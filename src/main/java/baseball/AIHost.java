@@ -4,13 +4,15 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.List;
 
+// TODO: 클래스명 - LocalHost? ComputerHost? AutoHost? AIHost?
 // TODO: immutable 해야하나? 사람은 그대로니까 mutable 한가?
 // TODO: 검증 완료 된 gameNumbers와 검증 안된 List<Integer> 중 무얼 갖고 있어야할까? -> 누가 유효성 검증?
-public class AIHost extends Host {
+public class AIHost implements Host {
 
-    @Override
-    protected GameNumbers setGameNumbers() {
-        return new GameNumbers(pickRandomUniqueNumbers());
+    private List<Integer> numbers;
+
+    public void think() {
+        numbers = pickRandomUniqueNumbers();
     }
 
     private List<Integer> pickRandomUniqueNumbers() {
