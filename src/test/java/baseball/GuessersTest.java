@@ -1,9 +1,10 @@
 package baseball;
 
-import camp.nextstep.edu.missionutils.Console;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class GuessersTest {
 
@@ -11,7 +12,9 @@ class GuessersTest {
     @Test
     void guessers는_값을_제출할_수_있다() {
         //given
-        Guessers guessers = createGuessers();
+        SomeOther someOther = mock(SomeOther.class);
+        Guessers guessers = new FakeGuessers(someOther);
+        given(someOther.input()).willReturn(1);
 
         //when
         Object guessValue = guessers.guess();
@@ -20,18 +23,25 @@ class GuessersTest {
         assertThat(guessValue).isNotNull();
     }
 
-    private Guessers createGuessers() {
-        return new FakeGuessers();
-    }
 
     private static final class FakeGuessers implements Guessers {
 
+        private final SomeOther someOtherClass;
+
+        FakeGuessers(SomeOther someOtherClass) {
+            this.someOtherClass = someOtherClass;
+        }
+
         @Override
         public Object guess() {
-            // 어떻게 테스트?
-            String input = Console.readLine();
-            return input;
+            return someOtherClass.input();
         }
     }
 
+    private static final class SomeOther {
+
+        public Object input() {
+            return null;
+        }
+    }
 }
