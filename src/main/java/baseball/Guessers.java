@@ -1,6 +1,14 @@
 package baseball;
 
-public interface Guessers {
+public final class Guessers {
 
-    Object guess();
+    private final SomeOther someOther;
+
+    public Guessers(SomeOther someOther) {
+        this.someOther = someOther;
+    }
+
+    public Object guess() {
+        return someOther.input();
+    }
 }
