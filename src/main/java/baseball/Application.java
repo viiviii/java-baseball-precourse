@@ -8,6 +8,10 @@ public class Application {
         host.think();
 
         // 값 입력받기 (맞추는 사람이 값 입력) → Console
+        SomeOther systemSomeOther = new SystemSomeOther();
+        Guessers guessers = new Guessers(systemSomeOther);
+        Object guessValue = guessers.guess();
+
         // 값 비교하기 (양측 게임 숫자 비교함)
         // 모두 맞췄으면 게임 종료
     }
