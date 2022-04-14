@@ -1,7 +1,6 @@
 package baseball;
 
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 
 // TODO: 채점자랑 힌트랑 두개가 섞여있는건가?
 public class Marker {
@@ -26,27 +25,28 @@ public class Marker {
         return toHint(map);
     }
 
-    private String toHint(Map<HintStatus, Integer> map) {
-        Integer nothingCount = map.getOrDefault(HintStatus.NOTHING, 0);
-        if (nothingCount == 3) {
-            return "낫싱";
+    private String toHint(Map<HintStatus, Integer> hintCountMap) {
+        if (containsAllNothing(hintCountMap)) {
+            return HintStatus.NOTHING.getName();
         }
-        String ball = "";
-        String strike = "";
-
-        boolean containsBall = map.containsKey(HintStatus.BALL);
-        if (containsBall) {
-            ball = map.get(HintStatus.BALL) + HintStatus.BALL.getName();
+        final List<HintStatus> hints = hintMessageOrder(hintCountMap);
+        String hintMessage = "";
+        for (HintStatus hint : hints) {
+            hintMessage += hintCountMap.get(hint) + hint.getName() + " ";
         }
+        return hintMessage.trim();
+    }
 
-        boolean containsStrike = map.containsKey(HintStatus.STRIKE);
-        if (containsStrike) {
-            strike = map.get(HintStatus.STRIKE) + HintStatus.STRIKE.getName();
-        }
+    private boolean containsAllNothing(Map<HintStatus, Integer> hintCountMap) {
+        final Integer nothingCount = hintCountMap.getOrDefault(HintStatus.NOTHING, 0);
+        return nothingCount == gameNumbers.size();
+    }
 
-        //TODO: 공백 최선인가?
-        return (ball + " " + strike).trim();
-
+    private List<HintStatus> hintMessageOrder(Map<HintStatus, Integer> hintCountMap) {
+        final List<HintStatus> printableHintOrder = Arrays.asList(HintStatus.BALL, HintStatus.STRIKE);
+        final List<HintStatus> hints = new ArrayList<>(printableHintOrder);
+        hints.retainAll(hintCountMap.keySet());
+        return hints;
     }
 
     private HintStatus getHintStatus(Integer target, int index) {
