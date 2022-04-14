@@ -1,24 +1,23 @@
 package baseball;
 
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 // TODO: 채점자랑 힌트랑 두개가 섞여있는건가?
 public class Marker {
 
-    private final List<Integer> gameNumbers;
+    private final GameNumbers gameNumbers;
 
-    private Marker(List<Integer> gameNumbers) {
+    private Marker(GameNumbers gameNumbers) {
         this.gameNumbers = gameNumbers;
     }
 
     // TODO: 메서드명
-    public static Marker origin(List<Integer> gameNumbers) {
+    public static Marker origin(GameNumbers gameNumbers) {
         return new Marker(gameNumbers);
     }
 
-    public String compareWith(List<Integer> other) {
+    public String compareWith(GameNumbers other) {
         Map<HintStatus, Integer> map = new EnumMap<>(HintStatus.class);
         for (int i = 0; i < gameNumbers.size(); i++) {
             HintStatus hints = getHintStatus(other.get(i), i);
@@ -28,7 +27,6 @@ public class Marker {
     }
 
     private String toHint(Map<HintStatus, Integer> map) {
-        System.out.println("map = " + map);
         Integer nothingCount = map.getOrDefault(HintStatus.NOTHING, 0);
         if (nothingCount == 3) {
             return "낫싱";

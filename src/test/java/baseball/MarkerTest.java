@@ -12,11 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MarkerTest {
 
-    private List<Integer> numbers;
+    private GameNumbers gameNumbers;
 
     @BeforeEach
     void setUp() {
-        numbers = Arrays.asList(1, 2, 3);
+        final List<Integer> numbers = Arrays.asList(1, 2, 3);
+        gameNumbers = new GameNumbers(numbers);
     }
 
     @Test
@@ -24,9 +25,10 @@ public class MarkerTest {
         //given
         String allDifferenceNumbers = "456";
         List<Integer> other = parse(allDifferenceNumbers);
+        GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(numbers).compareWith(other);
+        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
         assertThat(hint).isEqualTo("낫싱");
@@ -41,9 +43,10 @@ public class MarkerTest {
     void 같은_수가_같은_자리에_있으면_스트라이크를_리턴한다(String compare, int expectedCount) {
         //given
         List<Integer> other = parse(compare);
+        GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(numbers).compareWith(other);
+        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
         assertThat(hint).isEqualTo(expectedCount + "스트라이크");
@@ -58,9 +61,10 @@ public class MarkerTest {
     void 같은_수가_다른_자리에_있으면_볼을_리턴한다(String compare, int expectedCount) {
         //given
         List<Integer> other = parse(compare);
+        GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(numbers).compareWith(other);
+        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
         assertThat(hint).isEqualTo(expectedCount + "볼");
@@ -71,9 +75,10 @@ public class MarkerTest {
         //given
         String oneStrikeOneBall = "192"; // "1" is strike, "2" is ball
         List<Integer> other = parse(oneStrikeOneBall);
+        GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(numbers).compareWith(other);
+        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
         assertThat(hint).isEqualTo("1볼 1스트라이크");

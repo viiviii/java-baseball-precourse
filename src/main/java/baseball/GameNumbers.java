@@ -42,6 +42,18 @@ public final class GameNumbers {
         }
     }
 
+    public int size() {
+        return numbers.size();
+    }
+
+    public boolean contains(Integer number) {
+        return numbers.contains(number);
+    }
+
+    public Integer get(int index) {
+        return numbers.get(index);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
