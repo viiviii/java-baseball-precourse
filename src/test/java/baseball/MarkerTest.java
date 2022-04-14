@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CompareGameNumbersTest {
+public class MarkerTest {
 
     private List<Integer> numbers;
 
@@ -26,7 +26,7 @@ public class CompareGameNumbersTest {
         List<Integer> other = parse(allDifferenceNumbers);
 
         //when
-        String hint = hintCompareWith(numbers, other);
+        String hint = Marker.origin(numbers).compareWith(other);
 
         //then
         assertThat(hint).isEqualTo("낫싱");
@@ -43,7 +43,7 @@ public class CompareGameNumbersTest {
         List<Integer> other = parse(compare);
 
         //when
-        String hint = hintCompareWith(numbers, other);
+        String hint = Marker.origin(numbers).compareWith(other);
 
         //then
         assertThat(hint).isEqualTo(expectedCount + "스트라이크");
@@ -60,7 +60,7 @@ public class CompareGameNumbersTest {
         List<Integer> other = parse(compare);
 
         //when
-        String hint = hintCompareWith(numbers, other);
+        String hint = Marker.origin(numbers).compareWith(other);
 
         //then
         assertThat(hint).isEqualTo(expectedCount + "볼");
@@ -69,19 +69,14 @@ public class CompareGameNumbersTest {
     @Test
     void 볼과_스트라이트가_같이_있는_경우_볼_힌트가_먼저_온다() {
         //given
-        String oneStrikeOneBall = "132";
+        String oneStrikeOneBall = "192"; // "1" is strike, "2" is ball
         List<Integer> other = parse(oneStrikeOneBall);
 
         //when
-        String hint = hintCompareWith(numbers, other);
+        String hint = Marker.origin(numbers).compareWith(other);
 
         //then
         assertThat(hint).isEqualTo("1볼 1스트라이크");
-    }
-
-    private String hintCompareWith(List<Integer> origin, List<Integer> compare) {
-        // TODO
-        return "";
     }
 
     private List<Integer> parse(String number) {
