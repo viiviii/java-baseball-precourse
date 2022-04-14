@@ -19,7 +19,7 @@ public class GameNumbersTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3);
 
         //when
-        Throwable thrown = catchThrowable(() -> new GameNumbers(numbers));
+        Throwable thrown = catchThrowable(() -> createGameNumbers(numbers));
 
         //then
         assertThat(thrown).doesNotThrowAnyException();
@@ -31,7 +31,7 @@ public class GameNumbersTest {
         List<Integer> numbersOfFourLength = Arrays.asList(1, 2, 3, 4);
 
         //when
-        Throwable thrown = catchThrowable(() -> new GameNumbers(numbersOfFourLength));
+        Throwable thrown = catchThrowable(() -> createGameNumbers(numbersOfFourLength));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
@@ -44,7 +44,7 @@ public class GameNumbersTest {
         List<Integer> numbersWithDuplicateValues = Arrays.asList(duplicate, duplicate, 3);
 
         //when
-        Throwable thrown = catchThrowable(() -> new GameNumbers(numbersWithDuplicateValues));
+        Throwable thrown = catchThrowable(() -> createGameNumbers(numbersWithDuplicateValues));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
@@ -57,7 +57,7 @@ public class GameNumbersTest {
         List<Integer> numberWithInvalidValue = Arrays.asList(invalid, 2, 3);
 
         //when
-        Throwable thrown = catchThrowable(() -> new GameNumbers(numberWithInvalidValue));
+        Throwable thrown = catchThrowable(() -> createGameNumbers(numberWithInvalidValue));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
@@ -68,8 +68,8 @@ public class GameNumbersTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3);
         List<Integer> otherNumbers = Arrays.asList(1, 2, 3);
-        GameNumbers gameNumbers = new GameNumbers(numbers);
-        GameNumbers otherGameNumbers = new GameNumbers(otherNumbers);
+        GameNumbers gameNumbers = createGameNumbers(numbers);
+        GameNumbers otherGameNumbers = createGameNumbers(otherNumbers);
 
         //when
         boolean equals = gameNumbers.equals(otherGameNumbers);
@@ -83,8 +83,8 @@ public class GameNumbersTest {
         //given
         List<Integer> numbers = Arrays.asList(1, 2, 3);
         List<Integer> otherNumbers = Arrays.asList(1, 2, 3);
-        GameNumbers gameNumbers = new GameNumbers(numbers);
-        GameNumbers otherGameNumbers = new GameNumbers(otherNumbers);
+        GameNumbers gameNumbers = createGameNumbers(numbers);
+        GameNumbers otherGameNumbers = createGameNumbers(otherNumbers);
 
         //when
         boolean equals = gameNumbers.hashCode() == otherGameNumbers.hashCode();
@@ -99,11 +99,11 @@ public class GameNumbersTest {
         List<Integer> mutable = Arrays.asList(1, 2, 3);
 
         //when
-        GameNumbers gameNumbers = new GameNumbers(mutable);
+        GameNumbers gameNumbers = createGameNumbers(mutable);
         mutable.set(0, 4);
 
         //then
-        GameNumbers expected = new GameNumbers(Arrays.asList(1, 2, 3));
+        GameNumbers expected = createGameNumbers(Arrays.asList(1, 2, 3));
         assertThat(gameNumbers).isEqualTo(expected);
     }
 
@@ -113,12 +113,16 @@ public class GameNumbersTest {
         List<Integer> growable = new ArrayList<>(Arrays.asList(1, 2, 3));
 
         //when
-        GameNumbers gameNumbers = new GameNumbers(growable);
+        GameNumbers gameNumbers = createGameNumbers(growable);
         growable.add(4);
         growable.add(5);
 
         //then
-        GameNumbers expected = new GameNumbers(Arrays.asList(1, 2, 3));
+        GameNumbers expected = createGameNumbers(Arrays.asList(1, 2, 3));
         assertThat(gameNumbers).isEqualTo(expected);
+    }
+
+    private GameNumbers createGameNumbers(List<Integer> numbers) {
+        return new GameNumbers(numbers);
     }
 }
