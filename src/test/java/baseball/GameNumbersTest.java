@@ -2,6 +2,7 @@ package baseball;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class GameNumbersTest {
         List<Integer> numbers = Arrays.asList(1, 2, 3);
 
         //when
-        Throwable thrown = catchThrowable(() -> new GameNumbers(numbers));
+        Throwable thrown = catchThrowable(() -> createGameNumbers(numbers));
 
         //then
         assertThat(thrown).doesNotThrowAnyException();
@@ -30,7 +31,7 @@ public class GameNumbersTest {
         List<Integer> numbersOfFourLength = Arrays.asList(1, 2, 3, 4);
 
         //when
-        Throwable thrown = catchThrowable(() -> new GameNumbers(numbersOfFourLength));
+        Throwable thrown = catchThrowable(() -> createGameNumbers(numbersOfFourLength));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
@@ -43,7 +44,7 @@ public class GameNumbersTest {
         List<Integer> numbersWithDuplicateValues = Arrays.asList(duplicate, duplicate, 3);
 
         //when
-        Throwable thrown = catchThrowable(() -> new GameNumbers(numbersWithDuplicateValues));
+        Throwable thrown = catchThrowable(() -> createGameNumbers(numbersWithDuplicateValues));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
@@ -56,9 +57,72 @@ public class GameNumbersTest {
         List<Integer> numberWithInvalidValue = Arrays.asList(invalid, 2, 3);
 
         //when
-        Throwable thrown = catchThrowable(() -> new GameNumbers(numberWithInvalidValue));
+        Throwable thrown = catchThrowable(() -> createGameNumbers(numberWithInvalidValue));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void equality() {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3);
+        List<Integer> otherNumbers = Arrays.asList(1, 2, 3);
+        GameNumbers gameNumbers = createGameNumbers(numbers);
+        GameNumbers otherGameNumbers = createGameNumbers(otherNumbers);
+
+        //when
+        boolean equals = gameNumbers.equals(otherGameNumbers);
+
+        //then
+        assertThat(equals).isTrue();
+    }
+
+    @Test
+    void hashCodeEquality() {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3);
+        List<Integer> otherNumbers = Arrays.asList(1, 2, 3);
+        GameNumbers gameNumbers = createGameNumbers(numbers);
+        GameNumbers otherGameNumbers = createGameNumbers(otherNumbers);
+
+        //when
+        boolean equals = gameNumbers.hashCode() == otherGameNumbers.hashCode();
+
+        //then
+        assertThat(equals).isTrue();
+    }
+
+    @Test
+    void immutableWithMutableCollection() {
+        //given
+        List<Integer> mutable = Arrays.asList(1, 2, 3);
+
+        //when
+        GameNumbers gameNumbers = createGameNumbers(mutable);
+        mutable.set(0, 4);
+
+        //then
+        GameNumbers expected = createGameNumbers(Arrays.asList(1, 2, 3));
+        assertThat(gameNumbers).isEqualTo(expected);
+    }
+
+    @Test
+    void immutableWithGrowableCollection() {
+        //given
+        List<Integer> growable = new ArrayList<>(Arrays.asList(1, 2, 3));
+
+        //when
+        GameNumbers gameNumbers = createGameNumbers(growable);
+        growable.add(4);
+        growable.add(5);
+
+        //then
+        GameNumbers expected = createGameNumbers(Arrays.asList(1, 2, 3));
+        assertThat(gameNumbers).isEqualTo(expected);
+    }
+
+    private GameNumbers createGameNumbers(List<Integer> numbers) {
+        return new GameNumbers(numbers);
     }
 }
