@@ -2,6 +2,7 @@ package baseball;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -90,5 +91,34 @@ public class GameNumbersTest {
 
         //then
         assertThat(equals).isTrue();
+    }
+
+    @Test
+    void immutableWithMutableCollection() {
+        //given
+        List<Integer> mutable = Arrays.asList(1, 2, 3);
+
+        //when
+        GameNumbers gameNumbers = new GameNumbers(mutable);
+        mutable.set(0, 4);
+
+        //then
+        GameNumbers expected = new GameNumbers(Arrays.asList(1, 2, 3));
+        assertThat(gameNumbers).isEqualTo(expected);
+    }
+
+    @Test
+    void immutableWithGrowableCollection() {
+        //given
+        List<Integer> growable = new ArrayList<>(Arrays.asList(1, 2, 3));
+
+        //when
+        GameNumbers gameNumbers = new GameNumbers(growable);
+        growable.add(4);
+        growable.add(5);
+
+        //then
+        GameNumbers expected = new GameNumbers(Arrays.asList(1, 2, 3));
+        assertThat(gameNumbers).isEqualTo(expected);
     }
 }
