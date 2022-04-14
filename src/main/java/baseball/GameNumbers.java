@@ -8,10 +8,15 @@ public final class GameNumbers {
     private final List<Integer> numbers;
 
     public GameNumbers(List<Integer> numbers) {
-        validateSize(numbers);
-        validateDuplication(numbers);
-        validateRangeOfEachNumber(numbers);
-        this.numbers = numbers;
+        final List<Integer> copyNumbers = defensiveCopy(numbers);
+        validateSize(copyNumbers);
+        validateDuplication(copyNumbers);
+        validateRangeOfEachNumber(copyNumbers);
+        this.numbers = copyNumbers;
+    }
+
+    private List<Integer> defensiveCopy(List<Integer> numbers) {
+        return new ArrayList<>(numbers);
     }
 
     private void validateSize(Collection<Integer> numbers) {
