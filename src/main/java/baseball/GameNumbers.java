@@ -1,9 +1,6 @@
 package baseball;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // TODO: 예외에 의미있는 메세지를 담아서 던지기
 public class GameNumbers {
@@ -37,5 +34,18 @@ public class GameNumbers {
         if (number < 1 || number > 9) {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GameNumbers)) return false;
+        GameNumbers that = (GameNumbers) o;
+        return numbers.equals(that.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
