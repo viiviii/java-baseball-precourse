@@ -61,4 +61,34 @@ public class GameNumbersTest {
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void equality() {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3);
+        List<Integer> otherNumbers = Arrays.asList(1, 2, 3);
+        GameNumbers gameNumbers = new GameNumbers(numbers);
+        GameNumbers otherGameNumbers = new GameNumbers(otherNumbers);
+
+        //when
+        boolean equals = gameNumbers.equals(otherGameNumbers);
+
+        //then
+        assertThat(equals).isTrue();
+    }
+
+    @Test
+    void hashCodeEquality() {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3);
+        List<Integer> otherNumbers = Arrays.asList(1, 2, 3);
+        GameNumbers gameNumbers = new GameNumbers(numbers);
+        GameNumbers otherGameNumbers = new GameNumbers(otherNumbers);
+
+        //when
+        boolean equals = gameNumbers.hashCode() == otherGameNumbers.hashCode();
+
+        //then
+        assertThat(equals).isTrue();
+    }
 }
