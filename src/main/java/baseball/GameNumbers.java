@@ -3,7 +3,8 @@ package baseball;
 import java.util.*;
 
 // TODO: 예외에 의미있는 메세지를 담아서 던지기
-public class GameNumbers {
+public final class GameNumbers {
+
     private final List<Integer> numbers;
 
     public GameNumbers(List<Integer> numbers) {
@@ -47,5 +48,10 @@ public class GameNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return "GameNumbers{" + "numbers=" + numbers + '}';
     }
 }
