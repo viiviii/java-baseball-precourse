@@ -1,4 +1,4 @@
-package baseball;
+package baseball.player;
 
 import baseball.io.Controller;
 

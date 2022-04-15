@@ -3,6 +3,8 @@ package baseball;
 import baseball.io.ComputerController;
 import baseball.io.ConsoleController;
 import baseball.io.Controller;
+import baseball.player.Guessers;
+import baseball.player.Host;
 
 import java.util.List;
 
