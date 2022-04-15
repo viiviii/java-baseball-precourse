@@ -71,20 +71,22 @@ public class MarkerTest {
         assertThat(score.get(HintStatus.BALL)).isEqualTo(expectedCount);
     }
 
-    // TODO: 이제 메시지랑 분리되었으니 테스트 케이스 보강
-    @Test
-    void 볼과_스트라이트가_같이_있는_경우() {
+    @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}볼 {2}스트라이크이다")
+    @CsvSource(value = {
+            "192, 1, 1", // ball="2", strike="1"
+            "132, 2, 1", // ball=["2", "3"], strike="1"
+    })
+    void 볼과_스트라이트가_같이_있는_경우(String compare, int expectedBallCount, int expectedStrikeCount) {
         //given
-        String oneStrikeOneBall = "192"; // "1" is strike, "2" is ball
-        List<Integer> other = parse(oneStrikeOneBall);
+        List<Integer> other = parse(compare);
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
         Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
-        assertThat(score.get(HintStatus.BALL)).isEqualTo(1);
-        assertThat(score.get(HintStatus.STRIKE)).isEqualTo(1);
+        assertThat(score.get(HintStatus.BALL)).isEqualTo(expectedBallCount);
+        assertThat(score.get(HintStatus.STRIKE)).isEqualTo(expectedStrikeCount);
     }
 
     private List<Integer> parse(String number) {
