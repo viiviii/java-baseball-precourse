@@ -17,15 +17,15 @@ public class Message {
         if (score.isNothing()) {
             return HintStatus.NOTHING.getName();
         }
-        final List<HintStatus> hints = hintMessageOrder();
-        String hintMessage = "";
+        final List<HintStatus> hints = sortedOutputHints();
+        String message = "";
         for (HintStatus hint : hints) {
-            hintMessage += score.get(hint) + hint.getName() + " ";
+            message += score.get(hint) + hint.getName() + " ";
         }
-        return hintMessage.trim();
+        return message.trim();
     }
 
-    private List<HintStatus> hintMessageOrder() {
+    private List<HintStatus> sortedOutputHints() {
         return Arrays.asList(HintStatus.BALL, HintStatus.STRIKE);
     }
 }
