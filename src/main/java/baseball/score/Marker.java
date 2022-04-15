@@ -1,6 +1,7 @@
-package baseball;
+package baseball.score;
 
-import baseball.score.Score;
+import baseball.GameNumbers;
+import baseball.HintStatus;
 
 import java.util.EnumMap;
 import java.util.Map;

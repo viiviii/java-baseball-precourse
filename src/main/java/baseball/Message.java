@@ -1,6 +1,4 @@
-package baseball.score;
-
-import baseball.HintStatus;
+package baseball;
 
 import java.util.ArrayList;
 import java.util.Arrays;

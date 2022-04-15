@@ -1,6 +1,8 @@
-package baseball;
+package baseball.score;
 
-import baseball.score.Score;
+import baseball.GameNumbers;
+import baseball.HintStatus;
+import baseball.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
