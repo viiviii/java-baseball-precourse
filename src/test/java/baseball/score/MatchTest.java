@@ -1,5 +1,7 @@
-package baseball;
+package baseball.score;
 
+import baseball.GameNumbers;
+import baseball.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,9 +10,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static baseball.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MarkerTest {
+public class MatchTest {
 
     private GameNumbers gameNumbers;
 
@@ -28,10 +31,11 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
-        assertThat(hint).isEqualTo("낫싱");
+        assertThat(score.isNothing()).isTrue();
+        assertThat(score.get(NOTHING)).isEqualTo(3); // TODO: 하드코딩 제거
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}스트라이크이다")
@@ -46,10 +50,10 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
-        assertThat(hint).isEqualTo(expectedCount + "스트라이크");
+        assertThat(score.get(STRIKE)).isEqualTo(expectedCount);
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}볼이다")
@@ -64,24 +68,28 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
-        assertThat(hint).isEqualTo(expectedCount + "볼");
+        assertThat(score.get(BALL)).isEqualTo(expectedCount);
     }
 
-    @Test
-    void 볼과_스트라이트가_같이_있는_경우_볼_힌트가_먼저_온다() {
+    @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}볼 {2}스트라이크이다")
+    @CsvSource(value = {
+            "192, 1, 1", // ball="2", strike="1"
+            "132, 2, 1", // ball=["2", "3"], strike="1"
+    })
+    void 볼과_스트라이트가_같이_있는_경우(String compare, int expectedBallCount, int expectedStrikeCount) {
         //given
-        String oneStrikeOneBall = "192"; // "1" is strike, "2" is ball
-        List<Integer> other = parse(oneStrikeOneBall);
+        List<Integer> other = parse(compare);
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
-        assertThat(hint).isEqualTo("1볼 1스트라이크");
+        assertThat(score.get(BALL)).isEqualTo(expectedBallCount);
+        assertThat(score.get(STRIKE)).isEqualTo(expectedStrikeCount);
     }
 
     private List<Integer> parse(String number) {
