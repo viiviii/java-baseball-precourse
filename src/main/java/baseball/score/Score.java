@@ -1,10 +1,10 @@
 package baseball.score;
 
-import baseball.HintStatus;
+import baseball.Hint;
 
 public interface Score {
 
     boolean isNothing();
 
-    int get(HintStatus hintStatus);
+    int get(Hint hint);
 }

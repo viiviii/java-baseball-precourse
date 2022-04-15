@@ -1,7 +1,6 @@
 package baseball.score;
 
 import baseball.GameNumbers;
-import baseball.HintStatus;
 import baseball.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.List;
 
+import static baseball.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatchTest {
@@ -35,6 +35,7 @@ public class MatchTest {
 
         //then
         assertThat(score.isNothing()).isTrue();
+        assertThat(score.get(NOTHING)).isEqualTo(3); // TODO: 하드코딩 제거
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}스트라이크이다")
@@ -52,7 +53,7 @@ public class MatchTest {
         Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
-        assertThat(score.get(HintStatus.STRIKE)).isEqualTo(expectedCount);
+        assertThat(score.get(STRIKE)).isEqualTo(expectedCount);
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}볼이다")
@@ -70,7 +71,7 @@ public class MatchTest {
         Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
-        assertThat(score.get(HintStatus.BALL)).isEqualTo(expectedCount);
+        assertThat(score.get(BALL)).isEqualTo(expectedCount);
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}볼 {2}스트라이크이다")
@@ -87,8 +88,8 @@ public class MatchTest {
         Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
-        assertThat(score.get(HintStatus.BALL)).isEqualTo(expectedBallCount);
-        assertThat(score.get(HintStatus.STRIKE)).isEqualTo(expectedStrikeCount);
+        assertThat(score.get(BALL)).isEqualTo(expectedBallCount);
+        assertThat(score.get(STRIKE)).isEqualTo(expectedStrikeCount);
     }
 
     private List<Integer> parse(String number) {

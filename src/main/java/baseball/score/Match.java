@@ -1,10 +1,12 @@
 package baseball.score;
 
 import baseball.GameNumbers;
-import baseball.HintStatus;
+import baseball.Hint;
 
 import java.util.EnumMap;
 import java.util.Map;
+
+import static baseball.Hint.*;
 
 public class Match {
 
@@ -21,36 +23,36 @@ public class Match {
     public Score scoreOf(GameNumbers other) {
         final MatchScore score = new MatchScore();
         for (int i = 0; i < gameNumbers.size(); i++) {
-            final HintStatus hintStatus = getHintStatus(other.get(i), i); // TODO
-            score.count(hintStatus);
+            final Hint hint = getHint(other.get(i), i); // TODO
+            score.count(hint);
         }
         return score;
     }
 
-    private HintStatus getHintStatus(Integer target, int index) {
+    private Hint getHint(Integer target, int index) {
         if (gameNumbers.get(index).equals(target)) { // TODO
-            return HintStatus.STRIKE;
+            return STRIKE;
         }
         if (gameNumbers.contains(target)) {
-            return HintStatus.BALL;
+            return BALL;
         }
-        return HintStatus.NOTHING;
+        return NOTHING;
     }
 
     private static final class MatchScore implements Score {
-        private final Map<HintStatus, Integer> score = new EnumMap<>(HintStatus.class);
+        private final Map<Hint, Integer> score = new EnumMap<>(Hint.class);
 
-        private void count(HintStatus hintStatus) {
-            final int current = score.getOrDefault(hintStatus, 0);
-            score.put(hintStatus, current + 1);
+        private void count(Hint hint) {
+            final int current = score.getOrDefault(hint, 0);
+            score.put(hint, current + 1);
         }
 
-        public int get(HintStatus hintStatus) {
-            return score.get(hintStatus);
+        public int get(Hint hint) {
+            return score.get(hint);
         }
 
         public boolean isNothing() {
-            return score.get(HintStatus.NOTHING) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
+            return score.get(NOTHING) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
         }
     }
 }

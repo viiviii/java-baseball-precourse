@@ -5,6 +5,8 @@ import baseball.score.Score;
 import java.util.Arrays;
 import java.util.List;
 
+import static baseball.Hint.*;
+
 public class Message {
 
     private final Score score;
@@ -15,17 +17,17 @@ public class Message {
 
     public String toHint() {
         if (score.isNothing()) {
-            return HintStatus.NOTHING.getName();
+            return NOTHING.getName();
         }
-        final List<HintStatus> hints = sortedOutputHints();
+        final List<Hint> hints = sortedOutputHints();
         String message = "";
-        for (HintStatus hint : hints) {
+        for (Hint hint : hints) {
             message += score.get(hint) + hint.getName() + " ";
         }
         return message.trim();
     }
 
-    private List<HintStatus> sortedOutputHints() {
-        return Arrays.asList(HintStatus.BALL, HintStatus.STRIKE);
+    private List<Hint> sortedOutputHints() {
+        return Arrays.asList(BALL, STRIKE);
     }
 }
