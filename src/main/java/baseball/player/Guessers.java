@@ -1,6 +1,10 @@
 package baseball.player;
 
+import baseball.GameNumbers;
+import baseball.Parser;
 import baseball.io.Controller;
+
+import java.util.List;
 
 public final class Guessers {
 
@@ -10,7 +14,9 @@ public final class Guessers {
         this.controller = controller;
     }
 
-    public String guess() {
-        return controller.input();
+    public GameNumbers guess() {
+        final String input = controller.input();
+        final List<Integer> numbers = Parser.parseIntegerList(input); // TODO
+        return new GameNumbers(numbers);
     }
 }

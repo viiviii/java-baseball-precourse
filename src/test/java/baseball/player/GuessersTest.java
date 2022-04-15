@@ -1,7 +1,11 @@
 package baseball.player;
 
+import baseball.GameNumbers;
+import baseball.Parser;
 import baseball.io.Controller;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -15,11 +19,13 @@ class GuessersTest {
         Controller controller = mock(Controller.class);
         Guessers guessers = new Guessers(controller);
 
-        String expected = "123";
-        given(controller.input()).willReturn(expected);
+        String input = "123";
+        given(controller.input()).willReturn(input);
+        List<Integer> numbers = Parser.parseIntegerList(input);
+        GameNumbers expected = new GameNumbers(numbers);
 
         //when
-        String guess = guessers.guess();
+        GameNumbers guess = guessers.guess();
 
         //then
         assertThat(guess).isEqualTo(expected);
