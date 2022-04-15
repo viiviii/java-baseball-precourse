@@ -1,5 +1,6 @@
 package baseball;
 
+import baseball.score.Score;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,10 +29,10 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
-        assertThat(hint).isEqualTo("낫싱");
+        assertThat(score.isNothing()).isTrue();
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}스트라이크이다")
@@ -46,10 +47,10 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
-        assertThat(hint).isEqualTo(expectedCount + "스트라이크");
+        assertThat(score.get(HintStatus.STRIKE)).isEqualTo(expectedCount);
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}볼이다")
@@ -64,24 +65,26 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
-        assertThat(hint).isEqualTo(expectedCount + "볼");
+        assertThat(score.get(HintStatus.BALL)).isEqualTo(expectedCount);
     }
 
+    // TODO: 이제 메시지랑 분리되었으니 테스트 케이스 보강
     @Test
-    void 볼과_스트라이트가_같이_있는_경우_볼_힌트가_먼저_온다() {
+    void 볼과_스트라이트가_같이_있는_경우() {
         //given
         String oneStrikeOneBall = "192"; // "1" is strike, "2" is ball
         List<Integer> other = parse(oneStrikeOneBall);
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        String hint = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
 
         //then
-        assertThat(hint).isEqualTo("1볼 1스트라이크");
+        assertThat(score.get(HintStatus.BALL)).isEqualTo(1);
+        assertThat(score.get(HintStatus.STRIKE)).isEqualTo(1);
     }
 
     private List<Integer> parse(String number) {
