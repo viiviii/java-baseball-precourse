@@ -1,10 +1,8 @@
 package baseball.player;
 
 import baseball.GameNumbers;
-import baseball.Parser;
 import baseball.io.Controller;
-
-import java.util.List;
+import baseball.parser.Parser;
 
 public class Host {
 
@@ -16,7 +14,6 @@ public class Host {
 
     public GameNumbers think() {
         final String input = controller.input();
-        final List<Integer> numbers = Parser.parseIntegerList(input); // TODO
-        return new GameNumbers(numbers);
+        return Parser.asGameNumbers(input);
     }
 }
