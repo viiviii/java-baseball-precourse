@@ -1,6 +1,9 @@
 package baseball;
 
-import java.util.*;
+import baseball.score.Message;
+
+import java.util.EnumMap;
+import java.util.Map;
 
 // TODO: 채점자랑 힌트랑 두개가 섞여있는건가?
 public class Marker {
@@ -22,31 +25,8 @@ public class Marker {
             HintStatus hints = getHintStatus(other.get(i), i);
             map.put(hints, map.getOrDefault(hints, 0) + 1);
         }
-        return toHint(map);
-    }
-
-    private String toHint(Map<HintStatus, Integer> hintCountMap) {
-        if (containsAllNothing(hintCountMap)) {
-            return HintStatus.NOTHING.getName();
-        }
-        final List<HintStatus> hints = hintMessageOrder(hintCountMap);
-        String hintMessage = "";
-        for (HintStatus hint : hints) {
-            hintMessage += hintCountMap.get(hint) + hint.getName() + " ";
-        }
-        return hintMessage.trim();
-    }
-
-    private boolean containsAllNothing(Map<HintStatus, Integer> hintCountMap) {
-        final Integer nothingCount = hintCountMap.getOrDefault(HintStatus.NOTHING, 0);
-        return nothingCount == gameNumbers.size();
-    }
-
-    private List<HintStatus> hintMessageOrder(Map<HintStatus, Integer> hintCountMap) {
-        final List<HintStatus> printableHintOrder = Arrays.asList(HintStatus.BALL, HintStatus.STRIKE);
-        final List<HintStatus> hints = new ArrayList<>(printableHintOrder);
-        hints.retainAll(hintCountMap.keySet());
-        return hints;
+        Message message = new Message(map);
+        return message.toHint();
     }
 
     private HintStatus getHintStatus(Integer target, int index) {
