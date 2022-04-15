@@ -14,6 +14,11 @@ public class PlayerImpl implements Player {
     }
 
     @Override
+    public void viewResult(String message) {
+        view.output(message);
+    }
+
+    @Override
     public GameNumbers think() {
         return inputGameNumbers();
     }

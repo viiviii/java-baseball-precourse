@@ -8,6 +8,11 @@ import java.util.List;
 public class ComputerPlayer implements Player {
 
     @Override
+    public void viewResult(String message) {
+        // computer does nothing
+    }
+
+    @Override
     public GameNumbers think() {
         return randomGameNumbers();
     }
