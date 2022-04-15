@@ -6,30 +6,29 @@ import baseball.HintStatus;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class Marker {
+public class Match {
 
     private final GameNumbers gameNumbers;
 
-    private Marker(GameNumbers gameNumbers) {
+    private Match(GameNumbers gameNumbers) {
         this.gameNumbers = gameNumbers;
     }
 
-    // TODO: 메서드명
-    public static Marker origin(GameNumbers gameNumbers) {
-        return new Marker(gameNumbers);
+    public static Match baseOn(GameNumbers gameNumbers) {
+        return new Match(gameNumbers);
     }
 
-    public Score compareWith(GameNumbers other) {
-        final MarkerScore score = new MarkerScore();
+    public Score scoreOf(GameNumbers other) {
+        final MatchScore score = new MatchScore();
         for (int i = 0; i < gameNumbers.size(); i++) {
-            final HintStatus hintStatus = getHintStatus(other.get(i), i);
+            final HintStatus hintStatus = getHintStatus(other.get(i), i); // TODO
             score.count(hintStatus);
         }
         return score;
     }
 
     private HintStatus getHintStatus(Integer target, int index) {
-        if (gameNumbers.get(index).equals(target)) {
+        if (gameNumbers.get(index).equals(target)) { // TODO
             return HintStatus.STRIKE;
         }
         if (gameNumbers.contains(target)) {
@@ -38,7 +37,7 @@ public class Marker {
         return HintStatus.NOTHING;
     }
 
-    private static final class MarkerScore implements Score {
+    private static final class MatchScore implements Score {
         private final Map<HintStatus, Integer> score = new EnumMap<>(HintStatus.class);
 
         private void count(HintStatus hintStatus) {

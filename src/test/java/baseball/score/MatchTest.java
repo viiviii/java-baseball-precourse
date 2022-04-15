@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MarkerTest {
+public class MatchTest {
 
     private GameNumbers gameNumbers;
 
@@ -31,7 +31,7 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
         assertThat(score.isNothing()).isTrue();
@@ -49,7 +49,7 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
         assertThat(score.get(HintStatus.STRIKE)).isEqualTo(expectedCount);
@@ -67,7 +67,7 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
         assertThat(score.get(HintStatus.BALL)).isEqualTo(expectedCount);
@@ -84,7 +84,7 @@ public class MarkerTest {
         GameNumbers otherGameNumbers = new GameNumbers(other);
 
         //when
-        Score score = Marker.origin(gameNumbers).compareWith(otherGameNumbers);
+        Score score = Match.baseOn(gameNumbers).scoreOf(otherGameNumbers);
 
         //then
         assertThat(score.get(HintStatus.BALL)).isEqualTo(expectedBallCount);
