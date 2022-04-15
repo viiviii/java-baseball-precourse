@@ -1,30 +1,27 @@
 package baseball;
 
+import baseball.io.Controller;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 class GuessersTest {
 
-
     @Test
-    void guessers는_값을_제출할_수_있다() {
+    void guess() {
         //given
-        SomeOther someOther = new FakeSomeOther();
-        Guessers guessers = new Guessers(someOther);
+        Controller controller = mock(Controller.class);
+        Guessers guessers = new Guessers(controller);
+
+        String expected = "123";
+        given(controller.input()).willReturn(expected);
 
         //when
-        Object guessValue = guessers.guess();
+        String guess = guessers.guess();
 
         //then
-        assertThat(guessValue).isNotNull();
-    }
-
-    private static final class FakeSomeOther implements SomeOther {
-
-        @Override
-        public Object input() {
-            return 1;
-        }
+        assertThat(guess).isEqualTo(expected);
     }
 }

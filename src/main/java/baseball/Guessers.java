@@ -1,14 +1,16 @@
 package baseball;
 
+import baseball.io.Controller;
+
 public final class Guessers {
 
-    private final SomeOther someOther;
+    private final Controller controller;
 
-    public Guessers(SomeOther someOther) {
-        this.someOther = someOther;
+    public Guessers(Controller controller) {
+        this.controller = controller;
     }
 
-    public Object guess() {
-        return someOther.input();
+    public String guess() {
+        return controller.input();
     }
 }

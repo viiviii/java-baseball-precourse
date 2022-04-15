@@ -1,5 +1,8 @@
 package baseball;
 
+import baseball.io.ConsoleController;
+import baseball.io.Controller;
+
 import java.util.List;
 
 public class Application {
@@ -11,13 +14,12 @@ public class Application {
         host.think();
 
         // 값 입력받기 (맞추는 사람이 값 입력) → Console
-        // TODO: input type Object vs String?
-        SomeOther systemSomeOther = new SystemSomeOther();
-        Guessers guessers = new Guessers(systemSomeOther);
-        Object guessValue = guessers.guess();
+        Controller controller = new ConsoleController();
+        Guessers guessers = new Guessers(controller);
+        String guess = guessers.guess();
 
         //     - 입력 받은 값 파싱하기
-        List<Integer> numbersOfGuessers = Parser.parseIntegerList(guessValue.toString());
+        List<Integer> numbersOfGuessers = Parser.parseIntegerList(guess);
         GameNumbers gameNumbersOfGuessers = new GameNumbers(numbersOfGuessers);
 
         // 값 비교하기 (양측 게임 숫자 비교함)
