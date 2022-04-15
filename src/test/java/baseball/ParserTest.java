@@ -1,5 +1,6 @@
 package baseball;
 
+import baseball.parser.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,19 +16,19 @@ public class ParserTest {
         String value = "123";
 
         //when
-        List<Integer> numbers = Parser.parseIntegerList(value);
+        List<Integer> numbers = Parser.asIntegerList(value);
 
         //then
         assertThat(numbers).containsExactly(1, 2, 3);
     }
 
     @Test
-    void 문자열를_integer_list로_파싱할_수_없으면_예외가_발생한다() {
+    void 문자열를_게임숫자로_파싱할_수_없으면_IllegalArgumentException이_발생한다() {
         //given
-        String value = "a1";
+        String str = "a1";
 
         //when
-        Throwable thrown = catchThrowable(() -> Parser.parseIntegerList(value));
+        Throwable thrown = catchThrowable(() -> Parser.asGameNumbers(str));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
