@@ -12,21 +12,21 @@ import static org.mockito.Mockito.mock;
 
 class MessageTest {
 
-    private Score score = mock(Score.class);
-    private Message message = new Message(score);
+    private Message message = new Message();
 
     @Test
     void 볼과_스트라이크가_함께_있는_경우_볼_힌트가_먼저_온다() {
         //given
-        final int count = 1;
-        given(score.get(BALL)).willReturn(count);
-        given(score.get(STRIKE)).willReturn(count);
+        final int ONE_COUNT = 1;
+        Score score = mock(Score.class);
+        given(score.get(BALL)).willReturn(ONE_COUNT);
+        given(score.get(STRIKE)).willReturn(ONE_COUNT);
 
         //when
-        String hint = message.toHint();
+        String hint = message.toHint(score);
 
         //then
-        String expected = String.format("%d%s %d%s", count, "볼", count, "스트라이크");
+        String expected = String.format("%d%s %d%s", ONE_COUNT, "볼", ONE_COUNT, "스트라이크");
         assertThat(hint).isEqualTo(expected);
     }
 
@@ -45,7 +45,7 @@ class MessageTest {
 
     @ParameterizedTest
     @EnumSource(Hint.class)
-    void 모든_hint는_이름이_있다(Hint hint) {
+    void 힌트는_모두_이름이_있다(Hint hint) {
         //when
         String hintName = message.hintName(hint);
 

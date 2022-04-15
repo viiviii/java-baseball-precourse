@@ -9,26 +9,19 @@ import static baseball.Hint.*;
 
 public class Message {
 
-    private final Score score;
+    private final List<Hint> sortedOutputHints = Arrays.asList(BALL, STRIKE);
 
-    public Message(Score score) {
-        this.score = score;
-    }
-
-    public String toHint() {
+    public String toHint(Score score) {
         if (score.isNothing()) {
             return hintName(NOTHING);
         }
-        final List<Hint> hints = sortedOutputHints();
         String message = "";
-        for (Hint hint : hints) {
-            message += score.get(hint) + hintName(hint) + " ";
+        for (Hint hint : sortedOutputHints) {
+            final int count = score.get(hint);
+            final String name = hintName(hint);
+            message += hint(count, name);
         }
         return message.trim();
-    }
-
-    private List<Hint> sortedOutputHints() {
-        return Arrays.asList(BALL, STRIKE);
     }
 
     public String hintName(Hint hint) {
@@ -45,5 +38,9 @@ public class Message {
                 break;
         }
         return name;
+    }
+
+    private String hint(int count, String name) {
+        return String.format("%d%s ", count, name);
     }
 }
