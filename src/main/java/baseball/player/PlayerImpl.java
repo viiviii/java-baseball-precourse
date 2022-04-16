@@ -20,9 +20,8 @@ public class PlayerImpl implements Player {
 
     @Override
     public boolean wantContinueNewGame() {
-        String input = view.input();
-        int wantNewGame = Integer.parseInt(input); // TODO
-        return wantNewGame == 1;
+        final String input = view.input();
+        return isSelectNewGame(input);
     }
 
     @Override
@@ -38,5 +37,15 @@ public class PlayerImpl implements Player {
     private GameNumbers inputGameNumbers() {
         final String input = view.input();
         return Parser.asGameNumbers(input);
+    }
+
+    // TODO
+    private boolean isSelectNewGame(String selectCode) {
+        final String newGameStart = "1";
+        final String exitApplication = "2";
+        if (!(selectCode.equals(newGameStart) || selectCode.equals(exitApplication))) {
+            throw new IllegalArgumentException();
+        }
+        return selectCode.equals(newGameStart);
     }
 }
