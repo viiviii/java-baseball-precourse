@@ -19,10 +19,10 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public int wantContinueNewGame() {
+    public boolean wantContinueNewGame() {
         String input = view.input();
         int wantNewGame = Integer.parseInt(input); // TODO
-        return wantNewGame;
+        return wantNewGame == 1;
     }
 
     @Override

@@ -13,9 +13,9 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
-    public int wantContinueNewGame() {
+    public boolean wantContinueNewGame() {
         // computer doesn't want
-        return 2;
+        return false;
     }
 
     @Override

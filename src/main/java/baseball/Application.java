@@ -21,8 +21,7 @@ public class Application {
             playGame(host, guessers, message);
             guessers.viewResult(message.continueNewGame());
             // 플레이어 선택에 따라 게임 재시작 or 완전히 종료
-            int wantContinueNewGame = guessers.wantContinueNewGame();
-            wantPlayGame = (wantContinueNewGame == 1); // TODO: 2도 체크해야함. 그외엔 exception
+            wantPlayGame = guessers.wantContinueNewGame();
         }
     }
 
