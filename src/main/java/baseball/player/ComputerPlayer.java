@@ -13,6 +13,12 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
+    public boolean wantContinueNewGame() {
+        // computer doesn't want
+        return false;
+    }
+
+    @Override
     public GameNumbers think() {
         return randomGameNumbers();
     }

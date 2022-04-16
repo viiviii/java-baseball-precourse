@@ -23,15 +23,15 @@ class MessageTest {
         given(score.get(STRIKE)).willReturn(ONE_COUNT);
 
         //when
-        String hint = message.toHint(score);
+        String msg = message.toHint(score);
 
         //then
         String expected = String.format("%d%s %d%s", ONE_COUNT, "볼", ONE_COUNT, "스트라이크");
-        assertThat(hint).isEqualTo(expected);
+        assertThat(msg).isEqualTo(expected);
     }
 
     @Test
-    void hintNames() {
+    void 힌트_이름은_스크라이크_볼_낫싱이다() {
         // when
         String strike = message.hintName(STRIKE);
         String ball = message.hintName(BALL);
@@ -47,9 +47,27 @@ class MessageTest {
     @EnumSource(Hint.class)
     void 힌트는_모두_이름이_있다(Hint hint) {
         //when
-        String hintName = message.hintName(hint);
+        String msg = message.hintName(hint);
 
         //then
-        assertThat(hintName).isNotBlank();
+        assertThat(msg).isNotBlank();
+    }
+
+    @Test
+    void 올_스트라이크_메세지() {
+        //when
+        String msg = message.allStrike();
+
+        //then
+        assertThat(msg).isEqualTo("3개의 숫자를 모두 맞히셨습니다! 게임 종료"); // TODO: 하드코딩 제거(3)
+    }
+
+    @Test
+    void 게임_재시작_선택_메세지() {
+        //when
+        String msg = message.continueNewGame();
+
+        //then
+        assertThat(msg).isEqualTo("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."); // TODO: 하드코딩 제거(1, 2)
     }
 }
