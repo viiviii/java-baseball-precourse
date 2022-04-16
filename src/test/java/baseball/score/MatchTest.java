@@ -7,27 +7,24 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static baseball.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatchTest {
 
     private GameNumbers gameNumbers;
+    private String baseNumber = "123";
 
     @BeforeEach
     void setUp() {
-        final List<Integer> numbers = Arrays.asList(1, 2, 3);
-        gameNumbers = new GameNumbers(numbers);
+        this.gameNumbers = parseAsGameNumbers(baseNumber);
     }
 
     @Test
-    void 같은_수가_전혀_없으면_낫싱을_리턴한다() {
+    void 같은_수가_전혀_없으면_낫싱이다() {
         //given
-        String allDifferenceNumbers = "456";
-        GameNumbers other = parseAsGameNumbers(allDifferenceNumbers);
+        String allNothingNumber = "456";
+        GameNumbers other = parseAsGameNumbers(allNothingNumber);
 
         //when
         Score score = Match.baseOn(gameNumbers).scoreOf(other);
@@ -39,13 +36,30 @@ public class MatchTest {
         assertThat(score.get(BALL)).isZero();
     }
 
+    @Test
+    void 같은_수가_모두_같은_자리에_있으면_올_스트라이크이다() {
+        //given
+        String allStrikeNumber = baseNumber;
+        GameNumbers other = parseAsGameNumbers(allStrikeNumber);
+
+        //when
+        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+
+        //then
+        assertThat(score.isAllStrike()).isTrue();
+        assertThat(score.get(STRIKE)).isEqualTo(3); // TODO: 하드코딩 제거
+        assertThat(score.get(BALL)).isZero();
+        assertThat(score.get(NOTHING)).isZero();
+
+    }
+
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}스트라이크이다")
     @CsvSource(value = {
             "123, 3", // 1, 2, 3
             "129, 2", // 1, 2
             "189, 1", // 1
     })
-    void 같은_수가_같은_자리에_있으면_스트라이크를_리턴한다(String compare, int expectedCount) {
+    void 같은_수가_같은_자리에_있으면_스트라이크이다(String compare, int expectedCount) {
         //given
         GameNumbers other = parseAsGameNumbers(compare);
 
@@ -62,7 +76,7 @@ public class MatchTest {
             "239, 2", // 2, 3
             "289, 1", // 2
     })
-    void 같은_수가_다른_자리에_있으면_볼을_리턴한다(String compare, int expectedCount) {
+    void 같은_수가_다른_자리에_있으면_볼이다(String compare, int expectedCount) {
         //given
         GameNumbers other = parseAsGameNumbers(compare);
 
