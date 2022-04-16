@@ -19,6 +19,13 @@ public class PlayerImpl implements Player {
     }
 
     @Override
+    public int wantContinueNewGame() {
+        String input = view.input();
+        int wantNewGame = Integer.parseInt(input); // TODO
+        return wantNewGame;
+    }
+
+    @Override
     public GameNumbers think() {
         return inputGameNumbers();
     }

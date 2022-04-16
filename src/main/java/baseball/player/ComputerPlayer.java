@@ -13,6 +13,12 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
+    public int wantContinueNewGame() {
+        // computer doesn't want
+        return 2;
+    }
+
+    @Override
     public GameNumbers think() {
         return randomGameNumbers();
     }
