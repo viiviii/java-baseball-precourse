@@ -35,6 +35,8 @@ public class MatchTest {
         //then
         assertThat(score.isNothing()).isTrue();
         assertThat(score.get(NOTHING)).isEqualTo(3); // TODO: 하드코딩 제거
+        assertThat(score.get(STRIKE)).isZero();
+        assertThat(score.get(BALL)).isZero();
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}스트라이크이다")
