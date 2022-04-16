@@ -47,10 +47,12 @@ public class Match {
             score.put(hint, current + 1);
         }
 
+        @Override
         public int get(Hint hint) {
             return score.getOrDefault(hint, 0);
         }
 
+        @Override
         public boolean isNothing() {
             return score.get(NOTHING) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
         }
