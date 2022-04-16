@@ -53,8 +53,13 @@ public class Match {
         }
 
         @Override
+        public boolean isAllStrike() {
+            return get(STRIKE) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
+        }
+
+        @Override
         public boolean isNothing() {
-            return score.get(NOTHING) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
+            return get(NOTHING) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
         }
     }
 }
