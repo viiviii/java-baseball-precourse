@@ -43,12 +43,12 @@ public class Match {
         private final Map<Hint, Integer> score = new EnumMap<>(Hint.class);
 
         private void count(Hint hint) {
-            final int current = score.getOrDefault(hint, 0);
+            final int current = get(hint);
             score.put(hint, current + 1);
         }
 
         public int get(Hint hint) {
-            return score.get(hint);
+            return score.getOrDefault(hint, 0);
         }
 
         public boolean isNothing() {
