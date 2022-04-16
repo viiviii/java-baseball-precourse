@@ -10,17 +10,27 @@ import baseball.view.View;
 
 public class Application {
     public static void main(String[] args) {
-        // 값 만들기 (출제자 게임 숫자 뽑음) → Randoms
         // TODO: 테스트 추가
-        // TODO: 메서드 위치 정리
-        Player host = new ComputerPlayer();
+        final View view = new ConsoleView();
+        final Player host = new ComputerPlayer();
+        final Player guessers = new PlayerImpl(view);
+        final Message message = new Message();
+
+        boolean wantPlayGame = true;
+        while (wantPlayGame) {
+            playGame(host, guessers, message);
+            guessers.viewResult(message.continueNewGame());
+            // 플레이어 선택에 따라 게임 재시작 or 완전히 종료
+            int wantContinueNewGame = guessers.wantContinueNewGame();
+            wantPlayGame = (wantContinueNewGame == 1); // TODO: 2도 체크해야함. 그외엔 exception
+        }
+    }
+
+    // TODO: 클래스로 분리
+    private static void playGame(Player host, Player guessers, Message message) {
+        // 값 만들기 (출제자 게임 숫자 뽑음) → Randoms
         GameNumbers gameNumbersOfHost = host.think();
-
-        View view = new ConsoleView();
-        Player guessers = new PlayerImpl(view);
-
         Match match = Match.baseOn(gameNumbersOfHost);
-        Message message = new Message();
 
         // 값 확인 후 모두 맞출 때 까지 반복
         boolean isAllStrike = false;
@@ -35,9 +45,5 @@ public class Application {
             isAllStrike = score.isAllStrike();
         }
         guessers.viewResult(message.allStrike());
-
-        // 플레이어 선택에 따라 게임 재시작 or 완전히 종료
-        guessers.viewResult(message.continueNewGame());
-        int wantContinueNewGame = guessers.wantContinueNewGame();
     }
 }
