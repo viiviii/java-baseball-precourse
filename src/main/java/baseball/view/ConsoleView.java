@@ -1,9 +1,15 @@
 package baseball.view;
 
+import baseball.view.message.Message;
 import camp.nextstep.edu.missionutils.Console;
 
 public class ConsoleView implements View {
 
+    private final Message message;
+
+    public ConsoleView(Message message) {
+        this.message = message;
+    }
 
     @Override
     public String input() {
@@ -17,12 +23,12 @@ public class ConsoleView implements View {
 
     @Override
     public void outputWinMessage() {
-        output("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+        output(message.win());
     }
 
     @Override
     public void outputContinueNewGameMessage() {
-        output("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+        output(message.continueNewGame());
     }
 
     private void output(String message) {

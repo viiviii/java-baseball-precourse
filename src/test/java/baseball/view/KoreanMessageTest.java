@@ -1,6 +1,9 @@
-package baseball;
+package baseball.view;
 
+import baseball.Hint;
 import baseball.score.Score;
+import baseball.view.message.KoreanMessage;
+import baseball.view.message.Message;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -10,9 +13,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-class MessageTest {
+class KoreanMessageTest {
 
-    private Message message = new Message();
+    private Message message = new KoreanMessage();
 
     @Test
     void 볼과_스트라이크가_함께_있는_경우_볼_힌트가_먼저_온다() {
@@ -54,9 +57,9 @@ class MessageTest {
     }
 
     @Test
-    void 올_스트라이크_메세지() {
+    void 승리_메세지() {
         //when
-        String msg = message.allStrike();
+        String msg = message.win();
 
         //then
         assertThat(msg).isEqualTo("3개의 숫자를 모두 맞히셨습니다! 게임 종료"); // TODO: 하드코딩 제거(3)
