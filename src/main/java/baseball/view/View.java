@@ -4,7 +4,9 @@ import baseball.score.Score;
 
 public interface View {
 
-    String input();
+    String inputGameNumber();
+
+    String inputContinueNewGame();
 
     void outputScoreMessage(Score score);
 

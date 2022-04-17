@@ -25,13 +25,13 @@ public class PlayerImpl implements Player {
     }
 
     private GameNumbers inputGameNumbers() {
-        final String input = view.input();
+        final String input = view.inputGameNumber();
         return Parser.asGameNumbers(input);
     }
 
     @Override
     public boolean wantContinueNewGame() {
-        final String input = view.input();
+        final String input = view.inputContinueNewGame();
         return isSelectNewGame(input);
     }
 

@@ -21,7 +21,17 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public String input() {
+    public String inputGameNumber() {
+        System.out.print("숫자를 입력해주세요 : ");
+        return input();
+    }
+
+    @Override
+    public String inputContinueNewGame() {
+        return input();
+    }
+
+    private String input() {
         return Console.readLine();
     }
 
