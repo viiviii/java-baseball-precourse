@@ -1,15 +1,19 @@
 package baseball.player;
 
 import baseball.GameNumbers;
+import baseball.score.Score;
 
 public interface Player {
-
-    void viewResult(String message); // TODO: String으로 메세지 받나?
-
-    boolean wantContinueNewGame();
 
     GameNumbers think();
 
     GameNumbers guess();
 
+    boolean wantContinueNewGame();
+
+    void announceContinueNewGame();
+
+    void announceWin();
+
+    void announceScore(Score score); // TODO: String으로 메세지 받나?
 }

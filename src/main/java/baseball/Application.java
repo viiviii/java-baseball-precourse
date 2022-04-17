@@ -19,7 +19,7 @@ public class Application {
         boolean wantPlayGame = true;
         while (wantPlayGame) {
             playGame(host, guessers, message);
-            guessers.viewResult(message.continueNewGame());
+            guessers.announceContinueNewGame();
             wantPlayGame = guessers.wantContinueNewGame();
         }
     }
@@ -32,9 +32,9 @@ public class Application {
         while (!isAllStrike) {
             final GameNumbers gameNumbersOfGuessers = guessers.guess();
             final Score score = match.scoreOf(gameNumbersOfGuessers);
-            guessers.viewResult(message.toHint(score)); // // TODO: scoreMessage가 더 낫나?
+            guessers.announceScore(score);
             isAllStrike = score.isAllStrike();
         }
-        guessers.viewResult(message.allStrike());
+        guessers.announceWin();
     }
 }
