@@ -8,23 +8,23 @@ import java.util.Map;
 
 import static baseball.Hint.*;
 
-public class Match {
+public class ScoreMatcher {
 
     private final GameNumbers gameNumbers;
 
-    private Match(GameNumbers gameNumbers) {
+    private ScoreMatcher(GameNumbers gameNumbers) {
         this.gameNumbers = gameNumbers;
     }
 
-    public static Match baseOn(GameNumbers gameNumbers) {
-        return new Match(gameNumbers);
+    public static ScoreMatcher baseOn(GameNumbers gameNumbers) {
+        return new ScoreMatcher(gameNumbers);
     }
 
     public Score scoreOf(GameNumbers other) {
-        final MatchScore score = new MatchScore();
+        final RememberScore score = new RememberScore();
         for (int i = 0; i < gameNumbers.size(); i++) {
             final Hint hint = getHint(other.get(i), i); // TODO
-            score.count(hint);
+            score.addCount(hint);
         }
         return score;
     }
@@ -39,10 +39,10 @@ public class Match {
         return NOTHING;
     }
 
-    private static final class MatchScore implements Score {
+    private static final class RememberScore implements Score {
         private final Map<Hint, Integer> score = new EnumMap<>(Hint.class);
 
-        private void count(Hint hint) {
+        private void addCount(Hint hint) {
             final int current = get(hint);
             score.put(hint, current + 1);
         }

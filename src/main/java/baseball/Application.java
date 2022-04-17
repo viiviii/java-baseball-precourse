@@ -3,8 +3,8 @@ package baseball;
 import baseball.player.ComputerPlayer;
 import baseball.player.Player;
 import baseball.player.PlayerImpl;
-import baseball.score.Match;
 import baseball.score.Score;
+import baseball.score.ScoreMatcher;
 import baseball.view.ConsoleView;
 import baseball.view.View;
 import baseball.view.message.KoreanMessage;
@@ -29,11 +29,11 @@ public class Application {
     // TODO: 클래스로 분리
     private static void playGame(Player host, Player guessers) {
         final GameNumbers gameNumbersOfHost = host.think();
-        final Match match = Match.baseOn(gameNumbersOfHost);
+        final ScoreMatcher scoreMatcher = ScoreMatcher.baseOn(gameNumbersOfHost);
         boolean isAllStrike = false;
         while (!isAllStrike) {
             final GameNumbers gameNumbersOfGuessers = guessers.guess();
-            final Score score = match.scoreOf(gameNumbersOfGuessers);
+            final Score score = scoreMatcher.scoreOf(gameNumbersOfGuessers);
             guessers.announceScore(score);
             isAllStrike = score.isAllStrike();
         }

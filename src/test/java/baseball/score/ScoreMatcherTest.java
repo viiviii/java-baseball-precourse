@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static baseball.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MatchTest {
+public class ScoreMatcherTest {
 
     private GameNumbers gameNumbers;
     private String baseNumber = "123";
@@ -27,7 +27,7 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(allNothingNumber);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
         assertThat(score.isNothing()).isTrue();
@@ -43,7 +43,7 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(allStrikeNumber);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
         assertThat(score.isAllStrike()).isTrue();
@@ -64,7 +64,7 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(compare);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
         assertThat(score.get(STRIKE)).isEqualTo(expectedCount);
@@ -81,7 +81,7 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(compare);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
         assertThat(score.get(BALL)).isEqualTo(expectedCount);
@@ -97,7 +97,7 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(compare);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
         assertThat(score.get(BALL)).isEqualTo(expectedBallCount);
