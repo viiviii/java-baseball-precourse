@@ -36,8 +36,8 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void outputScoreMessage(String score) {
-        output(score);
+    public void outputScoreMessage(Score score) {
+        output(scoreMessage(score));
     }
 
     private void output(String message) {

@@ -47,7 +47,7 @@ public class PlayerImpl implements Player {
 
     @Override
     public void announceScore(Score score) {
-        view.outputScoreMessage(score.toString()); // 임시로 한 toString 제거
+        view.outputScoreMessage(score);
     }
 
 
