@@ -1,7 +1,7 @@
 package baseball.player;
 
 import baseball.GameNumbers;
-import camp.nextstep.edu.missionutils.Randoms;
+import baseball.MyRandoms;
 
 import java.util.List;
 
@@ -29,14 +29,10 @@ public class ComputerPlayer implements Player {
     }
 
     private GameNumbers randomGameNumbers() {
-        final List<Integer> randomNumbers = randomNumbers();
-        return new GameNumbers(randomNumbers);
-    }
-
-    private List<Integer> randomNumbers() {
         final int start = 1; // TODO
         final int end = 9;
         final int count = 3;
-        return Randoms.pickUniqueNumbersInRange(start, end, count);
+        final List<Integer> randomNumbers = MyRandoms.pickUniqueNumbersInRange(start, end, count);
+        return new GameNumbers(randomNumbers);
     }
 }
