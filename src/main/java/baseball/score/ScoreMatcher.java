@@ -45,27 +45,30 @@ public class ScoreMatcher {
         private final Map<Hint, Integer> score = new EnumMap<>(Hint.class);
 
         private void addCount(Hint hint) {
-            final int count = get(hint);
+            final int count = getCount(hint);
             score.put(hint, count + 1);
         }
 
-        @Override
-        public int get(Hint hint) {
+        public int getCount(Hint hint) {
             return score.getOrDefault(hint, 0);
         }
 
         @Override
         public boolean isAllStrike() {
-            return get(STRIKE) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
+            return isAll(STRIKE);
         }
 
         @Override
-        public boolean isNothing() {
-            return get(NOTHING) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
+        public boolean isAllNothing() {
+            return isAll(NOTHING);
+        }
+
+        private boolean isAll(Hint hint) {
+            return score.size() == 1 && score.containsKey(hint);
         }
 
         @Override
-        public Iterable<Match> matches() {
+        public List<Match> matches() {
             final List<Match> matches = new ArrayList<>();
             for (Map.Entry<Hint, Integer> map : score.entrySet()) {
                 final Match match = new Match(map.getKey(), map.getValue());
