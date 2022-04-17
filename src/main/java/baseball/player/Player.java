@@ -1,6 +1,7 @@
 package baseball.player;
 
 import baseball.GameNumbers;
+import baseball.player.input.GameProgressStatus;
 import baseball.score.Score;
 
 public interface Player {
@@ -9,7 +10,7 @@ public interface Player {
 
     GameNumbers guess();
 
-    boolean wantContinueNewGame();
+    GameProgressStatus wantContinueNewGame();
 
     void announceContinueNewGame();
 

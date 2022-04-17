@@ -2,6 +2,7 @@ package baseball.player;
 
 import baseball.GameNumbers;
 import baseball.parser.Parser;
+import baseball.player.input.GameProgressStatus;
 import baseball.score.Score;
 import baseball.view.View;
 
@@ -30,9 +31,9 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public boolean wantContinueNewGame() {
+    public GameProgressStatus wantContinueNewGame() {
         final String input = view.inputContinueNewGame();
-        return isSelectNewGame(input);
+        return GameProgressStatus.fromString(input);
     }
 
     @Override
@@ -48,16 +49,5 @@ public class PlayerImpl implements Player {
     @Override
     public void announceScore(Score score) {
         view.outputScoreMessage(score);
-    }
-
-
-    // TODO
-    private boolean isSelectNewGame(String selectCode) {
-        final String newGameStart = "1";
-        final String exitApplication = "2";
-        if (!(selectCode.equals(newGameStart) || selectCode.equals(exitApplication))) {
-            throw new IllegalArgumentException();
-        }
-        return selectCode.equals(newGameStart);
     }
 }
