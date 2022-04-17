@@ -5,10 +5,10 @@ import baseball.Hint;
 public class Match {
 
     private final Hint hint;
-    private final int points;
+    private final int count;
 
-    public Match(Hint hint, int points) {
+    public Match(Hint hint, int count) {
         this.hint = hint;
-        this.points = points;
+        this.count = count;
     }
 }
