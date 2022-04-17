@@ -4,5 +4,9 @@ public interface View {
 
     String input();
 
-    void output(String message);
+    void outputScoreMessage(String message);
+
+    void outputWinMessage();
+
+    void outputContinueNewGameMessage();
 }
