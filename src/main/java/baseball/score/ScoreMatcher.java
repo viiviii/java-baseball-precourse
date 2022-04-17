@@ -3,9 +3,7 @@ package baseball.score;
 import baseball.GameNumbers;
 import baseball.Hint;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 
 import static baseball.Hint.*;
@@ -65,16 +63,6 @@ public class ScoreMatcher {
 
         private boolean isAll(Hint hint) {
             return score.size() == 1 && score.containsKey(hint);
-        }
-
-        @Override
-        public List<Match> matches() {
-            final List<Match> matches = new ArrayList<>();
-            for (Map.Entry<Hint, Integer> map : score.entrySet()) {
-                final Match match = new Match(map.getKey(), map.getValue());
-                matches.add(match);
-            }
-            return matches;
         }
     }
 }
