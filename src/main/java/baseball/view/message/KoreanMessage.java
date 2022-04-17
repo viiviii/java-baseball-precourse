@@ -15,6 +15,11 @@ public class KoreanMessage implements Message {
     }
 
     @Override
+    public String inputGameNumbers() {
+        return "숫자를 입력해주세요 : ";
+    }
+
+    @Override
     public String hintName(Hint hint) {
         String name = "";
         switch (hint) {

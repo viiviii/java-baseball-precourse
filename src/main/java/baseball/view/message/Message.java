@@ -8,5 +8,7 @@ public interface Message {
 
     String continueNewGame();
 
+    String inputGameNumbers();
+
     String hintName(Hint hint);
 }

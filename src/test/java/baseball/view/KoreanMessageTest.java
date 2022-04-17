@@ -33,6 +33,15 @@ class KoreanMessageTest {
     }
 
     @Test
+    void 게임_숫자_입력() {
+        //when
+        String msg = message.inputGameNumbers();
+
+        //then
+        assertThat(msg).isEqualTo("숫자를 입력해주세요 : ");
+    }
+
+    @Test
     void 힌트_이름() {
         // when
         String strike = message.hintName(STRIKE);
