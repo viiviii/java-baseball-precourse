@@ -1,12 +1,6 @@
 package baseball.view.message;
 
 import baseball.Hint;
-import baseball.score.Score;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static baseball.Hint.*;
 
 public class KoreanMessage implements Message {
 
@@ -35,25 +29,5 @@ public class KoreanMessage implements Message {
                 break;
         }
         return name;
-    }
-
-    // TODO: 이하 메세지가 아닌 view가 해야됨
-    private final List<Hint> sortedOutputHints = Arrays.asList(BALL, STRIKE);
-
-    public String toHint(Score score) {
-        if (score.isNothing()) {
-            return hintName(NOTHING);
-        }
-        String message = "";
-        for (Hint hint : sortedOutputHints) {
-            final int count = score.get(hint);
-            final String name = hintName(hint);
-            message += hint(count, name);
-        }
-        return message.trim();
-    }
-
-    private String hint(int count, String name) {
-        return String.format("%d%s ", count, name);
     }
 }

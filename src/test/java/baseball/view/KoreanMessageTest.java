@@ -1,7 +1,6 @@
 package baseball.view;
 
 import baseball.Hint;
-import baseball.score.Score;
 import baseball.view.message.KoreanMessage;
 import baseball.view.message.Message;
 import org.junit.jupiter.api.Test;
@@ -10,31 +9,31 @@ import org.junit.jupiter.params.provider.EnumSource;
 
 import static baseball.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 class KoreanMessageTest {
 
     private Message message = new KoreanMessage();
 
     @Test
-    void 볼과_스트라이크가_함께_있는_경우_볼_힌트가_먼저_온다() {
-        //given
-        final int ONE_COUNT = 1;
-        Score score = mock(Score.class);
-        given(score.get(BALL)).willReturn(ONE_COUNT);
-        given(score.get(STRIKE)).willReturn(ONE_COUNT);
-
+    void 승리() {
         //when
-        String msg = message.toHint(score);
+        String msg = message.win();
 
         //then
-        String expected = String.format("%d%s %d%s", ONE_COUNT, "볼", ONE_COUNT, "스트라이크");
-        assertThat(msg).isEqualTo(expected);
+        assertThat(msg).isEqualTo("3개의 숫자를 모두 맞히셨습니다! 게임 종료"); // TODO: 하드코딩 제거(3)
     }
 
     @Test
-    void 힌트_이름은_스크라이크_볼_낫싱이다() {
+    void 게임_재시작_선택() {
+        //when
+        String msg = message.continueNewGame();
+
+        //then
+        assertThat(msg).isEqualTo("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."); // TODO: 하드코딩 제거(1, 2)
+    }
+
+    @Test
+    void 힌트_이름() {
         // when
         String strike = message.hintName(STRIKE);
         String ball = message.hintName(BALL);
@@ -54,23 +53,5 @@ class KoreanMessageTest {
 
         //then
         assertThat(msg).isNotBlank();
-    }
-
-    @Test
-    void 승리_메세지() {
-        //when
-        String msg = message.win();
-
-        //then
-        assertThat(msg).isEqualTo("3개의 숫자를 모두 맞히셨습니다! 게임 종료"); // TODO: 하드코딩 제거(3)
-    }
-
-    @Test
-    void 게임_재시작_선택_메세지() {
-        //when
-        String msg = message.continueNewGame();
-
-        //then
-        assertThat(msg).isEqualTo("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."); // TODO: 하드코딩 제거(1, 2)
     }
 }
