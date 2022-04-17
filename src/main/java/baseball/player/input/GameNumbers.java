@@ -1,4 +1,4 @@
-package baseball;
+package baseball.player.input;
 
 import java.util.*;
 

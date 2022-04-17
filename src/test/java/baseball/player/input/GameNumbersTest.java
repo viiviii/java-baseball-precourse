@@ -1,4 +1,4 @@
-package baseball;
+package baseball.player.input;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +11,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 // TODO: 테스트 메서드명 영어로 바꾸고 @DisplayName으로 변경
 // TODO: 테스트에서 유효하지 않은 값, 유효한 값 하드코딩 된 부분 개선 가능한가? -> 경계값 + 중간값은 Randoms에 메서드 사용해서 3개 뽑기?
+// TODO: 테스트 리팩토링(hashcode 비교하는 부분 등, assertThat 메서드로)
 public class GameNumbersTest {
 
     @Test

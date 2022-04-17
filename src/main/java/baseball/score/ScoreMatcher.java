@@ -1,7 +1,7 @@
 package baseball.score;
 
-import baseball.GameNumbers;
 import baseball.Hint;
+import baseball.player.input.GameNumbers;
 
 import java.util.EnumMap;
 import java.util.Map;

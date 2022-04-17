@@ -1,7 +1,8 @@
 package baseball.player;
 
-import baseball.GameNumbers;
 import baseball.MyRandoms;
+import baseball.player.input.GameNumbers;
+import baseball.player.input.GameProgressStatus;
 import baseball.score.Score;
 
 import java.util.List;
@@ -42,8 +43,8 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
-    public boolean wantContinueNewGame() {
+    public GameProgressStatus wantContinueNewGame() {
         // computer doesn't want
-        return false;
+        return GameProgressStatus.EXIT_APPLICATION;
     }
 }

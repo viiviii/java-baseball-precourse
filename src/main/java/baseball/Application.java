@@ -3,12 +3,16 @@ package baseball;
 import baseball.player.ComputerPlayer;
 import baseball.player.Player;
 import baseball.player.PlayerImpl;
+import baseball.player.input.GameNumbers;
+import baseball.player.input.GameProgressStatus;
 import baseball.score.Score;
 import baseball.score.ScoreMatcher;
 import baseball.view.ConsoleView;
 import baseball.view.View;
 import baseball.view.message.KoreanMessage;
 import baseball.view.message.Message;
+
+import static baseball.player.input.GameProgressStatus.NEW_GAME_START;
 
 public class Application {
     public static void main(String[] args) {
@@ -22,7 +26,8 @@ public class Application {
         while (wantPlayGame) {
             playGame(host, guessers);
             guessers.announceContinueNewGame();
-            wantPlayGame = guessers.wantContinueNewGame();
+            final GameProgressStatus gameProgressStatus = guessers.wantContinueNewGame();
+            wantPlayGame = gameProgressStatus.equals(NEW_GAME_START);
         }
     }
 

@@ -1,6 +1,7 @@
 package baseball.player;
 
-import baseball.GameNumbers;
+import baseball.player.input.GameNumbers;
+import baseball.player.input.GameProgressStatus;
 import baseball.score.Score;
 
 public interface Player {
@@ -9,11 +10,11 @@ public interface Player {
 
     GameNumbers guess();
 
-    boolean wantContinueNewGame();
+    GameProgressStatus wantContinueNewGame();
 
     void announceContinueNewGame();
 
     void announceWin();
 
-    void announceScore(Score score); // TODO: String으로 메세지 받나?
+    void announceScore(Score score);
 }
