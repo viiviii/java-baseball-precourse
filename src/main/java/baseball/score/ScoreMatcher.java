@@ -3,7 +3,9 @@ package baseball.score;
 import baseball.GameNumbers;
 import baseball.Hint;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import static baseball.Hint.*;
@@ -43,8 +45,8 @@ public class ScoreMatcher {
         private final Map<Hint, Integer> score = new EnumMap<>(Hint.class);
 
         private void addCount(Hint hint) {
-            final int current = get(hint);
-            score.put(hint, current + 1);
+            final int count = get(hint);
+            score.put(hint, count + 1);
         }
 
         @Override
@@ -60,6 +62,16 @@ public class ScoreMatcher {
         @Override
         public boolean isNothing() {
             return get(NOTHING) == 3; // TODO: 하드코딩 제거(넘버 자릿수와 비교해야함)
+        }
+
+        @Override
+        public Iterable<Match> matches() {
+            final List<Match> matches = new ArrayList<>();
+            for (Map.Entry<Hint, Integer> map : score.entrySet()) {
+                final Match match = new Match(map.getKey(), map.getValue());
+                matches.add(match);
+            }
+            return matches;
         }
     }
 }

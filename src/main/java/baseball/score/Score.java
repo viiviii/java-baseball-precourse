@@ -9,4 +9,6 @@ public interface Score {
     boolean isNothing();
 
     int get(Hint hint);
+
+    Iterable<Match> matches();
 }
