@@ -20,26 +20,28 @@ public class ScoreMatcher {
         return new ScoreMatcher(gameNumbers);
     }
 
-    public Score scoreOf(GameNumbers other) {
-        final RememberScore score = new RememberScore();
+    public Score scoreOf(GameNumbers otherNumbers) {
+        final ScoreRecord score = new ScoreRecord();
         for (int i = 0; i < gameNumbers.size(); i++) {
-            final Hint hint = getHint(other.get(i), i); // TODO
+            final Integer base = gameNumbers.get(i);
+            final Integer other = otherNumbers.get(i);
+            final Hint hint = match(base, other);
             score.addCount(hint);
         }
         return score;
     }
 
-    private Hint getHint(Integer target, int index) {
-        if (gameNumbers.get(index).equals(target)) { // TODO
+    private Hint match(Integer gameNumber, Integer other) {
+        if (gameNumber.equals(other)) {
             return STRIKE;
         }
-        if (gameNumbers.contains(target)) {
+        if (gameNumbers.contains(other)) {
             return BALL;
         }
         return NOTHING;
     }
 
-    private static final class RememberScore implements Score {
+    private static final class ScoreRecord implements Score {
         private final Map<Hint, Integer> score = new EnumMap<>(Hint.class);
 
         private void addCount(Hint hint) {

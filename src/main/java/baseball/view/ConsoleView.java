@@ -61,7 +61,6 @@ public class ConsoleView implements View {
         String msg = "";
         for (Hint hint : hintMessageOrder) {
             msg += hintMessage(score.getCount(hint), hintName(hint));
-            msg += " ";
         }
         return msg.trim();
     }
@@ -74,6 +73,6 @@ public class ConsoleView implements View {
         if (count == 0) {
             return "";
         }
-        return String.format("%d%s", count, hintName);
+        return String.format("%d%s ", count, hintName);
     }
 }

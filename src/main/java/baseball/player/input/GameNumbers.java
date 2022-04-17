@@ -19,7 +19,7 @@ public final class GameNumbers {
         return new ArrayList<>(numbers);
     }
 
-    private void validateSize(Collection<Integer> numbers) {
+    private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 3) {
             throw new IllegalArgumentException();
         }
