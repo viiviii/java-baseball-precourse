@@ -1,7 +1,7 @@
 package baseball.score;
 
-import baseball.GameNumbers;
 import baseball.parser.Parser;
+import baseball.player.input.GameNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

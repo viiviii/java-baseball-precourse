@@ -1,7 +1,7 @@
 package baseball.player;
 
-import baseball.GameNumbers;
 import baseball.parser.Parser;
+import baseball.player.input.GameNumbers;
 import baseball.player.input.GameProgressStatus;
 import baseball.score.Score;
 import baseball.view.View;

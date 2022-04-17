@@ -3,6 +3,7 @@ package baseball;
 import baseball.player.ComputerPlayer;
 import baseball.player.Player;
 import baseball.player.PlayerImpl;
+import baseball.player.input.GameNumbers;
 import baseball.player.input.GameProgressStatus;
 import baseball.score.Score;
 import baseball.score.ScoreMatcher;

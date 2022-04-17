@@ -1,7 +1,7 @@
 package baseball.player;
 
-import baseball.GameNumbers;
 import baseball.MyRandoms;
+import baseball.player.input.GameNumbers;
 import baseball.player.input.GameProgressStatus;
 import baseball.score.Score;
 
