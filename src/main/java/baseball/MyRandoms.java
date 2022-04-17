@@ -11,19 +11,18 @@ public final class MyRandoms {
 
     public static List<Integer> pickUniqueNumbersInRange(int startInclusive, int endInclusive, int count) {
         validateCount(startInclusive, endInclusive, count);
-        final Set<Integer> set = new HashSet<>();
-        while (set.size() < count) {
-            int random = Randoms.pickNumberInRange(startInclusive, endInclusive);
-            set.add(random);
+        final Set<Integer> randomNumbers = new HashSet<>();
+        while (randomNumbers.size() < count) {
+            final int random = Randoms.pickNumberInRange(startInclusive, endInclusive);
+            randomNumbers.add(random);
         }
-        return new ArrayList<>(set);
+        return new ArrayList<>(randomNumbers);
     }
 
     private static void validateCount(int startInclusive, int endInclusive, int count) {
         if (count < 0) {
             throw new IllegalArgumentException();
         }
-
         if (endInclusive - startInclusive + 1 < count) {
             throw new IllegalArgumentException();
         }
