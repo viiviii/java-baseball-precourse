@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static baseball.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MatchTest {
+public class ScoreMatcherTest {
 
     private GameNumbers gameNumbers;
     private String baseNumber = "123";
@@ -27,13 +27,13 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(allNothingNumber);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
-        assertThat(score.isNothing()).isTrue();
-        assertThat(score.get(NOTHING)).isEqualTo(3); // TODO: 하드코딩 제거
-        assertThat(score.get(STRIKE)).isZero();
-        assertThat(score.get(BALL)).isZero();
+        assertThat(score.isAllNothing()).isTrue();
+        assertThat(score.getCount(NOTHING)).isEqualTo(3); // TODO: 하드코딩 제거
+        assertThat(score.getCount(STRIKE)).isZero();
+        assertThat(score.getCount(BALL)).isZero();
     }
 
     @Test
@@ -43,13 +43,13 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(allStrikeNumber);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
         assertThat(score.isAllStrike()).isTrue();
-        assertThat(score.get(STRIKE)).isEqualTo(3); // TODO: 하드코딩 제거
-        assertThat(score.get(BALL)).isZero();
-        assertThat(score.get(NOTHING)).isZero();
+        assertThat(score.getCount(STRIKE)).isEqualTo(3); // TODO: 하드코딩 제거
+        assertThat(score.getCount(BALL)).isZero();
+        assertThat(score.getCount(NOTHING)).isZero();
 
     }
 
@@ -64,10 +64,10 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(compare);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
-        assertThat(score.get(STRIKE)).isEqualTo(expectedCount);
+        assertThat(score.getCount(STRIKE)).isEqualTo(expectedCount);
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}볼이다")
@@ -81,10 +81,10 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(compare);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
-        assertThat(score.get(BALL)).isEqualTo(expectedCount);
+        assertThat(score.getCount(BALL)).isEqualTo(expectedCount);
     }
 
     @ParameterizedTest(name = "[{index}] 123과 {0}는 {1}볼 {2}스트라이크이다")
@@ -97,11 +97,11 @@ public class MatchTest {
         GameNumbers other = parseAsGameNumbers(compare);
 
         //when
-        Score score = Match.baseOn(gameNumbers).scoreOf(other);
+        Score score = ScoreMatcher.baseOn(gameNumbers).scoreOf(other);
 
         //then
-        assertThat(score.get(BALL)).isEqualTo(expectedBallCount);
-        assertThat(score.get(STRIKE)).isEqualTo(expectedStrikeCount);
+        assertThat(score.getCount(BALL)).isEqualTo(expectedBallCount);
+        assertThat(score.getCount(STRIKE)).isEqualTo(expectedStrikeCount);
     }
 
     private GameNumbers parseAsGameNumbers(String number) {

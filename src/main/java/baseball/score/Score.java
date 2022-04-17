@@ -2,11 +2,15 @@ package baseball.score;
 
 import baseball.Hint;
 
+import java.util.List;
+
 public interface Score {
 
     boolean isAllStrike();
 
-    boolean isNothing();
+    boolean isAllNothing();
 
-    int get(Hint hint);
+    int getCount(Hint hint);
+
+    List<Match> matches();
 }

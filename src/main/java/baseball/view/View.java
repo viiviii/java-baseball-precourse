@@ -1,8 +1,16 @@
 package baseball.view;
 
+import baseball.score.Score;
+
 public interface View {
 
-    String input();
+    String inputGameNumber();
 
-    void output(String message);
+    String inputContinueNewGame();
+
+    void outputScoreMessage(Score score);
+
+    void outputWinMessage();
+
+    void outputContinueNewGameMessage();
 }

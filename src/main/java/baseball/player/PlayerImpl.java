@@ -2,6 +2,7 @@ package baseball.player;
 
 import baseball.GameNumbers;
 import baseball.parser.Parser;
+import baseball.score.Score;
 import baseball.view.View;
 
 // TODO: 클래스명 별로임
@@ -11,17 +12,6 @@ public class PlayerImpl implements Player {
 
     public PlayerImpl(View view) {
         this.view = view;
-    }
-
-    @Override
-    public void viewResult(String message) {
-        view.output(message);
-    }
-
-    @Override
-    public boolean wantContinueNewGame() {
-        final String input = view.input();
-        return isSelectNewGame(input);
     }
 
     @Override
@@ -35,9 +25,31 @@ public class PlayerImpl implements Player {
     }
 
     private GameNumbers inputGameNumbers() {
-        final String input = view.input();
+        final String input = view.inputGameNumber();
         return Parser.asGameNumbers(input);
     }
+
+    @Override
+    public boolean wantContinueNewGame() {
+        final String input = view.inputContinueNewGame();
+        return isSelectNewGame(input);
+    }
+
+    @Override
+    public void announceContinueNewGame() {
+        view.outputContinueNewGameMessage();
+    }
+
+    @Override
+    public void announceWin() {
+        view.outputWinMessage();
+    }
+
+    @Override
+    public void announceScore(Score score) {
+        view.outputScoreMessage(score);
+    }
+
 
     // TODO
     private boolean isSelectNewGame(String selectCode) {
