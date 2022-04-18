@@ -9,6 +9,9 @@ import java.util.Set;
 
 public final class MyRandoms {
 
+    private MyRandoms() {
+    }
+
     public static List<Integer> pickUniqueNumbersInRange(int startInclusive, int endInclusive, int count) {
         validateCount(startInclusive, endInclusive, count);
         final Set<Integer> randomNumbers = new HashSet<>();

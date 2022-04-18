@@ -5,6 +5,9 @@ import java.util.List;
 
 public final class Parser {
 
+    private Parser() {
+    }
+
     public static List<Integer> asIntegerList(String str) {
         final String[] chars = str.trim().split("");
         final List<Integer> integers = new ArrayList<>();
