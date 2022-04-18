@@ -11,7 +11,6 @@ import java.util.List;
 import static baseball.model.Hint.*;
 
 public class ConsoleView implements View {
-
     private final List<Hint> hintMessageOrder = Arrays.asList(BALL, STRIKE);
     private final Message message;
 

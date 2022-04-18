@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.mockStatic;
 
 public class MyRandomsTest {
-
     private int startInclusive = 1;
     private int endInclusive = 9;
     private int count = 3;

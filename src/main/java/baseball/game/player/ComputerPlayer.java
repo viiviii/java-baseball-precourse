@@ -1,8 +1,9 @@
 package baseball.game.player;
 
 import baseball.model.GameNumbers;
-import baseball.model.GameProgressStatus;
 import baseball.model.Score;
+import baseball.model.SecretGameNumbers;
+import baseball.model.SelectGameContinue;
 import baseball.util.MyRandoms;
 
 import java.util.List;
@@ -10,8 +11,8 @@ import java.util.List;
 public class ComputerPlayer implements Player {
 
     @Override
-    public GameNumbers think() {
-        return randomGameNumbers();
+    public SecretGameNumbers think() {
+        return SecretGameNumbers.from(randomGameNumbers());
     }
 
     @Override
@@ -24,7 +25,7 @@ public class ComputerPlayer implements Player {
         final int end = 9;
         final int count = 3;
         final List<Integer> randomNumbers = MyRandoms.pickUniqueNumbersInRange(start, end, count);
-        return new GameNumbers(randomNumbers);
+        return GameNumbers.fromIntegers(randomNumbers);
     }
 
     @Override
@@ -43,8 +44,8 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
-    public GameProgressStatus wantContinueNewGame() {
+    public SelectGameContinue wantContinueWithNewGame() {
         // computer doesn't want
-        return GameProgressStatus.EXIT_APPLICATION;
+        return SelectGameContinue.EXIT_GAME;
     }
 }

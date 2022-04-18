@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-class GameProgressStatusTest {
+class SelectGameContinueTest {
 
     @Test
     void 인풋_값이_1이면_새로운_게임을_원한다() {
@@ -13,10 +13,10 @@ class GameProgressStatusTest {
         String wantNewGame = "1";
 
         //when
-        GameProgressStatus gameProgressNumber = GameProgressStatus.fromString(wantNewGame);
+        SelectGameContinue select = SelectGameContinue.fromString(wantNewGame);
 
         //then
-        assertThat(gameProgressNumber).isEqualTo(GameProgressStatus.NEW_GAME_START);
+        assertThat(select).isEqualTo(SelectGameContinue.NEW_GAME_START);
 
     }
 
@@ -26,19 +26,19 @@ class GameProgressStatusTest {
         String wantGameEnd = "2";
 
         //when
-        GameProgressStatus gameProgressNumber = GameProgressStatus.fromString(wantGameEnd);
+        SelectGameContinue select = SelectGameContinue.fromString(wantGameEnd);
 
         //then
-        assertThat(gameProgressNumber).isEqualTo(GameProgressStatus.EXIT_APPLICATION);
+        assertThat(select).isEqualTo(SelectGameContinue.EXIT_GAME);
     }
 
     @Test
     void 인풋_값이_잘못된_값이면_IllegalArgumentException이_발생한다() {
         //given
-        String notOneOrTwo = "3";
+        String invalid = "3";
 
         //when
-        Throwable thrown = catchThrowable(() -> GameProgressStatus.fromString(notOneOrTwo));
+        Throwable thrown = catchThrowable(() -> SelectGameContinue.fromString(invalid));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
@@ -50,11 +50,11 @@ class GameProgressStatusTest {
         String wantNewGame = "1";
 
         //when
-        GameProgressStatus gameProgressNumber = GameProgressStatus.fromString(wantNewGame);
+        SelectGameContinue select = SelectGameContinue.fromString(wantNewGame);
 
         //then
-        GameProgressStatus expected = GameProgressStatus.NEW_GAME_START;
-        assertThat(gameProgressNumber).isEqualTo(expected);
-        assertThat(gameProgressNumber).hasSameHashCodeAs(expected);
+        SelectGameContinue expected = SelectGameContinue.NEW_GAME_START;
+        assertThat(select).isEqualTo(expected);
+        assertThat(select).hasSameHashCodeAs(expected);
     }
 }

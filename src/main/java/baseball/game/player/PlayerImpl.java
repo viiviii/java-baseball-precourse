@@ -1,14 +1,13 @@
 package baseball.game.player;
 
-import baseball.Parser;
 import baseball.model.GameNumbers;
-import baseball.model.GameProgressStatus;
 import baseball.model.Score;
+import baseball.model.SecretGameNumbers;
+import baseball.model.SelectGameContinue;
 import baseball.view.View;
 
 // TODO: 클래스명 별로임
 public class PlayerImpl implements Player {
-
     private final View view;
 
     public PlayerImpl(View view) {
@@ -16,8 +15,8 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public GameNumbers think() {
-        return inputGameNumbers();
+    public SecretGameNumbers think() {
+        return SecretGameNumbers.from(inputGameNumbers());
     }
 
     @Override
@@ -27,13 +26,13 @@ public class PlayerImpl implements Player {
 
     private GameNumbers inputGameNumbers() {
         final String input = view.inputGameNumber();
-        return Parser.asGameNumbers(input);
+        return GameNumbers.fromString(input);
     }
 
     @Override
-    public GameProgressStatus wantContinueNewGame() {
+    public SelectGameContinue wantContinueWithNewGame() {
         final String input = view.inputContinueNewGame();
-        return GameProgressStatus.fromString(input);
+        return SelectGameContinue.fromString(input);
     }
 
     @Override

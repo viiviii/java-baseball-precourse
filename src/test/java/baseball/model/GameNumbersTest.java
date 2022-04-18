@@ -79,6 +79,19 @@ public class GameNumbersTest {
         assertThat(equals).isTrue();
     }
 
+
+    @Test
+    void 문자열를_게임숫자로_파싱할_수_없으면_IllegalArgumentException이_발생한다() {
+        //given
+        String str = "a1";
+
+        //when
+        Throwable thrown = catchThrowable(() -> GameNumbers.fromString(str));
+
+        //then
+        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @Test
     void hashCodeEquality() {
         //given
@@ -124,6 +137,6 @@ public class GameNumbersTest {
     }
 
     private GameNumbers createGameNumbers(List<Integer> numbers) {
-        return new GameNumbers(numbers);
+        return GameNumbers.fromIntegers(numbers);
     }
 }
