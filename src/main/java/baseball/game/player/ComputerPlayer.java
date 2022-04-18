@@ -1,9 +1,9 @@
-package baseball.player;
+package baseball.game.player;
 
-import baseball.MyRandoms;
-import baseball.player.input.GameNumbers;
-import baseball.player.input.GameProgressStatus;
-import baseball.score.Score;
+import baseball.model.GameNumbers;
+import baseball.model.GameProgressStatus;
+import baseball.model.Score;
+import baseball.util.MyRandoms;
 
 import java.util.List;
 

@@ -1,6 +1,4 @@
-package baseball.score;
-
-import baseball.Hint;
+package baseball.model;
 
 public interface Score {
 

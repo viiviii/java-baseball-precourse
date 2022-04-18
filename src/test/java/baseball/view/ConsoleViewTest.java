@@ -1,11 +1,11 @@
 package baseball.view;
 
-import baseball.score.Score;
+import baseball.model.Score;
 import baseball.view.message.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static baseball.Hint.*;
+import static baseball.model.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;

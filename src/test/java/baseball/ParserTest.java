@@ -1,6 +1,5 @@
 package baseball;
 
-import baseball.parser.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package baseball.view;
 
-import baseball.score.Score;
+import baseball.model.Score;
 
 public interface View {
 

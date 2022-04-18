@@ -1,12 +1,9 @@
-package baseball.score;
-
-import baseball.Hint;
-import baseball.player.input.GameNumbers;
+package baseball.model;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-import static baseball.Hint.*;
+import static baseball.model.Hint.*;
 
 public class ScoreMatcher {
 
