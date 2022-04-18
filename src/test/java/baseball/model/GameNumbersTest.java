@@ -101,8 +101,9 @@ public class GameNumbersTest {
         GameNumbers otherGameNumbers = gameNumbersFromIntegers(otherNumbers);
 
         //then
-        assertThat(gameNumbers).isEqualTo(otherGameNumbers);
-        assertThat(gameNumbers).hasSameHashCodeAs(otherGameNumbers);
+        assertThat(gameNumbers)
+                .isEqualTo(otherGameNumbers)
+                .hasSameHashCodeAs(otherGameNumbers);
     }
 
     @DisplayName("게임숫자는 생성 후에 값이 변경되지 않는다")
