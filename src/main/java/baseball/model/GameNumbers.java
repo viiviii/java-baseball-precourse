@@ -1,6 +1,6 @@
 package baseball.model;
 
-import baseball.Parser;
+import baseball.util.Parser;
 
 import java.util.*;
 
