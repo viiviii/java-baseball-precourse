@@ -9,7 +9,6 @@ import static baseball.model.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SecretGameNumbersTest {
-
     private SecretGameNumbers secretGameNumbers;
     private String baseNumber = "123";
 

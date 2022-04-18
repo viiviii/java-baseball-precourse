@@ -6,7 +6,6 @@ import java.util.Map;
 import static baseball.model.Hint.*;
 
 public class SecretGameNumbers {
-
     private final GameNumbers gameNumbers;
 
     private SecretGameNumbers(GameNumbers gameNumbers) {

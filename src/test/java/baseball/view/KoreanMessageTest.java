@@ -11,7 +11,6 @@ import static baseball.model.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class KoreanMessageTest {
-
     private Message message = new KoreanMessage();
 
     @Test

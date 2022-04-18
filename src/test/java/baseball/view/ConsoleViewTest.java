@@ -11,7 +11,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 class ConsoleViewTest {
-
     private Message message = mock(Message.class);
     private Score score = mock(Score.class);
     private ConsoleView view = new ConsoleView(message);
