@@ -57,15 +57,19 @@ public class ConsoleView implements View {
         if (score.isAllNothing()) {
             return hintName(NOTHING);
         }
-        String msg = "";
-        for (Hint hint : hintMessageOrder) {
-            msg += hintMessage(score.getCount(hint), hintName(hint));
-        }
-        return msg.trim();
+        return makeOrderedHintMessageWith(score);
     }
 
     private String hintName(Hint hint) {
         return message.hintName(hint);
+    }
+
+    private String makeOrderedHintMessageWith(Score score) {
+        final StringBuilder msg = new StringBuilder();
+        for (Hint hint : hintMessageOrder) {
+            msg.append(hintMessage(score.getCount(hint), hintName(hint)));
+        }
+        return msg.toString().trim();
     }
 
     private String hintMessage(int count, String hintName) {

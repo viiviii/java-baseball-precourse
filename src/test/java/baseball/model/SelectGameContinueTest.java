@@ -58,7 +58,8 @@ class SelectGameContinueTest {
 
         //then
         SelectGameContinue expected = SelectGameContinue.NEW_GAME_START;
-        assertThat(select).isEqualTo(expected);
-        assertThat(select).hasSameHashCodeAs(expected);
+        assertThat(select)
+                .isEqualTo(expected)
+                .hasSameHashCodeAs(expected);
     }
 }

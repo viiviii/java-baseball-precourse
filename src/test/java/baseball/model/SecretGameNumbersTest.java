@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static baseball.model.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SecretGameNumbersTest {
+class SecretGameNumbersTest {
     private SecretGameNumbers secretGameNumbers;
     private String baseNumber = "123";
 

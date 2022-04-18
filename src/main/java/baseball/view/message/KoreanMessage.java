@@ -3,10 +3,21 @@ package baseball.view.message;
 import baseball.game.Game;
 import baseball.model.Hint;
 
+import java.util.EnumMap;
+import java.util.Map;
+
+import static baseball.model.Hint.*;
 import static baseball.model.SelectGameContinue.EXIT_GAME;
 import static baseball.model.SelectGameContinue.NEW_GAME_START;
 
 public class KoreanMessage implements Message {
+    final Map<Hint, String> hintNames = new EnumMap<>(Hint.class);
+    
+    public KoreanMessage() {
+        hintNames.put(STRIKE, "스트라이크");
+        hintNames.put(BALL, "볼");
+        hintNames.put(NOTHING, "낫싱");
+    }
 
     @Override
     public String win() {
@@ -25,18 +36,6 @@ public class KoreanMessage implements Message {
 
     @Override
     public String hintName(Hint hint) {
-        String name = "";
-        switch (hint) {
-            case STRIKE:
-                name = "스트라이크";
-                break;
-            case BALL:
-                name = "볼";
-                break;
-            case NOTHING:
-                name = "낫싱";
-                break;
-        }
-        return name;
+        return hintNames.get(hint);
     }
 }
