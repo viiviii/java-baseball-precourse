@@ -21,10 +21,10 @@ public final class MyRandoms {
 
     private static void validateCount(int startInclusive, int endInclusive, int count) {
         if (count < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("카운트는 0보다 작을 수 없습니다");
         }
         if (endInclusive - startInclusive + 1 < count) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("카운트는 입력 범위보다 클 수 없습니다");
         }
     }
 }

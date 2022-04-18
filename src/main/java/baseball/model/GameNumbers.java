@@ -5,7 +5,6 @@ import baseball.util.Parser;
 
 import java.util.*;
 
-// TODO: 예외에 의미있는 메세지를 담아서 던지기
 public final class GameNumbers {
     private final List<Integer> numbers;
 
@@ -26,7 +25,7 @@ public final class GameNumbers {
             final List<Integer> numbers = Parser.asIntegerList(str);
             return GameNumbers.fromIntegers(numbers);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("게임숫자는 숫자만 가능합니다");
         }
     }
 
@@ -36,14 +35,15 @@ public final class GameNumbers {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != Game.DIGITS) {
-            throw new IllegalArgumentException();
+            final String message = String.format("게임숫자는 %d 자리의 수여야 합니다", Game.DIGITS);
+            throw new IllegalArgumentException(message);
         }
     }
 
     private void validateDuplication(List<Integer> numbers) {
         final Set<Integer> deduplicatedNumbers = new HashSet<>(numbers);
         if (numbers.size() != deduplicatedNumbers.size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("게임숫자는 서로 다른 수로 이루어져야 합니다");
         }
     }
 
@@ -52,8 +52,11 @@ public final class GameNumbers {
     }
 
     private void validateRange(Integer number) {
-        if (number < 1 || number > 9) {
-            throw new IllegalArgumentException();
+        final int start = Game.START_NUMBER;
+        final int end = Game.END_NUMBER;
+        if (number < start || number > end) {
+            final String message = String.format("게임숫자는 %d ~ %d까지 숫자만 가능합니다.", start, end);
+            throw new IllegalArgumentException(message);
         }
     }
 

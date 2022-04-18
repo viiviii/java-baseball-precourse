@@ -19,7 +19,7 @@ public final class SelectGameContinue {
 
     private static void validate(String code) {
         if (!(code.equals(NEW_GAME_START.code) || code.equals(EXIT_GAME.code))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("유효하지 않은 게임 진행 코드입니다");
         }
     }
 
