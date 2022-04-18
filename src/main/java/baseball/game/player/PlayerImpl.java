@@ -6,7 +6,6 @@ import baseball.model.SecretGameNumbers;
 import baseball.model.SelectGameContinue;
 import baseball.view.View;
 
-// TODO: 클래스명 별로임
 public class PlayerImpl implements Player {
     private final View view;
 
