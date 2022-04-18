@@ -1,5 +1,6 @@
 package baseball.game.player;
 
+import baseball.game.Game;
 import baseball.model.GameNumbers;
 import baseball.model.Score;
 import baseball.model.SecretGameNumbers;
@@ -21,10 +22,8 @@ public class ComputerPlayer implements Player {
     }
 
     private GameNumbers randomGameNumbers() {
-        final int start = 1; // TODO
-        final int end = 9;
-        final int count = 3;
-        final List<Integer> randomNumbers = MyRandoms.pickUniqueNumbersInRange(start, end, count);
+        final List<Integer> randomNumbers = MyRandoms
+                .pickUniqueNumbersInRange(Game.START_NUMBER, Game.END_NUMBER, Game.DIGITS);
         return GameNumbers.fromIntegers(randomNumbers);
     }
 

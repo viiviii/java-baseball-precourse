@@ -1,5 +1,6 @@
 package baseball.util;
 
+import baseball.game.Game;
 import camp.nextstep.edu.missionutils.Randoms;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
@@ -12,9 +13,9 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.mockStatic;
 
 public class MyRandomsTest {
-    private int startInclusive = 1;
-    private int endInclusive = 9;
-    private int count = 3;
+    private int startInclusive = Game.START_NUMBER;
+    private int endInclusive = Game.END_NUMBER;
+    private int count = Game.DIGITS;
 
     @Test
     void pickUniqueNumbersInRange() {

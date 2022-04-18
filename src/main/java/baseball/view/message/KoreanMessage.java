@@ -1,17 +1,21 @@
 package baseball.view.message;
 
+import baseball.game.Game;
 import baseball.model.Hint;
+
+import static baseball.model.SelectGameContinue.EXIT_GAME;
+import static baseball.model.SelectGameContinue.NEW_GAME_START;
 
 public class KoreanMessage implements Message {
 
     @Override
     public String win() {
-        return "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
+        return String.format("%s개의 숫자를 모두 맞히셨습니다! 게임 종료", Game.DIGITS);
     }
 
     @Override
     public String continueNewGame() {
-        return "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
+        return String.format("게임을 새로 시작하려면 %s, 종료하려면 %s를 입력하세요.", NEW_GAME_START.code(), EXIT_GAME.code());
     }
 
     @Override
