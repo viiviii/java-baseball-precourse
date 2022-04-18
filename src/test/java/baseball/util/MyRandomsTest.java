@@ -2,6 +2,7 @@ package baseball.util;
 
 import baseball.game.Game;
 import camp.nextstep.edu.missionutils.Randoms;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
@@ -17,6 +18,7 @@ public class MyRandomsTest {
     private int endInclusive = Game.END_NUMBER;
     private int count = Game.DIGITS;
 
+    @DisplayName("유니크한 랜덤 숫자 리스트를 생성한다")
     @Test
     void pickUniqueNumbersInRange() {
         try (final MockedStatic<Randoms> mocked = mockStatic(Randoms.class)) {
@@ -33,8 +35,9 @@ public class MyRandomsTest {
         }
     }
 
+    @DisplayName("카운트가 0보다 작으면 예외가 발생한다")
     @Test
-    void 카운트가_0보다_작으면_IllegalArgumentException이_발생한다() {
+    void thrownExceptionWhenNegativeCount() {
         //given
         int negativeCount = -1;
 
@@ -46,8 +49,9 @@ public class MyRandomsTest {
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("생성할 범위의 숫자 갯수가 카운트보다 작으면 예외가 발생한다")
     @Test
-    void 생성할_범위의_숫자_갯수가_카운트보다_작으면_IllegalArgumentException이_발생한다() {
+    void thrownExceptionWhenNumberInRangeLessThanCount() {
         //given
         int greaterThanRangeCount = 999;
 

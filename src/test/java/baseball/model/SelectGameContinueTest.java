@@ -1,5 +1,6 @@
 package baseball.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -7,8 +8,9 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 class SelectGameContinueTest {
 
+    @DisplayName("1은 새로운 게임 시작을 나타낸다")
     @Test
-    void 인풋_값이_1이면_새로운_게임을_원한다() {
+    void newStartGameCode() {
         //given
         String wantNewGame = "1";
 
@@ -20,8 +22,9 @@ class SelectGameContinueTest {
 
     }
 
+    @DisplayName("2는 게임 종료를 나타낸다")
     @Test
-    void 인풋_값이_2이면_게임종료를_원한다() {
+    void exitGameCode() {
         //given
         String wantGameEnd = "2";
 
@@ -32,8 +35,9 @@ class SelectGameContinueTest {
         assertThat(select).isEqualTo(SelectGameContinue.EXIT_GAME);
     }
 
+    @DisplayName("1과 2가 아닌 경우 예외가 발생한다")
     @Test
-    void 인풋_값이_잘못된_값이면_IllegalArgumentException이_발생한다() {
+    void thrownExceptionWhenInvalidCode() {
         //given
         String invalid = "3";
 

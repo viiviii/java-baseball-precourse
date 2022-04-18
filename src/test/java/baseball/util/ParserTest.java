@@ -1,5 +1,6 @@
 package baseball.util;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,8 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParserTest {
 
+    @DisplayName("문자열을 integer list로_파싱한다")
     @Test
-    void 문자열을_integer_list로_파싱한다() {
+    void parseStringToIntegerList() {
         //given
         String value = "123";
 

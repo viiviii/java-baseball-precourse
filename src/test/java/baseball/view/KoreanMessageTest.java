@@ -3,6 +3,7 @@ package baseball.view;
 import baseball.model.Hint;
 import baseball.view.message.KoreanMessage;
 import baseball.view.message.Message;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
@@ -13,8 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class KoreanMessageTest {
     private Message message = new KoreanMessage();
 
+    @DisplayName("승리 메세지")
     @Test
-    void 승리() {
+    void messageWin() {
         //when
         String msg = message.win();
 
@@ -22,8 +24,9 @@ class KoreanMessageTest {
         assertThat(msg).isEqualTo("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
 
+    @DisplayName("게임 재시작 선택 메세지")
     @Test
-    void 게임_재시작_선택() {
+    void messageContinueNewGame() {
         //when
         String msg = message.continueNewGame();
 
@@ -31,8 +34,9 @@ class KoreanMessageTest {
         assertThat(msg).isEqualTo("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     }
 
+    @DisplayName("게임 숫자 입력 메세지")
     @Test
-    void 게임_숫자_입력() {
+    void messageInputGameNumbers() {
         //when
         String msg = message.inputGameNumbers();
 
@@ -40,8 +44,9 @@ class KoreanMessageTest {
         assertThat(msg).isEqualTo("숫자를 입력해주세요 : ");
     }
 
+    @DisplayName("힌트 이름")
     @Test
-    void 힌트_이름() {
+    void hintName() {
         // when
         String strike = message.hintName(STRIKE);
         String ball = message.hintName(BALL);
@@ -53,9 +58,10 @@ class KoreanMessageTest {
         assertThat(nothing).isEqualTo("낫싱");
     }
 
+    @DisplayName("힌트는 모두 이름이 있다")
     @ParameterizedTest
     @EnumSource(Hint.class)
-    void 힌트는_모두_이름이_있다(Hint hint) {
+    void allHintsHaveNames(Hint hint) {
         //when
         String msg = message.hintName(hint);
 

@@ -1,5 +1,6 @@
 package baseball.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,79 +10,76 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-// TODO: 테스트 메서드명 영어로 바꾸고 @DisplayName으로 변경
-// TODO: 테스트에서 유효하지 않은 값, 유효한 값 하드코딩 된 부분 개선 가능한가? -> 경계값 + 중간값은 Randoms에 메서드 사용해서 3개 뽑기?
-// TODO: 테스트 리팩토링(hashcode 비교하는 부분 등, assertThat 메서드로)
 public class GameNumbersTest {
 
+    @DisplayName("문자열로 게임 숫자를 생성한다")
     @Test
-    void 올바른_게임숫자() {
+    void createGameNumberFromString() {
         //given
-        List<Integer> numbers = Arrays.asList(1, 2, 3);
+        String numbers = "123";
 
         //when
-        Throwable thrown = catchThrowable(() -> createGameNumbers(numbers));
+        Throwable thrown = catchThrowable(() -> gameNumbersFromString(numbers));
 
         //then
         assertThat(thrown).doesNotThrowAnyException();
     }
 
+    @DisplayName("숫자 리스트로 게임 숫자를 생성한다")
     @Test
-    void 게임_숫자는_3개가_아니면_예외가_발생한다() {
+    void createGameNumberFromIntegers() {
         //given
-        List<Integer> numbersOfFourLength = Arrays.asList(1, 2, 3, 4);
+        List<Integer> integers = Arrays.asList(1, 2, 3);
 
         //when
-        Throwable thrown = catchThrowable(() -> createGameNumbers(numbersOfFourLength));
+        Throwable thrown = catchThrowable(() -> gameNumbersFromIntegers(integers));
+
+        //then
+        assertThat(thrown).doesNotThrowAnyException();
+    }
+
+    @DisplayName("게임숫자 길이가 유효하지 않으면 예외가  발생한다")
+    @Test
+    void thrownExceptionWhenInvalidLength() {
+        //given
+        String numbersOfFourLength = "1234";
+
+        //when
+        Throwable thrown = catchThrowable(() -> gameNumbersFromString(numbersOfFourLength));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("게임숫자에 중복 값이 있는 경우 예외가 발생한다")
     @Test
-    void 게임_숫자가_중복된_경우_예외가_발생한다() {
+    void thrownExceptionWhenDuplicateValues() {
         //given
-        Integer duplicate = 1;
-        List<Integer> numbersWithDuplicateValues = Arrays.asList(duplicate, duplicate, 3);
+        String numbersWithDuplicateValues = "112";
 
         //when
-        Throwable thrown = catchThrowable(() -> createGameNumbers(numbersWithDuplicateValues));
+        Throwable thrown = catchThrowable(() -> gameNumbersFromString(numbersWithDuplicateValues));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("게임숫자 범위가 유효하지 않으면 예외가 발생한다")
     @Test
-    void 게임_숫자_범위가_유효하지_않으면_예외가_발생한다() {
+    void thrownExceptionWhenInvalidRanges() {
         //given
-        Integer invalid = -1;
-        List<Integer> numberWithInvalidValue = Arrays.asList(invalid, 2, 3);
+        String numberWithInvalidValue = "-523";
 
         //when
-        Throwable thrown = catchThrowable(() -> createGameNumbers(numberWithInvalidValue));
+        Throwable thrown = catchThrowable(() -> gameNumbersFromString(numberWithInvalidValue));
 
         //then
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("문자열을 게임숫자로 파싱할 수 없으면 예외가 발생한다")
     @Test
-    void equality() {
-        //given
-        List<Integer> numbers = Arrays.asList(1, 2, 3);
-        List<Integer> otherNumbers = Arrays.asList(1, 2, 3);
-        GameNumbers gameNumbers = createGameNumbers(numbers);
-        GameNumbers otherGameNumbers = createGameNumbers(otherNumbers);
-
-        //when
-        boolean equals = gameNumbers.equals(otherGameNumbers);
-
-        //then
-        assertThat(equals).isTrue();
-    }
-
-
-    @Test
-    void 문자열를_게임숫자로_파싱할_수_없으면_IllegalArgumentException이_발생한다() {
+    void thrownExceptionWhenInvalidString() {
         //given
         String str = "a1";
 
@@ -92,51 +90,57 @@ public class GameNumbersTest {
         assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("동등성 테스트")
     @Test
-    void hashCodeEquality() {
-        //given
+    void equality() {
+        //given, when
         List<Integer> numbers = Arrays.asList(1, 2, 3);
         List<Integer> otherNumbers = Arrays.asList(1, 2, 3);
-        GameNumbers gameNumbers = createGameNumbers(numbers);
-        GameNumbers otherGameNumbers = createGameNumbers(otherNumbers);
 
-        //when
-        boolean equals = gameNumbers.hashCode() == otherGameNumbers.hashCode();
+        GameNumbers gameNumbers = gameNumbersFromIntegers(numbers);
+        GameNumbers otherGameNumbers = gameNumbersFromIntegers(otherNumbers);
 
         //then
-        assertThat(equals).isTrue();
+        assertThat(gameNumbers).isEqualTo(otherGameNumbers);
+        assertThat(gameNumbers).hasSameHashCodeAs(otherGameNumbers);
     }
 
+    @DisplayName("게임숫자는 생성 후에 값이 변경되지 않는다")
     @Test
     void immutableWithMutableCollection() {
         //given
         List<Integer> mutable = Arrays.asList(1, 2, 3);
 
         //when
-        GameNumbers gameNumbers = createGameNumbers(mutable);
+        GameNumbers gameNumbers = gameNumbersFromIntegers(mutable);
         mutable.set(0, 4);
 
         //then
-        GameNumbers expected = createGameNumbers(Arrays.asList(1, 2, 3));
+        GameNumbers expected = gameNumbersFromIntegers(Arrays.asList(1, 2, 3));
         assertThat(gameNumbers).isEqualTo(expected);
     }
 
+    @DisplayName("게임숫자는 생성 후에 길이가 변경되지 않는다")
     @Test
     void immutableWithGrowableCollection() {
         //given
         List<Integer> growable = new ArrayList<>(Arrays.asList(1, 2, 3));
 
         //when
-        GameNumbers gameNumbers = createGameNumbers(growable);
+        GameNumbers gameNumbers = gameNumbersFromIntegers(growable);
         growable.add(4);
         growable.add(5);
 
         //then
-        GameNumbers expected = createGameNumbers(Arrays.asList(1, 2, 3));
+        GameNumbers expected = gameNumbersFromIntegers(Arrays.asList(1, 2, 3));
         assertThat(gameNumbers).isEqualTo(expected);
     }
 
-    private GameNumbers createGameNumbers(List<Integer> numbers) {
-        return GameNumbers.fromIntegers(numbers);
+    private GameNumbers gameNumbersFromString(String numbers) {
+        return GameNumbers.fromString(numbers);
+    }
+
+    private GameNumbers gameNumbersFromIntegers(List<Integer> integers) {
+        return GameNumbers.fromIntegers(integers);
     }
 }
