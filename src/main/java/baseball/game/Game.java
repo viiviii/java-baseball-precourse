@@ -9,6 +9,10 @@ import baseball.model.SelectGameContinue;
 import static baseball.model.SelectGameContinue.NEW_GAME_START;
 
 public class Game {
+    public static final int START_NUMBER = 1;
+    public static final int END_NUMBER = 9;
+    public static final int DIGITS = 3;
+
     private final Player host;
     private final Player guesser;
 
