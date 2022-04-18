@@ -12,8 +12,8 @@ import static baseball.model.SelectGameContinue.NEW_GAME_START;
 
 public class KoreanMessage implements Message {
     final Map<Hint, String> hintNames = new EnumMap<>(Hint.class);
-
-    {
+    
+    public KoreanMessage() {
         hintNames.put(STRIKE, "스트라이크");
         hintNames.put(BALL, "볼");
         hintNames.put(NOTHING, "낫싱");
