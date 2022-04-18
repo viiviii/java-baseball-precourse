@@ -1,6 +1,5 @@
 package baseball.model;
 
-import baseball.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -16,7 +15,7 @@ public class SecretGameNumbersTest {
 
     @BeforeEach
     void setUp() {
-        final GameNumbers gameNumbers = parseAsGameNumbers(baseNumber);
+        final GameNumbers gameNumbers = createGameNumbers(baseNumber);
         this.secretGameNumbers = SecretGameNumbers.from(gameNumbers);
     }
 
@@ -24,7 +23,7 @@ public class SecretGameNumbersTest {
     void 같은_수가_전혀_없으면_낫싱이다() {
         //given
         String allNothingNumber = "456";
-        GameNumbers gameNumbers = parseAsGameNumbers(allNothingNumber);
+        GameNumbers gameNumbers = createGameNumbers(allNothingNumber);
 
         //when
         Score score = secretGameNumbers.matchOf(gameNumbers);
@@ -40,7 +39,7 @@ public class SecretGameNumbersTest {
     void 같은_수가_모두_같은_자리에_있으면_올_스트라이크이다() {
         //given
         String allStrikeNumber = baseNumber;
-        GameNumbers gameNumbers = parseAsGameNumbers(allStrikeNumber);
+        GameNumbers gameNumbers = createGameNumbers(allStrikeNumber);
 
         //when
         Score score = secretGameNumbers.matchOf(gameNumbers);
@@ -61,7 +60,7 @@ public class SecretGameNumbersTest {
     })
     void 같은_수가_같은_자리에_있으면_스트라이크이다(String compare, int expectedCount) {
         //given
-        GameNumbers gameNumbers = parseAsGameNumbers(compare);
+        GameNumbers gameNumbers = createGameNumbers(compare);
 
         //when
         Score score = secretGameNumbers.matchOf(gameNumbers);
@@ -78,7 +77,7 @@ public class SecretGameNumbersTest {
     })
     void 같은_수가_다른_자리에_있으면_볼이다(String compare, int expectedCount) {
         //given
-        GameNumbers gameNumbers = parseAsGameNumbers(compare);
+        GameNumbers gameNumbers = createGameNumbers(compare);
 
         //when
         Score score = secretGameNumbers.matchOf(gameNumbers);
@@ -94,7 +93,7 @@ public class SecretGameNumbersTest {
     })
     void 볼과_스트라이트가_같이_있는_경우(String compare, int expectedBallCount, int expectedStrikeCount) {
         //given
-        GameNumbers gameNumbers = parseAsGameNumbers(compare);
+        GameNumbers gameNumbers = createGameNumbers(compare);
 
         //when
         Score score = secretGameNumbers.matchOf(gameNumbers);
@@ -104,7 +103,7 @@ public class SecretGameNumbersTest {
         assertThat(score.getCount(STRIKE)).isEqualTo(expectedStrikeCount);
     }
 
-    private GameNumbers parseAsGameNumbers(String number) {
-        return Parser.asGameNumbers(number);
+    private GameNumbers createGameNumbers(String number) {
+        return GameNumbers.fromString(number);
     }
 }

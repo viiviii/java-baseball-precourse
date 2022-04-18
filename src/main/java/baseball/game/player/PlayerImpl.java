@@ -1,6 +1,5 @@
 package baseball.game.player;
 
-import baseball.Parser;
 import baseball.model.GameNumbers;
 import baseball.model.Score;
 import baseball.model.SecretGameNumbers;
@@ -28,7 +27,7 @@ public class PlayerImpl implements Player {
 
     private GameNumbers inputGameNumbers() {
         final String input = view.inputGameNumber();
-        return Parser.asGameNumbers(input);
+        return GameNumbers.fromString(input);
     }
 
     @Override

@@ -1,10 +1,11 @@
 package baseball.model;
 
+import baseball.Parser;
+
 import java.util.*;
 
 // TODO: 예외에 의미있는 메세지를 담아서 던지기
 public final class GameNumbers {
-
     private final List<Integer> numbers;
 
     private GameNumbers(List<Integer> numbers) {
@@ -17,6 +18,15 @@ public final class GameNumbers {
 
     public static GameNumbers fromIntegers(List<Integer> numbers) {
         return new GameNumbers(numbers);
+    }
+
+    public static GameNumbers fromString(String str) {
+        try {
+            final List<Integer> numbers = Parser.asIntegerList(str);
+            return GameNumbers.fromIntegers(numbers);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private List<Integer> defensiveCopy(List<Integer> numbers) {

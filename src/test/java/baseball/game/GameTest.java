@@ -1,6 +1,5 @@
 package baseball.game;
 
-import baseball.Parser;
 import baseball.game.player.Player;
 import baseball.model.GameNumbers;
 import baseball.model.SecretGameNumbers;
@@ -22,9 +21,9 @@ class GameTest {
     @Test
     void start() {
         //given
-        GameNumbers hostThink = parseAsGameNumbers("123");
-        GameNumbers guess1 = parseAsGameNumbers("456");
-        GameNumbers guess2 = parseAsGameNumbers("129");
+        GameNumbers hostThink = createGameNumbers("123");
+        GameNumbers guess1 = createGameNumbers("456");
+        GameNumbers guess2 = createGameNumbers("129");
 
         given(host.think()).willReturn(SecretGameNumbers.from(hostThink));
         given(guesser.guess()).willReturn(guess1, guess2, hostThink);
@@ -42,7 +41,7 @@ class GameTest {
         inOrder.verify(guesser).wantContinueWithNewGame();
     }
 
-    private GameNumbers parseAsGameNumbers(String number) {
-        return Parser.asGameNumbers(number);
+    private GameNumbers createGameNumbers(String str) {
+        return GameNumbers.fromString(str);
     }
 }
