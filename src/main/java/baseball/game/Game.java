@@ -18,26 +18,40 @@ public class Game {
     }
 
     public void start() {
-        boolean wantPlayGame = true;
-        while (wantPlayGame) {
-            playGame(host, guesser);
-            guesser.announceContinueNewGame();
-            final GameProgressStatus gameProgressStatus = guesser.wantContinueNewGame();
-            wantPlayGame = gameProgressStatus.equals(NEW_GAME_START);
+        boolean wantPlay = true;
+        while (wantPlay) {
+            tryGuess();
+            announceWin();
+            wantPlay = isSelectNewGame();
         }
     }
 
-    private void playGame(Player host, Player guessers) {
-        final GameNumbers gameNumbersOfHost = host.think();
-        final ScoreMatcher scoreMatcher = ScoreMatcher.baseOn(gameNumbersOfHost);
+    // TODO: 여기 변수명이랑 메서드명 잔뜩 이상함
+    private void tryGuess() {
         boolean isAllStrike = false;
+        // 호스트가 생각
+        GameNumbers hostGameNumber = host.think();
+        final ScoreMatcher scoreMatcher = ScoreMatcher.baseOn(hostGameNumber);
         while (!isAllStrike) {
-            final GameNumbers gameNumbersOfGuessers = guessers.guess();
-            final Score score = scoreMatcher.scoreOf(gameNumbersOfGuessers);
-            guessers.announceScore(score);
+            // 질문자가 추측
+            final GameNumbers guess = guesser.guess();
+            // 질문자의 점수와 비교
+            final Score score = scoreMatcher.scoreOf(guess);
+            // 점수 표시
+            guesser.announceScore(score);
+            // 점수 확인
             isAllStrike = score.isAllStrike();
         }
-        guessers.announceWin();
+    }
+
+    private void announceWin() {
+        guesser.announceWin();
+        guesser.announceContinueNewGame();
+    }
+
+    private boolean isSelectNewGame() {
+        final GameProgressStatus select = guesser.wantContinueNewGame();
+        return select.equals(NEW_GAME_START);
     }
 
     public static final class Builder {
