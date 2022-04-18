@@ -4,6 +4,7 @@ import baseball.Parser;
 import baseball.game.player.Player;
 import baseball.model.GameNumbers;
 import baseball.model.GameProgressStatus;
+import baseball.model.SecretGameNumbers;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 
@@ -25,7 +26,7 @@ class GameTest {
         GameNumbers guess1 = parseAsGameNumbers("456");
         GameNumbers guess2 = parseAsGameNumbers("129");
 
-        given(host.think()).willReturn(hostThink);
+        given(host.think()).willReturn(SecretGameNumbers.from(hostThink));
         given(guesser.guess()).willReturn(guess1, guess2, hostThink);
         given(guesser.wantContinueNewGame()).willReturn(GameProgressStatus.EXIT_APPLICATION);
 

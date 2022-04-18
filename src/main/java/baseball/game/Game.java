@@ -4,7 +4,7 @@ import baseball.game.player.Player;
 import baseball.model.GameNumbers;
 import baseball.model.GameProgressStatus;
 import baseball.model.Score;
-import baseball.model.ScoreMatcher;
+import baseball.model.SecretGameNumbers;
 
 import static baseball.model.GameProgressStatus.NEW_GAME_START;
 
@@ -30,13 +30,12 @@ public class Game {
     private void tryGuess() {
         boolean isAllStrike = false;
         // 호스트가 생각
-        GameNumbers hostGameNumber = host.think();
-        final ScoreMatcher scoreMatcher = ScoreMatcher.baseOn(hostGameNumber);
+        final SecretGameNumbers hostNumbers = host.think();
         while (!isAllStrike) {
             // 질문자가 추측
             final GameNumbers guess = guesser.guess();
             // 질문자의 점수와 비교
-            final Score score = scoreMatcher.scoreOf(guess);
+            final Score score = hostNumbers.matchOf(guess);
             // 점수 표시
             guesser.announceScore(score);
             // 점수 확인

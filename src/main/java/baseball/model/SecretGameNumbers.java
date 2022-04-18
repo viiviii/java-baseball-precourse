@@ -5,25 +5,25 @@ import java.util.Map;
 
 import static baseball.model.Hint.*;
 
-public class ScoreMatcher {
+public class SecretGameNumbers {
 
     private final GameNumbers gameNumbers;
 
-    private ScoreMatcher(GameNumbers gameNumbers) {
+    private SecretGameNumbers(GameNumbers gameNumbers) {
         this.gameNumbers = gameNumbers;
     }
 
-    public static ScoreMatcher baseOn(GameNumbers gameNumbers) {
-        return new ScoreMatcher(gameNumbers);
+    public static SecretGameNumbers from(GameNumbers gameNumbers) {
+        return new SecretGameNumbers(gameNumbers);
     }
 
-    public Score scoreOf(GameNumbers otherNumbers) {
+    public Score matchOf(GameNumbers otherNumbers) {
         final ScoreRecord score = new ScoreRecord();
         for (int i = 0; i < gameNumbers.size(); i++) {
             final Integer base = gameNumbers.get(i);
             final Integer other = otherNumbers.get(i);
             final Hint hint = match(base, other);
-            score.addCount(hint);
+            score.recordOf(hint);
         }
         return score;
     }
@@ -41,11 +41,12 @@ public class ScoreMatcher {
     private static final class ScoreRecord implements Score {
         private final Map<Hint, Integer> score = new EnumMap<>(Hint.class);
 
-        private void addCount(Hint hint) {
+        private void recordOf(Hint hint) {
             final int count = getCount(hint);
             score.put(hint, count + 1);
         }
 
+        @Override
         public int getCount(Hint hint) {
             return score.getOrDefault(hint, 0);
         }

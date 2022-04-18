@@ -4,6 +4,7 @@ import baseball.Parser;
 import baseball.model.GameNumbers;
 import baseball.model.GameProgressStatus;
 import baseball.model.Score;
+import baseball.model.SecretGameNumbers;
 import baseball.view.View;
 
 // TODO: 클래스명 별로임
@@ -16,8 +17,8 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public GameNumbers think() {
-        return inputGameNumbers();
+    public SecretGameNumbers think() {
+        return SecretGameNumbers.from(inputGameNumbers());
     }
 
     @Override

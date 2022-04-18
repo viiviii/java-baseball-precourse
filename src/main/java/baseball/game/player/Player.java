@@ -3,10 +3,11 @@ package baseball.game.player;
 import baseball.model.GameNumbers;
 import baseball.model.GameProgressStatus;
 import baseball.model.Score;
+import baseball.model.SecretGameNumbers;
 
 public interface Player {
 
-    GameNumbers think();
+    SecretGameNumbers think();
 
     GameNumbers guess();
 
