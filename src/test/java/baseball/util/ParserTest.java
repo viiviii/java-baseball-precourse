@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ParserTest {
+class ParserTest {
 
     @DisplayName("문자열을 integer list로_파싱한다")
     @Test

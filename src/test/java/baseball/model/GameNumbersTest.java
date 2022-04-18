@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class GameNumbersTest {
+class GameNumbersTest {
 
     @DisplayName("문자열로 게임 숫자를 생성한다")
     @Test

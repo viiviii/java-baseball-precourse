@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.mockStatic;
 
-public class MyRandomsTest {
+class MyRandomsTest {
     private int startInclusive = Game.START_NUMBER;
     private int endInclusive = Game.END_NUMBER;
     private int count = Game.DIGITS;
