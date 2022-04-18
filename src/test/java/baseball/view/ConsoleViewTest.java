@@ -3,6 +3,7 @@ package baseball.view;
 import baseball.model.Score;
 import baseball.view.message.Message;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static baseball.model.Hint.*;
@@ -27,8 +28,9 @@ class ConsoleViewTest {
         given(message.hintName(NOTHING)).willReturn(nothingName);
     }
 
+    @DisplayName("낫싱만 있는 경우 힌트이름인 문자열만 리턴한다")
     @Test
-    void 낫싱만_있는_경우_힌트이름인_문자열만_리턴한다() {
+    void onlyHintNameWhenNothing() {
         //given
         given(score.isAllNothing()).willReturn(true);
         given(score.getCount(NOTHING)).willReturn(count);
@@ -40,8 +42,9 @@ class ConsoleViewTest {
         assertThat(message).isEqualTo(nothingName);
     }
 
+    @DisplayName("스트라이크일 땐 점수와 힌트이름을 합친 문자열을 리턴한다")
     @Test
-    void 스트라이크만_있는_경우_점수와_힌트이름을_합친_문자열을_리턴한다() {
+    void countAndHintNameWhenStrike() {
         //given
         given(score.getCount(STRIKE)).willReturn(count);
 
@@ -52,8 +55,9 @@ class ConsoleViewTest {
         assertThat(message).isEqualTo(count + strikeName);
     }
 
+    @DisplayName("볼일 땐 점수와 힌트이름을 합친 문자열을 리턴한다")
     @Test
-    void 볼만_있는_경우_점수와_힌트이름을_합친_문자열을_리턴한다() {
+    void countAndHintNameWhenBall() {
         //given
         given(score.getCount(BALL)).willReturn(count);
 
@@ -64,8 +68,9 @@ class ConsoleViewTest {
         assertThat(message).isEqualTo(count + ballName);
     }
 
+    @DisplayName("볼과_스트라이크가_함께_있는_경우_볼_힌트가_먼저_온다")
     @Test
-    void 볼과_스트라이크가_함께_있는_경우_볼_힌트가_먼저_온다() {
+    void ballMessageFirstWhenBallAndStrikeTogether() {
         //given
         given(score.getCount(STRIKE)).willReturn(count);
         given(score.getCount(BALL)).willReturn(count);
@@ -77,8 +82,9 @@ class ConsoleViewTest {
         assertThat(message).isEqualTo(count + ballName + " " + count + strikeName);
     }
 
+    @DisplayName("낫싱이 다른 힌트와 함께 있는 경우 낫싱은 출력되지 않는다")
     @Test
-    void 낫싱이_다른_힌트와_함께_있는_경우_낫싱은_출력되지_않는다() {
+    void nothingMessageNotPrintWhenOtherHintTogether() {
         //given
         given(score.getCount(STRIKE)).willReturn(count);
         given(score.getCount(NOTHING)).willReturn(count);

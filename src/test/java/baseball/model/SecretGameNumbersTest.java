@@ -2,6 +2,7 @@ package baseball.model;
 
 import baseball.game.Game;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,8 +20,9 @@ public class SecretGameNumbersTest {
         this.secretGameNumbers = SecretGameNumbers.from(gameNumbers);
     }
 
+    @DisplayName("같은 수가 전혀 없으면 낫싱이다")
     @Test
-    void 같은_수가_전혀_없으면_낫싱이다() {
+    void nothing() {
         //given
         String allNothingNumber = "456";
         GameNumbers gameNumbers = createGameNumbers(allNothingNumber);
@@ -35,8 +37,9 @@ public class SecretGameNumbersTest {
         assertThat(score.getCount(BALL)).isZero();
     }
 
+    @DisplayName("같은 수가 모두 같은 자리에 있으면 올 스트라이크이다")
     @Test
-    void 같은_수가_모두_같은_자리에_있으면_올_스트라이크이다() {
+    void allStrike() {
         //given
         String allStrikeNumber = baseNumber;
         GameNumbers gameNumbers = createGameNumbers(allStrikeNumber);
@@ -58,7 +61,7 @@ public class SecretGameNumbersTest {
             "129, 2", // 1, 2
             "189, 1", // 1
     })
-    void 같은_수가_같은_자리에_있으면_스트라이크이다(String compare, int expectedCount) {
+    void strikeCount(String compare, int expectedCount) {
         //given
         GameNumbers gameNumbers = createGameNumbers(compare);
 
@@ -75,7 +78,7 @@ public class SecretGameNumbersTest {
             "239, 2", // 2, 3
             "289, 1", // 2
     })
-    void 같은_수가_다른_자리에_있으면_볼이다(String compare, int expectedCount) {
+    void ballCount(String compare, int expectedCount) {
         //given
         GameNumbers gameNumbers = createGameNumbers(compare);
 
@@ -91,7 +94,7 @@ public class SecretGameNumbersTest {
             "192, 1, 1", // ball="2", strike="1"
             "132, 2, 1", // ball=["2", "3"], strike="1"
     })
-    void 볼과_스트라이트가_같이_있는_경우(String compare, int expectedBallCount, int expectedStrikeCount) {
+    void countBothBallAndStrike(String compare, int expectedBallCount, int expectedStrikeCount) {
         //given
         GameNumbers gameNumbers = createGameNumbers(compare);
 
