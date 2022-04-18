@@ -1,13 +1,12 @@
-package baseball.score;
+package baseball.model;
 
-import baseball.parser.Parser;
-import baseball.player.input.GameNumbers;
+import baseball.Parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static baseball.Hint.*;
+import static baseball.model.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ScoreMatcherTest {

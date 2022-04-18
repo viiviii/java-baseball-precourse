@@ -1,14 +1,14 @@
 package baseball.view;
 
-import baseball.Hint;
-import baseball.score.Score;
+import baseball.model.Hint;
+import baseball.model.Score;
 import baseball.view.message.Message;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static baseball.Hint.*;
+import static baseball.model.Hint.*;
 
 public class ConsoleView implements View {
 

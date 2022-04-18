@@ -1,9 +1,9 @@
-package baseball.player;
+package baseball.game.player;
 
-import baseball.parser.Parser;
-import baseball.player.input.GameNumbers;
-import baseball.player.input.GameProgressStatus;
-import baseball.score.Score;
+import baseball.Parser;
+import baseball.model.GameNumbers;
+import baseball.model.GameProgressStatus;
+import baseball.model.Score;
 import baseball.view.View;
 
 // TODO: 클래스명 별로임

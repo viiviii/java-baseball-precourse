@@ -1,12 +1,12 @@
-package baseball;
+package baseball.game;
 
-import baseball.player.Player;
-import baseball.player.input.GameNumbers;
-import baseball.player.input.GameProgressStatus;
-import baseball.score.Score;
-import baseball.score.ScoreMatcher;
+import baseball.game.player.Player;
+import baseball.model.GameNumbers;
+import baseball.model.GameProgressStatus;
+import baseball.model.Score;
+import baseball.model.ScoreMatcher;
 
-import static baseball.player.input.GameProgressStatus.NEW_GAME_START;
+import static baseball.model.GameProgressStatus.NEW_GAME_START;
 
 public class Game {
     private final Player host;

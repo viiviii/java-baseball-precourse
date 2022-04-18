@@ -1,6 +1,6 @@
-package baseball.parser;
+package baseball;
 
-import baseball.player.input.GameNumbers;
+import baseball.model.GameNumbers;
 
 import java.util.ArrayList;
 import java.util.List;

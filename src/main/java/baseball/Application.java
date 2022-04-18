@@ -1,8 +1,9 @@
 package baseball;
 
-import baseball.player.ComputerPlayer;
-import baseball.player.Player;
-import baseball.player.PlayerImpl;
+import baseball.game.Game;
+import baseball.game.player.ComputerPlayer;
+import baseball.game.player.Player;
+import baseball.game.player.PlayerImpl;
 import baseball.view.ConsoleView;
 import baseball.view.View;
 import baseball.view.message.KoreanMessage;

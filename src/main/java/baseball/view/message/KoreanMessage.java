@@ -1,6 +1,6 @@
 package baseball.view.message;
 
-import baseball.Hint;
+import baseball.model.Hint;
 
 public class KoreanMessage implements Message {
 

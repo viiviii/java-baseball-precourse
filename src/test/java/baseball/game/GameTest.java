@@ -1,9 +1,9 @@
-package baseball;
+package baseball.game;
 
-import baseball.parser.Parser;
-import baseball.player.Player;
-import baseball.player.input.GameNumbers;
-import baseball.player.input.GameProgressStatus;
+import baseball.Parser;
+import baseball.game.player.Player;
+import baseball.model.GameNumbers;
+import baseball.model.GameProgressStatus;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 

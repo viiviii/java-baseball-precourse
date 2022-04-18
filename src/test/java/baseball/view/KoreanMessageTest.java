@@ -1,13 +1,13 @@
 package baseball.view;
 
-import baseball.Hint;
+import baseball.model.Hint;
 import baseball.view.message.KoreanMessage;
 import baseball.view.message.Message;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import static baseball.Hint.*;
+import static baseball.model.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class KoreanMessageTest {
