@@ -1,9 +1,9 @@
 package baseball.game.player;
 
 import baseball.model.GameNumbers;
-import baseball.model.GameProgressStatus;
 import baseball.model.Score;
 import baseball.model.SecretGameNumbers;
+import baseball.model.SelectGameContinue;
 
 public interface Player {
 
@@ -11,7 +11,7 @@ public interface Player {
 
     GameNumbers guess();
 
-    GameProgressStatus wantContinueNewGame();
+    SelectGameContinue wantContinueWithNewGame();
 
     void announceContinueNewGame();
 

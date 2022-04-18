@@ -1,9 +1,9 @@
 package baseball.game.player;
 
 import baseball.model.GameNumbers;
-import baseball.model.GameProgressStatus;
 import baseball.model.Score;
 import baseball.model.SecretGameNumbers;
+import baseball.model.SelectGameContinue;
 import baseball.util.MyRandoms;
 
 import java.util.List;
@@ -44,8 +44,8 @@ public class ComputerPlayer implements Player {
     }
 
     @Override
-    public GameProgressStatus wantContinueNewGame() {
+    public SelectGameContinue wantContinueWithNewGame() {
         // computer doesn't want
-        return GameProgressStatus.EXIT_APPLICATION;
+        return SelectGameContinue.EXIT_GAME;
     }
 }
