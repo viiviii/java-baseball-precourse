@@ -15,7 +15,7 @@ public final class Parser {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
-        return new GameNumbers(integers);
+        return GameNumbers.fromIntegers(integers);
     }
 
     public static List<Integer> asIntegerList(String str) {

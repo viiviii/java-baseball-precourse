@@ -25,7 +25,7 @@ public class ComputerPlayer implements Player {
         final int end = 9;
         final int count = 3;
         final List<Integer> randomNumbers = MyRandoms.pickUniqueNumbersInRange(start, end, count);
-        return new GameNumbers(randomNumbers);
+        return GameNumbers.fromIntegers(randomNumbers);
     }
 
     @Override

@@ -124,6 +124,6 @@ public class GameNumbersTest {
     }
 
     private GameNumbers createGameNumbers(List<Integer> numbers) {
-        return new GameNumbers(numbers);
+        return GameNumbers.fromIntegers(numbers);
     }
 }

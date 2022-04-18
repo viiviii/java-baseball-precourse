@@ -7,12 +7,16 @@ public final class GameNumbers {
 
     private final List<Integer> numbers;
 
-    public GameNumbers(List<Integer> numbers) {
+    private GameNumbers(List<Integer> numbers) {
         final List<Integer> copyNumbers = defensiveCopy(numbers);
         validateSize(copyNumbers);
         validateDuplication(copyNumbers);
         validateRangeOfEachNumber(copyNumbers);
         this.numbers = copyNumbers;
+    }
+
+    public static GameNumbers fromIntegers(List<Integer> numbers) {
+        return new GameNumbers(numbers);
     }
 
     private List<Integer> defensiveCopy(List<Integer> numbers) {
