@@ -1,5 +1,6 @@
 package baseball.model;
 
+import baseball.game.Game;
 import baseball.util.Parser;
 
 import java.util.*;
@@ -34,7 +35,7 @@ public final class GameNumbers {
     }
 
     private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != 3) {
+        if (numbers.size() != Game.DIGITS) {
             throw new IllegalArgumentException();
         }
     }

@@ -19,7 +19,7 @@ class KoreanMessageTest {
         String msg = message.win();
 
         //then
-        assertThat(msg).isEqualTo("3개의 숫자를 모두 맞히셨습니다! 게임 종료"); // TODO: 하드코딩 제거(3)
+        assertThat(msg).isEqualTo("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
 
     @Test
@@ -28,7 +28,7 @@ class KoreanMessageTest {
         String msg = message.continueNewGame();
 
         //then
-        assertThat(msg).isEqualTo("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요."); // TODO: 하드코딩 제거(1, 2)
+        assertThat(msg).isEqualTo("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
     }
 
     @Test

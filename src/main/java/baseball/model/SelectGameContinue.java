@@ -23,6 +23,10 @@ public final class SelectGameContinue {
         }
     }
 
+    public String code() {
+        return code;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

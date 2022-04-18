@@ -1,5 +1,6 @@
 package baseball.model;
 
+import baseball.game.Game;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,7 +30,7 @@ public class SecretGameNumbersTest {
 
         //then
         assertThat(score.isAllNothing()).isTrue();
-        assertThat(score.getCount(NOTHING)).isEqualTo(3); // TODO: 하드코딩 제거
+        assertThat(score.getCount(NOTHING)).isEqualTo(Game.DIGITS);
         assertThat(score.getCount(STRIKE)).isZero();
         assertThat(score.getCount(BALL)).isZero();
     }
@@ -45,7 +46,7 @@ public class SecretGameNumbersTest {
 
         //then
         assertThat(score.isAllStrike()).isTrue();
-        assertThat(score.getCount(STRIKE)).isEqualTo(3); // TODO: 하드코딩 제거
+        assertThat(score.getCount(STRIKE)).isEqualTo(Game.DIGITS);
         assertThat(score.getCount(BALL)).isZero();
         assertThat(score.getCount(NOTHING)).isZero();
 
