@@ -2,7 +2,7 @@ package baseball.model;
 
 import java.util.Objects;
 
-public final class Ball {
+final class Ball {
     private final int position;
     private final BallNumber number;
 

@@ -4,7 +4,7 @@ import baseball.game.Game;
 
 import java.util.Objects;
 
-public final class BallNumber {
+final class BallNumber {
     private final int number;
 
     public BallNumber(int number) {
