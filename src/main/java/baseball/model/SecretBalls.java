@@ -5,22 +5,22 @@ import java.util.Map;
 
 import static baseball.model.Hint.*;
 
-public class SecretGameNumbers {
-    private final GameNumbers gameNumbers;
+public class SecretBalls {
+    private final Balls balls;
 
-    private SecretGameNumbers(GameNumbers gameNumbers) {
-        this.gameNumbers = gameNumbers;
+    private SecretBalls(Balls balls) {
+        this.balls = balls;
     }
 
-    public static SecretGameNumbers from(GameNumbers gameNumbers) {
-        return new SecretGameNumbers(gameNumbers);
+    public static SecretBalls from(Balls balls) {
+        return new SecretBalls(balls);
     }
 
-    public Score matchOf(GameNumbers otherNumbers) {
+    public Score matchOf(Balls otherBalls) {
         final ScoreRecord score = new ScoreRecord();
-        for (int i = 0; i < gameNumbers.size(); i++) {
-            final Integer base = gameNumbers.get(i);
-            final Integer other = otherNumbers.get(i);
+        for (int i = 0; i < balls.size(); i++) {
+            final Integer base = balls.get(i);
+            final Integer other = otherBalls.get(i);
             final Hint hint = match(base, other);
             score.recordOf(hint);
         }
@@ -31,7 +31,7 @@ public class SecretGameNumbers {
         if (gameNumber.equals(other)) {
             return STRIKE;
         }
-        if (gameNumbers.contains(other)) {
+        if (balls.contains(other)) {
             return BALL;
         }
         return NOTHING;

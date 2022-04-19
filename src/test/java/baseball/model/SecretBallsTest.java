@@ -10,25 +10,25 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static baseball.model.Hint.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SecretGameNumbersTest {
-    private SecretGameNumbers secretGameNumbers;
-    private String baseNumber = "123";
+class SecretBallsTest {
+    private SecretBalls secretBalls;
+    private String baseNumbers = "123";
 
     @BeforeEach
     void setUp() {
-        final GameNumbers gameNumbers = createGameNumbers(baseNumber);
-        this.secretGameNumbers = SecretGameNumbers.from(gameNumbers);
+        final Balls balls = createBalls(baseNumbers);
+        this.secretBalls = SecretBalls.from(balls);
     }
 
     @DisplayName("같은 수가 전혀 없으면 낫싱이다")
     @Test
     void nothing() {
         //given
-        String allNothingNumber = "456";
-        GameNumbers gameNumbers = createGameNumbers(allNothingNumber);
+        String allNothingNumbers = "456";
+        Balls balls = createBalls(allNothingNumbers);
 
         //when
-        Score score = secretGameNumbers.matchOf(gameNumbers);
+        Score score = secretBalls.matchOf(balls);
 
         //then
         assertThat(score.isAllNothing()).isTrue();
@@ -41,11 +41,11 @@ class SecretGameNumbersTest {
     @Test
     void allStrike() {
         //given
-        String allStrikeNumber = baseNumber;
-        GameNumbers gameNumbers = createGameNumbers(allStrikeNumber);
+        String allStrikeNumbers = baseNumbers;
+        Balls balls = createBalls(allStrikeNumbers);
 
         //when
-        Score score = secretGameNumbers.matchOf(gameNumbers);
+        Score score = secretBalls.matchOf(balls);
 
         //then
         assertThat(score.isAllStrike()).isTrue();
@@ -63,10 +63,10 @@ class SecretGameNumbersTest {
     })
     void strikeCount(String compare, int expectedCount) {
         //given
-        GameNumbers gameNumbers = createGameNumbers(compare);
+        Balls balls = createBalls(compare);
 
         //when
-        Score score = secretGameNumbers.matchOf(gameNumbers);
+        Score score = secretBalls.matchOf(balls);
 
         //then
         assertThat(score.getCount(STRIKE)).isEqualTo(expectedCount);
@@ -80,10 +80,10 @@ class SecretGameNumbersTest {
     })
     void ballCount(String compare, int expectedCount) {
         //given
-        GameNumbers gameNumbers = createGameNumbers(compare);
+        Balls balls = createBalls(compare);
 
         //when
-        Score score = secretGameNumbers.matchOf(gameNumbers);
+        Score score = secretBalls.matchOf(balls);
 
         //then
         assertThat(score.getCount(BALL)).isEqualTo(expectedCount);
@@ -96,17 +96,17 @@ class SecretGameNumbersTest {
     })
     void countBothBallAndStrike(String compare, int expectedBallCount, int expectedStrikeCount) {
         //given
-        GameNumbers gameNumbers = createGameNumbers(compare);
+        Balls balls = createBalls(compare);
 
         //when
-        Score score = secretGameNumbers.matchOf(gameNumbers);
+        Score score = secretBalls.matchOf(balls);
 
         //then
         assertThat(score.getCount(BALL)).isEqualTo(expectedBallCount);
         assertThat(score.getCount(STRIKE)).isEqualTo(expectedStrikeCount);
     }
 
-    private GameNumbers createGameNumbers(String number) {
-        return GameNumbers.fromString(number);
+    private Balls createBalls(String number) {
+        return Balls.fromString(number);
     }
 }

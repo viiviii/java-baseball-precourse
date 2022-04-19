@@ -1,8 +1,8 @@
 package baseball.game;
 
 import baseball.game.player.Player;
-import baseball.model.GameNumbers;
-import baseball.model.SecretGameNumbers;
+import baseball.model.Balls;
+import baseball.model.SecretBalls;
 import baseball.model.SelectGameContinue;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
@@ -21,11 +21,11 @@ class GameTest {
     @Test
     void start() {
         //given
-        GameNumbers hostThink = createGameNumbers("123");
-        GameNumbers guess1 = createGameNumbers("456");
-        GameNumbers guess2 = createGameNumbers("129");
+        Balls hostThink = createBalls("123");
+        Balls guess1 = createBalls("456");
+        Balls guess2 = createBalls("129");
 
-        given(host.think()).willReturn(SecretGameNumbers.from(hostThink));
+        given(host.think()).willReturn(SecretBalls.from(hostThink));
         given(guesser.guess()).willReturn(guess1, guess2, hostThink);
         given(guesser.wantContinueWithNewGame()).willReturn(SelectGameContinue.EXIT_GAME);
 
@@ -41,7 +41,7 @@ class GameTest {
         inOrder.verify(guesser).wantContinueWithNewGame();
     }
 
-    private GameNumbers createGameNumbers(String str) {
-        return GameNumbers.fromString(str);
+    private Balls createBalls(String str) {
+        return Balls.fromString(str);
     }
 }

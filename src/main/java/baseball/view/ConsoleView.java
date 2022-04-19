@@ -20,8 +20,8 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public String inputGameNumber() {
-        System.out.print(message.inputGameNumbers());
+    public String inputBalls() {
+        System.out.print(message.inputBalls());
         return input();
     }
 
