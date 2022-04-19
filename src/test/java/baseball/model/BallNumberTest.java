@@ -41,6 +41,20 @@ class BallNumberTest {
         assertThat(moreThanMaxThrown).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void equality() {
+        //given
+        int sameNumber = 1;
+
+        //when
+        BallNumber ballNumber = new BallNumber(sameNumber);
+        BallNumber other = new BallNumber(sameNumber);
+
+        //then
+        assertThat(ballNumber).isEqualTo(other);
+        assertThat(ballNumber).hasSameHashCodeAs(other);
+    }
+
     private BallNumber createBallNumber(int i) {
         return new BallNumber(i);
     }
