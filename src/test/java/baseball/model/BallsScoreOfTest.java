@@ -16,7 +16,7 @@ class BallsScoreOfTest {
     @Test
     void nothing() {
         //given
-        String allNothingNumbers = "4522";
+        String allNothingNumbers = "456";
         Balls other = createBalls(allNothingNumbers);
 
         //when
