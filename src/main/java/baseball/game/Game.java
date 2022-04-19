@@ -21,21 +21,19 @@ public class Game {
     }
 
     public void start() {
-        boolean wantPlay = true;
-        while (wantPlay) {
+        do {
             play();
             announceWin();
-            wantPlay = wantContinueWithNewGame();
-        }
+        } while (wantContinueWithNewGame());
     }
 
     private void play() {
-        boolean isAllStrike = false;
+        boolean isPerfectStrike = false;
         final Balls hostBalls = host.think();
-        while (!isAllStrike) {
+        while (!isPerfectStrike) {
             final Balls guess = guesser.guess();
             final Score score = hostBalls.scoreOf(guess);
-            isAllStrike = score.isPerfectStrike();
+            isPerfectStrike = score.isPerfectStrike();
             guesser.announceScore(score);
         }
     }
