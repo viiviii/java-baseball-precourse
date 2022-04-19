@@ -1,7 +1,8 @@
 package baseball.game.player;
 
-import baseball.model.Balls;
+import baseball.model.GameNumbers;
 import baseball.model.Score;
+import baseball.model.SecretGameNumbers;
 import baseball.model.SelectGameContinue;
 import baseball.view.View;
 
@@ -13,18 +14,18 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public Balls think() {
-        return inputBalls();
+    public SecretGameNumbers think() {
+        return SecretGameNumbers.from(inputGameNumbers());
     }
 
     @Override
-    public Balls guess() {
-        return inputBalls();
+    public GameNumbers guess() {
+        return inputGameNumbers();
     }
 
-    private Balls inputBalls() {
-        final String input = view.inputBalls();
-        return Balls.fromString(input);
+    private GameNumbers inputGameNumbers() {
+        final String input = view.inputGameNumber();
+        return GameNumbers.fromString(input);
     }
 
     @Override
