@@ -12,7 +12,7 @@ import static baseball.model.SelectGameContinue.NEW_GAME_START;
 
 public class KoreanMessage implements Message {
     final Map<Hint, String> hintNames = new EnumMap<>(Hint.class);
-
+    
     public KoreanMessage() {
         hintNames.put(STRIKE, "스트라이크");
         hintNames.put(BALL, "볼");
@@ -30,7 +30,7 @@ public class KoreanMessage implements Message {
     }
 
     @Override
-    public String inputBalls() {
+    public String inputGameNumbers() {
         return "숫자를 입력해주세요 : ";
     }
 

@@ -1,8 +1,9 @@
 package baseball.game.player;
 
 import baseball.game.Game;
-import baseball.model.Balls;
+import baseball.model.GameNumbers;
 import baseball.model.Score;
+import baseball.model.SecretGameNumbers;
 import baseball.model.SelectGameContinue;
 import baseball.util.MyRandoms;
 
@@ -11,19 +12,19 @@ import java.util.List;
 public class ComputerPlayer implements Player {
 
     @Override
-    public Balls think() {
-        return randomBalls();
+    public SecretGameNumbers think() {
+        return SecretGameNumbers.from(randomGameNumbers());
     }
 
     @Override
-    public Balls guess() {
-        return randomBalls();
+    public GameNumbers guess() {
+        return randomGameNumbers();
     }
 
-    private Balls randomBalls() {
-        final List<Integer> randoms = MyRandoms
+    private GameNumbers randomGameNumbers() {
+        final List<Integer> randomNumbers = MyRandoms
                 .pickUniqueNumbersInRange(Game.START_NUMBER, Game.END_NUMBER, Game.DIGITS);
-        return Balls.fromIntegers(randoms);
+        return GameNumbers.fromIntegers(randomNumbers);
     }
 
     @Override
