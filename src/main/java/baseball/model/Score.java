@@ -1,10 +1,33 @@
 package baseball.model;
 
-public interface Score {
+import baseball.game.Game;
 
-    boolean isAllStrike();
+public final class Score {
+    private int strike;
+    private int ball;
 
-    boolean isAllNothing();
+    void recordOf(Hint hint) {
+        if (hint.isStrike()) {
+            strike += 1;
+        }
+        if (hint.isBall()) {
+            ball += 1;
+        }
+    }
 
-    int getCount(Hint hint);
+    public int getStrike() {
+        return strike;
+    }
+
+    public int getBall() {
+        return ball;
+    }
+
+    public boolean isPerfectStrike() {
+        return getStrike() == Game.DIGITS;
+    }
+
+    public boolean isNothing() {
+        return getStrike() == 0 && getBall() == 0;
+    }
 }

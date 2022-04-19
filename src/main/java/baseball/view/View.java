@@ -4,7 +4,7 @@ import baseball.model.Score;
 
 public interface View {
 
-    String inputGameNumber();
+    String inputBalls();
 
     String inputContinueNewGame();
 

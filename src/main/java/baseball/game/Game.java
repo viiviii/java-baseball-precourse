@@ -1,9 +1,8 @@
 package baseball.game;
 
 import baseball.game.player.Player;
-import baseball.model.GameNumbers;
+import baseball.model.Balls;
 import baseball.model.Score;
-import baseball.model.SecretGameNumbers;
 import baseball.model.SelectGameContinue;
 
 import static baseball.model.SelectGameContinue.NEW_GAME_START;
@@ -22,21 +21,19 @@ public class Game {
     }
 
     public void start() {
-        boolean wantPlay = true;
-        while (wantPlay) {
+        do {
             play();
             announceWin();
-            wantPlay = wantContinueWithNewGame();
-        }
+        } while (wantContinueWithNewGame());
     }
 
     private void play() {
-        boolean isAllStrike = false;
-        final SecretGameNumbers hostNumbers = host.think();
-        while (!isAllStrike) {
-            final GameNumbers guess = guesser.guess();
-            final Score score = hostNumbers.matchOf(guess);
-            isAllStrike = score.isAllStrike();
+        boolean isPerfectStrike = false;
+        final Balls hostBalls = host.think();
+        while (!isPerfectStrike) {
+            final Balls guess = guesser.guess();
+            final Score score = hostBalls.scoreOf(guess);
+            isPerfectStrike = score.isPerfectStrike();
             guesser.announceScore(score);
         }
     }

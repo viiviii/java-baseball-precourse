@@ -36,9 +36,9 @@ class KoreanMessageTest {
 
     @DisplayName("게임 숫자 입력 메세지")
     @Test
-    void messageInputGameNumbers() {
+    void messageInputBalls() {
         //when
-        String msg = message.inputGameNumbers();
+        String msg = message.inputBalls();
 
         //then
         assertThat(msg).isEqualTo("숫자를 입력해주세요 : ");

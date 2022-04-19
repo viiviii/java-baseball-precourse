@@ -1,15 +1,14 @@
 package baseball.game.player;
 
-import baseball.model.GameNumbers;
+import baseball.model.Balls;
 import baseball.model.Score;
-import baseball.model.SecretGameNumbers;
 import baseball.model.SelectGameContinue;
 
 public interface Player {
 
-    SecretGameNumbers think();
+    Balls think();
 
-    GameNumbers guess();
+    Balls guess();
 
     SelectGameContinue wantContinueWithNewGame();
 

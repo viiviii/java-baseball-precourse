@@ -5,23 +5,18 @@ import baseball.model.Score;
 import baseball.view.message.Message;
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static baseball.model.Hint.*;
 
 public class ConsoleView implements View {
-    private final List<Hint> hintMessageOrder = Arrays.asList(BALL, STRIKE);
     private final Message message;
-
 
     public ConsoleView(Message message) {
         this.message = message;
     }
 
     @Override
-    public String inputGameNumber() {
-        System.out.print(message.inputGameNumbers());
+    public String inputBalls() {
+        System.out.print(message.inputBalls());
         return input();
     }
 
@@ -54,21 +49,20 @@ public class ConsoleView implements View {
     }
 
     String scoreMessage(Score score) {
-        if (score.isAllNothing()) {
+        if (score.isNothing()) {
             return hintName(NOTHING);
         }
-        return makeOrderedHintMessageWith(score);
+        return hintMessageWith(score);
     }
 
     private String hintName(Hint hint) {
         return message.hintName(hint);
     }
 
-    private String makeOrderedHintMessageWith(Score score) {
+    private String hintMessageWith(Score score) {
         final StringBuilder msg = new StringBuilder();
-        for (Hint hint : hintMessageOrder) {
-            msg.append(hintMessage(score.getCount(hint), hintName(hint)));
-        }
+        msg.append(hintMessage(score.getBall(), hintName(BALL)));
+        msg.append(hintMessage(score.getStrike(), hintName(STRIKE)));
         return msg.toString().trim();
     }
 
