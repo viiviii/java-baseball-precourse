@@ -2,7 +2,6 @@ package baseball.game.player;
 
 import baseball.model.Balls;
 import baseball.model.Score;
-import baseball.model.SecretBalls;
 import baseball.model.SelectGameContinue;
 import baseball.view.View;
 
@@ -14,8 +13,8 @@ public class PlayerImpl implements Player {
     }
 
     @Override
-    public SecretBalls think() {
-        return SecretBalls.from(inputBalls());
+    public Balls think() {
+        return inputBalls();
     }
 
     @Override

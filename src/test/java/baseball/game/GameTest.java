@@ -2,7 +2,6 @@ package baseball.game;
 
 import baseball.game.player.Player;
 import baseball.model.Balls;
-import baseball.model.SecretBalls;
 import baseball.model.SelectGameContinue;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
@@ -25,7 +24,7 @@ class GameTest {
         Balls guess1 = createBalls("456");
         Balls guess2 = createBalls("129");
 
-        given(host.think()).willReturn(SecretBalls.from(hostThink));
+        given(host.think()).willReturn(hostThink);
         given(guesser.guess()).willReturn(guess1, guess2, hostThink);
         given(guesser.wantContinueWithNewGame()).willReturn(SelectGameContinue.EXIT_GAME);
 

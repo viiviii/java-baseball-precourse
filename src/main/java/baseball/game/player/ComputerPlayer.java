@@ -3,7 +3,6 @@ package baseball.game.player;
 import baseball.game.Game;
 import baseball.model.Balls;
 import baseball.model.Score;
-import baseball.model.SecretBalls;
 import baseball.model.SelectGameContinue;
 import baseball.util.MyRandoms;
 
@@ -12,8 +11,8 @@ import java.util.List;
 public class ComputerPlayer implements Player {
 
     @Override
-    public SecretBalls think() {
-        return SecretBalls.from(randomBalls());
+    public Balls think() {
+        return randomBalls();
     }
 
     @Override

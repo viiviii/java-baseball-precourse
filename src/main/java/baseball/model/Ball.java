@@ -2,7 +2,7 @@ package baseball.model;
 
 import java.util.Objects;
 
-public class Ball {
+public final class Ball {
     private final int position;
     private final BallNumber number;
 
@@ -21,6 +21,10 @@ public class Ball {
         return Hint.NOTHING;
     }
 
+    public BallNumber getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -32,5 +36,10 @@ public class Ball {
     @Override
     public int hashCode() {
         return Objects.hash(number, position);
+    }
+
+    @Override
+    public String toString() {
+        return "Ball{" + "position=" + position + ", number=" + number + '}';
     }
 }

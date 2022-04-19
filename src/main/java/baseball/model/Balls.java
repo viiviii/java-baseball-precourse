@@ -6,17 +6,19 @@ import baseball.util.Parser;
 import java.util.*;
 
 public final class Balls {
-    private final List<Integer> balls;
+    private final List<Ball> balls;
 
-    private Balls(List<Integer> balls) {
-        final List<Integer> copy = defensiveCopy(balls);
-        validateSize(copy);
-        validateDuplication(copy);
-        validateRangeOfEachNumber(copy);
-        this.balls = copy;
+    private Balls(List<Ball> balls) {
+        validateSize(balls);
+        validateDuplicationBallNumber(balls);
+        this.balls = balls;
     }
 
-    public static Balls fromIntegers(List<Integer> balls) {
+    public static Balls fromIntegers(List<Integer> numbers) {
+        final List<Ball> balls = new ArrayList<>();
+        for (int i = 0; i < numbers.size(); i++) {
+            balls.add(new Ball(i, numbers.get(i)));
+        }
         return new Balls(balls);
     }
 
@@ -29,47 +31,53 @@ public final class Balls {
         }
     }
 
-    private List<Integer> defensiveCopy(List<Integer> balls) {
-        return new ArrayList<>(balls);
-    }
-
-    private void validateSize(List<Integer> balls) {
+    private void validateSize(List<Ball> balls) {
         if (balls.size() != Game.DIGITS) {
             final String message = String.format("게임숫자는 %d 자리의 수여야 합니다", Game.DIGITS);
             throw new IllegalArgumentException(message);
         }
     }
 
-    private void validateDuplication(List<Integer> balls) {
-        final Set<Integer> noDuplicates = new HashSet<>(balls);
-        if (balls.size() != noDuplicates.size()) {
+    private void validateDuplicationBallNumber(List<Ball> balls) {
+        final Set<BallNumber> set = new HashSet<>();
+        for (Ball ball : balls) {
+            set.add(ball.getNumber());
+        }
+        if (balls.size() != set.size()) {
             throw new IllegalArgumentException("게임숫자는 서로 다른 수로 이루어져야 합니다");
         }
     }
 
-    private void validateRangeOfEachNumber(List<Integer> balls) {
-        balls.forEach(this::validateRange);
-    }
-
-    private void validateRange(Integer number) {
-        final int start = Game.START_NUMBER;
-        final int end = Game.END_NUMBER;
-        if (number < start || number > end) {
-            final String message = String.format("게임숫자는 %d ~ %d까지 숫자만 가능합니다.", start, end);
-            throw new IllegalArgumentException(message);
+    public Score scoreOf(Balls other) {
+        final Score score = new Score();
+        for (Ball ball : balls) {
+            final Hint hint = other.matchOf(ball);
+            score.recordOf(hint);
         }
+        return score;
     }
 
-    public int size() {
-        return balls.size();
+    private Hint matchOf(Ball other) {
+        if (isStrike(other)) {
+            return Hint.STRIKE;
+        }
+        if (isBall(other)) {
+            return Hint.BALL;
+        }
+        return Hint.NOTHING;
     }
 
-    public boolean contains(Integer number) {
-        return balls.contains(number);
+    private boolean isStrike(Ball ball) {
+        return balls.contains(ball);
     }
 
-    public Integer get(int index) {
-        return balls.get(index);
+    private boolean isBall(Ball other) {
+        final Set<Hint> hints = new HashSet<>();
+        for (Ball ball : balls) {
+            final Hint hint = ball.matchOf(other);
+            hints.add(hint);
+        }
+        return hints.contains(Hint.BALL);
     }
 
     @Override

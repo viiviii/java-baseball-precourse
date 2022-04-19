@@ -32,8 +32,7 @@ class ConsoleViewTest {
     @Test
     void onlyHintNameWhenNothing() {
         //given
-        given(score.isAllNothing()).willReturn(true);
-        given(score.getCount(NOTHING)).willReturn(count);
+        given(score.isNothing()).willReturn(true);
 
         //when
         String message = view.scoreMessage(score);
@@ -46,7 +45,7 @@ class ConsoleViewTest {
     @Test
     void countAndHintNameWhenStrike() {
         //given
-        given(score.getCount(STRIKE)).willReturn(count);
+        given(score.getStrike()).willReturn(count);
 
         //when
         String message = view.scoreMessage(score);
@@ -59,7 +58,7 @@ class ConsoleViewTest {
     @Test
     void countAndHintNameWhenBall() {
         //given
-        given(score.getCount(BALL)).willReturn(count);
+        given(score.getBall()).willReturn(count);
 
         //when
         String message = view.scoreMessage(score);
@@ -72,27 +71,13 @@ class ConsoleViewTest {
     @Test
     void ballMessageFirstWhenBallAndStrikeTogether() {
         //given
-        given(score.getCount(STRIKE)).willReturn(count);
-        given(score.getCount(BALL)).willReturn(count);
+        given(score.getStrike()).willReturn(count);
+        given(score.getBall()).willReturn(count);
 
         //when
         String message = view.scoreMessage(score);
 
         //then
         assertThat(message).isEqualTo(count + ballName + " " + count + strikeName);
-    }
-
-    @DisplayName("낫싱이 다른 힌트와 함께 있는 경우 낫싱은 출력되지 않는다")
-    @Test
-    void nothingMessageNotPrintWhenOtherHintTogether() {
-        //given
-        given(score.getCount(STRIKE)).willReturn(count);
-        given(score.getCount(NOTHING)).willReturn(count);
-
-        //when
-        String message = view.scoreMessage(score);
-
-        //then
-        assertThat(message).isEqualTo(count + strikeName);
     }
 }
