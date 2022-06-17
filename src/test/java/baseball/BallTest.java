@@ -12,7 +12,7 @@ class BallTest {
 
     @DisplayName("숫자가 같으면 true")
     @Test
-    void hasSameNumberReturnTrue() throws Exception {
+    void isSameNumberReturnTrue() throws Exception {
         //given
         int number = 1;
 
@@ -20,15 +20,15 @@ class BallTest {
         Ball other = new Ball(2, number);
 
         //when
-        boolean hasSameNumber = ball.hasSameNumber(other);
+        boolean actual = ball.isSameNumber(other);
 
         //then
-        assertThat(hasSameNumber).isTrue();
+        assertThat(actual).isTrue();
     }
 
     @DisplayName("숫자가 다르면 false")
     @Test
-    void hasSameNumberReturnFalse() throws Exception {
+    void isSameNumberReturnFalse() throws Exception {
         //given
         int number = 1;
         int otherNumber = 2;
@@ -37,10 +37,10 @@ class BallTest {
         Ball other = new Ball(1, otherNumber);
 
         //when
-        boolean hasSameNumber = ball.hasSameNumber(other);
+        boolean actual = ball.isSameNumber(other);
 
         //then
-        assertThat(hasSameNumber).isFalse();
+        assertThat(actual).isFalse();
     }
 
     @Test

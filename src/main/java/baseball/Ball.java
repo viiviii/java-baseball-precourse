@@ -11,7 +11,7 @@ public final class Ball {
         this.number = new BallNumber(number);
     }
 
-    public boolean hasSameNumber(Ball other) {
+    public boolean isSameNumber(Ball other) {
         return this.number.equals(other.number);
     }
 
