@@ -4,7 +4,19 @@ import static baseball.Score.BALL;
 import static baseball.Score.NOTHING;
 import static baseball.Score.STRIKE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class Scorer {
+
+    public List<Score> totalScoreTo(Balls balls, Balls otherBalls) {
+        final List<Score> scores = new ArrayList<>();
+        for (Ball otherBall : otherBalls.toList()) {
+            final Score score = scoreTo(balls, otherBall);
+            scores.add(score);
+        }
+        return scores;
+    }
 
     public Score scoreTo(Balls balls, Ball other) {
         if (isStrike(balls, other)) {

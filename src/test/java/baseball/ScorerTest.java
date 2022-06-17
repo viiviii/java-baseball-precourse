@@ -2,6 +2,7 @@ package baseball;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -24,6 +25,24 @@ class ScorerTest {
 
         //then
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "total score: balls=12, other={0}{1}")
+    @CsvSource(value = {
+            "1, 2, 3, STRIKE, STRIKE, STRIKE",
+            "1, 2, 4, STRIKE, STRIKE, NOTHING",
+            "2, 1, 4, BALL, BALL, NOTHING"
+    })
+    void totalScore(int number1, int number2, int number3, Score expected1, Score expected2, Score expected3) {
+        //given
+        Balls balls = Balls.of(1, 2, 3);
+        Balls other = Balls.of(number1, number2, number3);
+
+        //when
+        List<Score> scores = scorer.totalScoreTo(balls, other);
+
+        //then
+        assertThat(scores).containsExactlyInAnyOrder(expected1, expected2, expected3);
     }
 
     @ParameterizedTest(name = "strike: position={0}, number={1}")
@@ -53,5 +72,4 @@ class ScorerTest {
         //then
         assertThat(actual).isEqualTo(expected);
     }
-
 }

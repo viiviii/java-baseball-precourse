@@ -31,4 +31,8 @@ public final class Balls {
         }
         return false;
     }
+
+    public List<Ball> toList() {
+        return new ArrayList<>(values);
+    }
 }
