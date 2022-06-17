@@ -1,15 +1,19 @@
 package baseball;
 
+import static baseball.Score.BALL;
+import static baseball.Score.NOTHING;
+import static baseball.Score.STRIKE;
+
 public final class Scorer {
 
-    public String scoreTo(Ball ball, Ball other) {
+    public Score scoreTo(Ball ball, Ball other) {
         if (isStrike(ball, other)) {
-            return "스트라이크";
+            return STRIKE;
         }
         if (isBall(ball, other)) {
-            return "볼";
+            return BALL;
         }
-        return "낫싱";
+        return NOTHING;
     }
 
     public boolean isStrike(Ball ball, Ball other) {
@@ -17,6 +21,6 @@ public final class Scorer {
     }
 
     public boolean isBall(Ball ball, Ball other) {
-        return !ball.equals(other) && ball.number() == other.number();
+        return !ball.equals(other) && ball.hasSameNumber(other);
     }
 }

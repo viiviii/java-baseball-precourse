@@ -4,18 +4,15 @@ import java.util.Objects;
 
 public final class Ball {
     private final int position;
-    private final int number;
+    private final BallNumber number;
 
     public Ball(int position, int number) {
-        validateRange(number);
         this.position = position;
-        this.number = number;
+        this.number = new BallNumber(number);
     }
 
-    private void validateRange(int number) {
-        if (number < 1 || number > 9) {
-            throw new IllegalArgumentException();
-        }
+    public boolean hasSameNumber(Ball other) {
+        return this.number.equals(other.number);
     }
 
     @Override
@@ -27,15 +24,11 @@ public final class Ball {
             return false;
         }
         Ball ball = (Ball) o;
-        return position == ball.position && number == ball.number;
+        return position == ball.position && number.equals(ball.number);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(position, number);
-    }
-
-    public int number() {
-        return number;
     }
 }

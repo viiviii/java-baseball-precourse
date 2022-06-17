@@ -1,38 +1,46 @@
 package baseball;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 // - 야구 숫자 만들기
 //      - 1~9
 //      - 서로 다른 수
 class BallTest {
 
-    @DisplayName("생성")
+    @DisplayName("숫자가 같으면 true")
     @Test
-    void create() {
-        int position = 1;
-        assertDoesNotThrow(() -> new Ball(position, 1));
-        assertDoesNotThrow(() -> new Ball(position, 9));
-    }
-
-    @ParameterizedTest(name = "숫자가 유효하지 않으면 예외를 던진다: value={0}")
-    @ValueSource(ints = {0, 10})
-    void thrownExceptionWhenOutOfRange(int value) {
+    void hasSameNumberReturnTrue() throws Exception {
         //given
-        int position = 1;
+        int number = 1;
+
+        Ball ball = new Ball(1, number);
+        Ball other = new Ball(2, number);
 
         //when
-        Throwable thrown = catchThrowable(() -> new Ball(position, value));
+        boolean hasSameNumber = ball.hasSameNumber(other);
 
         //then
-        assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
+        assertThat(hasSameNumber).isTrue();
+    }
+
+    @DisplayName("숫자가 다르면 false")
+    @Test
+    void hasSameNumberReturnFalse() throws Exception {
+        //given
+        int number = 1;
+        int otherNumber = 2;
+
+        Ball ball = new Ball(1, number);
+        Ball other = new Ball(1, otherNumber);
+
+        //when
+        boolean hasSameNumber = ball.hasSameNumber(other);
+
+        //then
+        assertThat(hasSameNumber).isFalse();
     }
 
     @Test
