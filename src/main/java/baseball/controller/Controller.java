@@ -1,9 +1,9 @@
 package baseball.controller;
 
-import baseball.Balls;
 import baseball.Computer;
-import baseball.Score;
-import baseball.Scorer;
+import baseball.domain.Balls;
+import baseball.domain.Score;
+import baseball.domain.Scorer;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 import java.util.List;

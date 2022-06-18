@@ -1,6 +1,6 @@
 package baseball.controller;
 
-import static baseball.Score.STRIKE;
+import static baseball.domain.Score.STRIKE;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
