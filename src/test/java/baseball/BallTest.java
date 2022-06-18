@@ -5,14 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-// - 야구 숫자 만들기
-//      - 1~9
-//      - 서로 다른 수
 class BallTest {
 
     @DisplayName("숫자가 같으면 true")
     @Test
-    void isSameNumberReturnTrue() throws Exception {
+    void isSameNumberReturnTrue() {
         //given
         int number = 1;
 
@@ -28,7 +25,7 @@ class BallTest {
 
     @DisplayName("숫자가 다르면 false")
     @Test
-    void isSameNumberReturnFalse() throws Exception {
+    void isSameNumberReturnFalse() {
         //given
         int number = 1;
         int otherNumber = 2;

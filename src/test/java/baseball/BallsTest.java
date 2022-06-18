@@ -27,14 +27,14 @@ class BallsTest {
 
     @DisplayName("숫자가 3개가 아니면 예외를 던진다")
     @Test
-    void thrownExceptionWhenNoThreeNumbers() throws Exception {
+    void thrownExceptionWhenNoThreeNumbers() {
         assertThatIllegalArgumentException().isThrownBy(() -> Balls.of(1, 2));
         assertThatIllegalArgumentException().isThrownBy(() -> Balls.of(1, 2, 3, 4));
     }
 
     @DisplayName("중복 값이 있으면 예외가 던져진다")
     @Test
-    void thrownExceptionWhenDuplicateNumbers() throws Exception {
+    void thrownExceptionWhenDuplicateNumbers() {
         assertThatIllegalArgumentException().isThrownBy(() -> Balls.of(1, 2, 1));
     }
 
