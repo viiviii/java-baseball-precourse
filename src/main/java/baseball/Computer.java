@@ -14,7 +14,7 @@ public final class Computer {
     }
 
     // TODO: 상수
-    public List<Integer> randomBallNumbers() {
+    public List<Integer> ballNumbers() {
         final Set<Integer> uniqueBallNumbers = new HashSet<>();
         while (uniqueBallNumbers.size() < 3) {
             final int numbers = randoms.pickNumberInRange(1, 9);

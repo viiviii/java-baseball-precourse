@@ -4,18 +4,17 @@ import baseball.Balls;
 import baseball.Computer;
 import baseball.Score;
 import baseball.Scorer;
-import baseball.util.MyRandoms;
 import baseball.view.InputView;
 import java.util.List;
 
 // TODO
 public final class Controller {
     private final InputView inputView;
-    private final MyRandoms randoms;
+    private final Computer computer;
 
-    public Controller(InputView inputView, MyRandoms randoms) {
+    public Controller(InputView inputView, Computer computer) {
         this.inputView = inputView;
-        this.randoms = randoms;
+        this.computer = computer;
     }
 
     public List<Score> compareTwoBalls() {
@@ -31,8 +30,7 @@ public final class Controller {
     }
 
     private Balls computerBalls() {
-        final Computer computer = new Computer(randoms); // TODO
-        final List<Integer> computerBallNumbers = computer.randomBallNumbers();
+        final List<Integer> computerBallNumbers = computer.ballNumbers();
         return Balls.of(computerBallNumbers);
     }
 }
