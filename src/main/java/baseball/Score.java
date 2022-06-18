@@ -1,3 +1,3 @@
 package baseball;
 
-enum Score {STRIKE, BALL, NOTHING}
+public enum Score {STRIKE, BALL, NOTHING}
