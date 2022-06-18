@@ -1,6 +1,7 @@
 package baseball;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,13 @@ class BallsTest {
         //then
         assertThat(balls.hasSameBall(firstBall)).isTrue(); // TODO
         assertThat(balls.hasSameBall(secondBall)).isTrue(); // TODO
+    }
+
+    @DisplayName("숫자가 3개가 아니면 예외를 던진다")
+    @Test
+    void thrownExceptionWhenNoThreeNumbers() throws Exception {
+        assertThatIllegalArgumentException().isThrownBy(() -> Balls.of(1, 2));
+        assertThatIllegalArgumentException().isThrownBy(() -> Balls.of(1, 2, 3, 4));
     }
 
     @ParameterizedTest(name = "위치와 숫자가 같은 볼이 있는지: position={0}, number={1}")

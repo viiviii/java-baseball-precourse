@@ -11,12 +11,19 @@ public final class Balls {
     }
 
     public static Balls of(int... numbers) {
+        validateLength(numbers);
         final List<Ball> balls = new ArrayList<>();
         for (int position = 0; position < numbers.length; position++) {
             final Ball ball = new Ball(position, numbers[position]);
             balls.add(ball);
         }
         return new Balls(balls);
+    }
+
+    private static void validateLength(int... numbers) {
+        if (numbers.length != 3) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public boolean hasSameBall(Ball ball) {
