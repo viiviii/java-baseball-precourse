@@ -2,6 +2,7 @@ package baseball.controller;
 
 import static baseball.Score.STRIKE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -9,6 +10,7 @@ import static org.mockito.Mockito.verify;
 import baseball.Computer;
 import baseball.Score;
 import baseball.view.InputView;
+import baseball.view.OutputView;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +21,7 @@ class ControllerTest {
     private final InputView inputView = mock(InputView.class);
     private final OutputView outputView = mock(OutputView.class);
     private final Computer computer = mock(Computer.class);
-    private final Controller controller = new Controller(inputView, computer);
+    private final Controller controller = new Controller(inputView, outputView, computer);
 
     @DisplayName("사용자에게 값을 입력받아 컴퓨터의 값과 비교한 결과를 사용자에게 출력한다")
     @Test
@@ -36,7 +38,7 @@ class ControllerTest {
         verify(outputView).selectNumberRequest();
         verify(computer).ballNumbers();
         verify(inputView).ballNumbers();
-        verify(outputView).selectNumberResponse();
+        verify(outputView).selectNumberResponse(any());
 
     }
 
