@@ -6,36 +6,25 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 import baseball.util.MyRandoms;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class MakeRandomNumbersTest {
+class ComputerTest {
 
     private MyRandoms randoms = mock(MyRandoms.class);
+    private Computer computer = new Computer(randoms);
 
-    @DisplayName("중복된 값이 있는 경우")
+    @DisplayName("랜덤한 야구 숫자를 생성한다")
     @Test
-    void pickRandomBallNumbersTest() {
+    void createRandomBallNumbers() {
         //given
         given(randoms.pickNumberInRange(anyInt(), anyInt())).willReturn(1, 2, 1, 3, 4);
 
         //when
-        List<Integer> randomBallNumbers = pickRandomBallNumbers();
+        List<Integer> randomBallNumbers = computer.randomBallNumbers();
 
         //then
         assertThat(randomBallNumbers).containsExactlyInAnyOrder(1, 2, 3);
-    }
-
-    private List<Integer> pickRandomBallNumbers() {
-        final Set<Integer> uniqueBallNumbers = new HashSet<>();
-        while (uniqueBallNumbers.size() < 3) {
-            final int numbers = randoms.pickNumberInRange(1, 9);
-            uniqueBallNumbers.add(numbers);
-        }
-        return new ArrayList<>(uniqueBallNumbers);
     }
 }
