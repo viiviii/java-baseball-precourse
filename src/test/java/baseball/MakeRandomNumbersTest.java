@@ -5,7 +5,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-import camp.nextstep.edu.missionutils.Randoms;
+import baseball.util.MyRandoms;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,12 +37,5 @@ class MakeRandomNumbersTest {
             uniqueBallNumbers.add(numbers);
         }
         return new ArrayList<>(uniqueBallNumbers);
-    }
-
-    public static final class MyRandoms {
-
-        public int pickNumberInRange(int startInclusive, int endInclusive) {
-            return Randoms.pickNumberInRange(startInclusive, endInclusive);
-        }
     }
 }
