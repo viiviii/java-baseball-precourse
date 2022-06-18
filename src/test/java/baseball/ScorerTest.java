@@ -14,10 +14,10 @@ class ScorerTest {
     @CsvSource(value = {
             "0, 1, STRIKE",
             "0, 2, BALL",
-            "0, 3, NOTHING"})
+            "0, 9, NOTHING"})
     void score(int position, int number, Score expected) {
         //given
-        Balls balls = Balls.of(1, 2);
+        Balls balls = Balls.of(1, 2, 3);
         Ball other = new Ball(position, number);
 
         //when
@@ -30,8 +30,8 @@ class ScorerTest {
     @ParameterizedTest(name = "total score: balls=12, other={0}{1}")
     @CsvSource(value = {
             "1, 2, 3, STRIKE, STRIKE, STRIKE",
-            "1, 2, 4, STRIKE, STRIKE, NOTHING",
-            "2, 1, 4, BALL, BALL, NOTHING"
+            "1, 2, 9, STRIKE, STRIKE, NOTHING",
+            "2, 1, 9, BALL, BALL, NOTHING"
     })
     void totalScore(int number1, int number2, int number3, Score expected1, Score expected2, Score expected3) {
         //given
@@ -49,7 +49,7 @@ class ScorerTest {
     @CsvSource(value = {"0, 1, true", "0, 2, false", "1, 1, false"})
     void strike(int position, int number, boolean expected) {
         //given
-        Balls balls = Balls.of(1, 2);
+        Balls balls = Balls.of(1, 2, 3);
         Ball other = new Ball(position, number);
 
         //when
@@ -63,7 +63,7 @@ class ScorerTest {
     @CsvSource(value = {"0, 1, false", "0, 2, true", "1, 1, true"})
     void ball(int position, int number, boolean expected) {
         //given
-        Balls balls = Balls.of(1, 2);
+        Balls balls = Balls.of(1, 2, 3);
         Ball other = new Ball(position, number);
 
         //when
