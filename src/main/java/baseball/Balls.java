@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public final class Balls {
+    private static final int BALL_NUMBER_COUNT = 3;
     private final List<Ball> values;
 
     private Balls(List<Ball> values) {
@@ -25,14 +26,14 @@ public final class Balls {
     }
 
     private static void validateDuplicate(Integer... numbers) {
-        final Set<Integer> set = new HashSet<>(Arrays.asList(numbers));
-        if (set.size() != 3) {
+        final Set<Integer> uniqueNumbers = new HashSet<>(Arrays.asList(numbers));
+        if (uniqueNumbers.size() != BALL_NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static void validateLength(Integer... numbers) {
-        if (numbers.length != 3) {
+    private static void validateLength(Integer... inputNumbers) {
+        if (inputNumbers.length != BALL_NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
     }
