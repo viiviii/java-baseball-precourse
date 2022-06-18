@@ -10,4 +10,6 @@ public interface OutputView {
     void selectNumberResponse(List<Score> scores); // TODO: domain
 
     void perfectScore();
+
+    void startNewGame();
 }

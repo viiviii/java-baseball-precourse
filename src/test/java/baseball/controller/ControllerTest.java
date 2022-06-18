@@ -17,6 +17,7 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
+import org.mockito.verification.VerificationMode;
 
 class ControllerTest {
 
@@ -35,7 +36,7 @@ class ControllerTest {
         InOrder inOrder = inOrder(outputView, computer, inputView);
 
         //when
-        controller.play();
+        controller.start();
 
         //then
         inOrder.verify(computer).ballNumbers();
@@ -43,13 +44,14 @@ class ControllerTest {
         inOrder.verify(inputView).ballNumbers();
         inOrder.verify(outputView).selectNumberResponse(Arrays.asList(STRIKE, STRIKE, STRIKE));
         inOrder.verify(outputView).perfectScore();
+        inOrder.verify(outputView).startNewGame();
+        inOrder.verify(inputView).startNewGame();
     }
 
-    @DisplayName("플레이어가 정답을 맞출 때까지 플레이를 반복한다")
+    @DisplayName("정답을 맞출 때까지 플레이어에게 숫자를 요청한다")
     @Test
-    void repeatPlay() {
+    void requestPlayerForNumberUntilCorrect() {
         //given
-        int selectCount = 2;
         List<Integer> correct = Arrays.asList(1, 2, 3);
         List<Integer> nothing = Arrays.asList(7, 8, 9);
 
@@ -57,13 +59,36 @@ class ControllerTest {
         given(computer.ballNumbers()).willReturn(correct);
 
         //when
-        controller.play();
+        controller.start();
 
         //then
+        VerificationMode tryingTwice = times(2);
         verify(computer, only()).ballNumbers();
-        verify(outputView, times(selectCount)).selectNumberRequest();
-        verify(inputView, times(selectCount)).ballNumbers();
-        verify(outputView, times(selectCount)).selectNumberResponse(any());
+        verify(outputView, tryingTwice).selectNumberRequest();
+        verify(inputView, tryingTwice).ballNumbers();
+        verify(outputView, tryingTwice).selectNumberResponse(any());
         verify(outputView).perfectScore();
+        verify(outputView).startNewGame();
+        verify(inputView).startNewGame();
+    }
+
+    @DisplayName("게임이 종료된 후 새로운 게임을 다시 시작한다")
+    @Test
+    void startNewGame() {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3);
+        given(inputView.ballNumbers()).willReturn(numbers);
+        given(computer.ballNumbers()).willReturn(numbers);
+        given(inputView.startNewGame()).willReturn(true, false);
+
+        //when
+        controller.start();
+
+        //then
+        VerificationMode playingTwice = times(2);
+        verify(computer, playingTwice).ballNumbers();
+        verify(outputView, playingTwice).perfectScore();
+        verify(outputView, playingTwice).startNewGame();
+        verify(inputView, playingTwice).startNewGame();
     }
 }
