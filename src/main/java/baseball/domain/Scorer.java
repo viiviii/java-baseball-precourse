@@ -1,8 +1,8 @@
-package baseball;
+package baseball.domain;
 
-import static baseball.Score.BALL;
-import static baseball.Score.NOTHING;
-import static baseball.Score.STRIKE;
+import static baseball.domain.Score.BALL;
+import static baseball.domain.Score.NOTHING;
+import static baseball.domain.Score.STRIKE;
 
 import java.util.ArrayList;
 import java.util.List;

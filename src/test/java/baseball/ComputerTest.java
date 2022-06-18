@@ -22,7 +22,7 @@ class ComputerTest {
         given(randoms.pickNumberInRange(anyInt(), anyInt())).willReturn(1, 2, 1, 3, 4);
 
         //when
-        List<Integer> randomBallNumbers = computer.randomBallNumbers();
+        List<Integer> randomBallNumbers = computer.ballNumbers();
 
         //then
         assertThat(randomBallNumbers).containsExactlyInAnyOrder(1, 2, 3);
