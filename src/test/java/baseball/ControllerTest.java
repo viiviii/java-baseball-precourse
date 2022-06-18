@@ -2,6 +2,9 @@ package baseball;
 
 import static baseball.Score.STRIKE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 import baseball.util.MyRandoms;
 import java.util.Arrays;
@@ -12,6 +15,7 @@ import org.junit.jupiter.api.Test;
 class ControllerTest {
 
     private final InputView inputView = new StubInputView();
+    private final MyRandoms myRandoms = mock(MyRandoms.class);
 
     @DisplayName("사용자에게 입력받은 값과 컴퓨터의 값을 비교하기")
     @Test
@@ -20,7 +24,8 @@ class ControllerTest {
         List<Integer> playerBallNumbers = inputView.ballNumbers();
         Balls playerBalls = Balls.of(playerBallNumbers);
 
-        Computer computer = new Computer(new MyRandoms());
+        given(myRandoms.pickNumberInRange(anyInt(), anyInt())).willReturn(1, 2, 3);
+        Computer computer = new Computer(myRandoms);
         List<Integer> computerBallNumbers = computer.randomBallNumbers();
         Balls computerBalls = Balls.of(computerBallNumbers);
 
