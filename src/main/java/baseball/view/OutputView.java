@@ -8,4 +8,6 @@ public interface OutputView {
     void selectNumberRequest();
 
     void selectNumberResponse(List<Score> scores); // TODO: domain
+
+    void perfectScore();
 }

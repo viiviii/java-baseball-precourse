@@ -1,9 +1,13 @@
 package baseball.controller;
 
 import static baseball.domain.Score.STRIKE;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import baseball.Computer;
 import baseball.view.InputView;
@@ -34,9 +38,32 @@ class ControllerTest {
         controller.play();
 
         //then
-        inOrder.verify(outputView).selectNumberRequest();
         inOrder.verify(computer).ballNumbers();
+        inOrder.verify(outputView).selectNumberRequest();
         inOrder.verify(inputView).ballNumbers();
         inOrder.verify(outputView).selectNumberResponse(Arrays.asList(STRIKE, STRIKE, STRIKE));
+        inOrder.verify(outputView).perfectScore();
+    }
+
+    @DisplayName("플레이어가 정답을 맞출 때까지 플레이를 반복한다")
+    @Test
+    void repeatPlay() {
+        //given
+        int selectCount = 2;
+        List<Integer> correct = Arrays.asList(1, 2, 3);
+        List<Integer> nothing = Arrays.asList(7, 8, 9);
+
+        given(inputView.ballNumbers()).willReturn(nothing, correct);
+        given(computer.ballNumbers()).willReturn(correct);
+
+        //when
+        controller.play();
+
+        //then
+        verify(computer, only()).ballNumbers();
+        verify(outputView, times(selectCount)).selectNumberRequest();
+        verify(inputView, times(selectCount)).ballNumbers();
+        verify(outputView, times(selectCount)).selectNumberResponse(any());
+        verify(outputView).perfectScore();
     }
 }
