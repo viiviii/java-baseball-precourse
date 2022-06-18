@@ -1,7 +1,10 @@
 package baseball;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public final class Balls {
     private final List<Ball> values;
@@ -10,8 +13,9 @@ public final class Balls {
         this.values = values;
     }
 
-    public static Balls of(int... numbers) {
-        validateLength(numbers);
+    public static Balls of(Integer... numbers) {
+        validateDuplicate(numbers); // TODO
+        validateLength(numbers); // TODO
         final List<Ball> balls = new ArrayList<>();
         for (int position = 0; position < numbers.length; position++) {
             final Ball ball = new Ball(position, numbers[position]);
@@ -20,7 +24,14 @@ public final class Balls {
         return new Balls(balls);
     }
 
-    private static void validateLength(int... numbers) {
+    private static void validateDuplicate(Integer... numbers) {
+        final Set<Integer> set = new HashSet<>(Arrays.asList(numbers));
+        if (set.size() != 3) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static void validateLength(Integer... numbers) {
         if (numbers.length != 3) {
             throw new IllegalArgumentException();
         }

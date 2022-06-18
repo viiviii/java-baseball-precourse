@@ -32,6 +32,12 @@ class BallsTest {
         assertThatIllegalArgumentException().isThrownBy(() -> Balls.of(1, 2, 3, 4));
     }
 
+    @DisplayName("중복 값이 있으면 예외가 던져진다")
+    @Test
+    void thrownExceptionWhenDuplicateNumbers() throws Exception {
+        assertThatIllegalArgumentException().isThrownBy(() -> Balls.of(1, 2, 1));
+    }
+
     @ParameterizedTest(name = "위치와 숫자가 같은 볼이 있는지: position={0}, number={1}")
     @CsvSource(value = {"0, 1, true", "1, 2, true", "1, 1, false"})
     void hasSameBall(int position, int number, boolean expected) {
