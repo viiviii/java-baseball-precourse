@@ -23,8 +23,17 @@ public final class Controller {
         this.computer = computer;
     }
 
+    public void start() {
+        boolean wantPlay = true;
+        while (wantPlay) {
+            play();
+            outputView.startNewGame();
+            wantPlay = inputView.startNewGame();
+        }
+    }
+
     // TODO: 여기 정리해라
-    public void play() {
+    private void play() {
         final Scorer scorer = new Scorer(); // TODO
         final Balls computerBalls = computerBalls();
         boolean allStrikes = false;
