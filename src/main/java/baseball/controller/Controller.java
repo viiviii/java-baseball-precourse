@@ -22,15 +22,11 @@ public final class Controller {
 
     public void play() {
         outputView.selectNumberRequest();
-        final List<Score> scores = compareTwoBalls();
-        outputView.selectNumberResponse(scores);
-    }
-
-    public List<Score> compareTwoBalls() {
         final Balls computerBalls = computerBalls();
         final Balls playerBalls = playerBalls();
         final Scorer scorer = new Scorer(); // TODO
-        return scorer.totalScoreTo(computerBalls, playerBalls);
+        final List<Score> scores = scorer.totalScoreTo(computerBalls, playerBalls);
+        outputView.selectNumberResponse(scores);
     }
 
     private Balls playerBalls() {
