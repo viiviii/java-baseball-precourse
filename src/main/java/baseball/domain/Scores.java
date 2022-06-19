@@ -1,10 +1,12 @@
 package baseball.domain;
 
+import static baseball.domain.Score.BALL;
 import static baseball.domain.Score.STRIKE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public final class Scores {
     private final List<Score> value;
@@ -21,14 +23,32 @@ public final class Scores {
         return new Scores(Arrays.asList(scores));
     }
 
-    public boolean isPerfect() {
+    public int strikeCount() {
         final List<Score> strikes = new ArrayList<>(value); // TODO
         strikes.removeIf(score -> !score.equals(STRIKE));
-        return strikes.size() == 3; // TODO
+        return strikes.size();
     }
 
-    // TODO: 임시
-    public List<Score> toList() {
-        return new ArrayList<>(value);
+    public int ballCount() {
+        final List<Score> balls = new ArrayList<>(value); // TODO
+        balls.removeIf(score -> !score.equals(BALL));
+        return balls.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Scores)) {
+            return false;
+        }
+        Scores scores = (Scores) o;
+        return Objects.equals(value, scores.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

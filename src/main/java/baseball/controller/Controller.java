@@ -38,10 +38,14 @@ public final class Controller {
             outputView.selectNumberRequest();
             final Balls playerBalls = playerBalls();
             final Scores scores = umpire.totalCalls(computerBalls, playerBalls);
-            outputView.selectNumberResponse(scores.toList());
-            perfectScore = scores.isPerfect(); // TODO
+            outputView.selectNumberResponse(scores);
+            perfectScore = isPerfect(scores);
         }
         outputView.perfectScore();
+    }
+
+    private boolean isPerfect(Scores scores) {
+        return scores.strikeCount() == 3; // TODO: 상수
     }
 
     private Balls playerBalls() {

@@ -1,6 +1,5 @@
 package baseball.controller;
 
-import static baseball.domain.Score.STRIKE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
@@ -42,7 +41,7 @@ class ControllerTest {
         inOrder.verify(computer).ballNumbers();
         inOrder.verify(outputView).selectNumberRequest();
         inOrder.verify(inputView).ballNumbers();
-        inOrder.verify(outputView).selectNumberResponse(Arrays.asList(STRIKE, STRIKE, STRIKE));
+        inOrder.verify(outputView).selectNumberResponse(any());
         inOrder.verify(outputView).perfectScore();
         inOrder.verify(outputView).startNewGame();
         inOrder.verify(inputView).startNewGame();
