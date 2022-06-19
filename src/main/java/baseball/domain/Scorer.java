@@ -9,13 +9,13 @@ import java.util.List;
 
 public final class Scorer {
 
-    public List<Score> totalScoreTo(Balls balls, Balls otherBalls) {
+    public Scores totalScoreTo(Balls balls, Balls otherBalls) {
         final List<Score> scores = new ArrayList<>();
         for (Ball otherBall : otherBalls.toList()) {
             final Score score = scoreTo(balls, otherBall);
             scores.add(score);
         }
-        return scores;
+        return Scores.from(scores);
     }
 
     public Score scoreTo(Balls balls, Ball other) {

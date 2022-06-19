@@ -27,7 +27,7 @@ class ScorerTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @ParameterizedTest(name = "total score: balls=12, other={0}{1}")
+    @ParameterizedTest(name = "total score: balls=123, other={0}{1}")
     @CsvSource(value = {
             "1, 2, 3, STRIKE, STRIKE, STRIKE",
             "1, 2, 9, STRIKE, STRIKE, NOTHING",
@@ -39,7 +39,7 @@ class ScorerTest {
         Balls other = Balls.of(number1, number2, number3);
 
         //when
-        List<Score> scores = scorer.totalScoreTo(balls, other);
+        List<Score> scores = scorer.totalScoreTo(balls, other).toList();
 
         //then
         assertThat(scores).containsExactlyInAnyOrder(expected1, expected2, expected3);
@@ -72,4 +72,5 @@ class ScorerTest {
         //then
         assertThat(actual).isEqualTo(expected);
     }
+
 }
