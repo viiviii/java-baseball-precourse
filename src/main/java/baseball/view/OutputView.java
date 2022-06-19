@@ -8,7 +8,5 @@ public interface OutputView {
 
     void selectNumberResponse(Score score); // TODO: domain
 
-    void perfectScore();
-
     void startNewGame();
 }

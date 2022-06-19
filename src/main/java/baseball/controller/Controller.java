@@ -41,7 +41,6 @@ public final class Controller {
             outputView.selectNumberResponse(score);
             perfectScore = isPerfect(score);
         }
-        outputView.perfectScore();
     }
 
     private boolean isPerfect(Score score) {

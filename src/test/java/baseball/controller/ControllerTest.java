@@ -42,7 +42,6 @@ class ControllerTest {
         inOrder.verify(outputView).selectNumberRequest();
         inOrder.verify(inputView).ballNumbers();
         inOrder.verify(outputView).selectNumberResponse(any());
-        inOrder.verify(outputView).perfectScore();
         inOrder.verify(outputView).startNewGame();
         inOrder.verify(inputView).startNewGame();
     }
@@ -66,7 +65,6 @@ class ControllerTest {
         verify(outputView, tryingTwice).selectNumberRequest();
         verify(inputView, tryingTwice).ballNumbers();
         verify(outputView, tryingTwice).selectNumberResponse(any());
-        verify(outputView).perfectScore();
         verify(outputView).startNewGame();
         verify(inputView).startNewGame();
     }
@@ -86,7 +84,6 @@ class ControllerTest {
         //then
         VerificationMode playingTwice = times(2);
         verify(computer, playingTwice).ballNumbers();
-        verify(outputView, playingTwice).perfectScore();
         verify(outputView, playingTwice).startNewGame();
         verify(inputView, playingTwice).startNewGame();
     }
