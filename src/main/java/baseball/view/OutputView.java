@@ -4,9 +4,9 @@ import baseball.domain.Score;
 
 public interface OutputView {
 
-    void selectNumberRequest();
+    void ballNumbers();
 
-    void selectNumberResponse(Score score); // TODO: domain
+    void score(Score score); // TODO: domain
 
     void startNewGame();
 }

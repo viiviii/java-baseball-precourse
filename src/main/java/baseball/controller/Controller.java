@@ -35,10 +35,10 @@ public final class Controller {
         final Balls computerBalls = computerBalls();
         boolean perfectScore = false;
         while (!perfectScore) {
-            outputView.selectNumberRequest();
+            outputView.ballNumbers();
             final Balls playerBalls = playerBalls();
             final Score score = umpire.call(computerBalls, playerBalls);
-            outputView.selectNumberResponse(score);
+            outputView.score(score);
             perfectScore = isPerfect(score);
         }
     }

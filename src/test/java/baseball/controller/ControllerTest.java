@@ -39,9 +39,9 @@ class ControllerTest {
 
         //then
         inOrder.verify(computer).ballNumbers();
-        inOrder.verify(outputView).selectNumberRequest();
+        inOrder.verify(outputView).ballNumbers();
         inOrder.verify(inputView).ballNumbers();
-        inOrder.verify(outputView).selectNumberResponse(any());
+        inOrder.verify(outputView).score(any());
         inOrder.verify(outputView).startNewGame();
         inOrder.verify(inputView).startNewGame();
     }
@@ -62,9 +62,9 @@ class ControllerTest {
         //then
         VerificationMode tryingTwice = times(2);
         verify(computer, only()).ballNumbers();
-        verify(outputView, tryingTwice).selectNumberRequest();
+        verify(outputView, tryingTwice).ballNumbers();
         verify(inputView, tryingTwice).ballNumbers();
-        verify(outputView, tryingTwice).selectNumberResponse(any());
+        verify(outputView, tryingTwice).score(any());
         verify(outputView).startNewGame();
         verify(inputView).startNewGame();
     }
