@@ -1,17 +1,18 @@
 package baseball.gamePlay;
 
 import baseball.gameStrategy.Balls;
-import baseball.gameStrategy.Umpire;
 import java.util.List;
 
 // TODO
 public final class Controller {
     private final Player player;
     private final Computer computer;
+    private final Umpire umpire;
 
-    public Controller(Player player, Computer computer) {
+    public Controller(Player player, Computer computer, Umpire umpire) {
         this.player = player;
         this.computer = computer;
+        this.umpire = umpire;
     }
 
     public void start() {
@@ -24,7 +25,6 @@ public final class Controller {
 
     // TODO: 여기 정리해라
     private void play() {
-        final Umpire umpire = new Umpire(); // TODO
         final Balls computerBalls = computerBalls();
         boolean perfectScore = false;
         while (!perfectScore) {

@@ -19,16 +19,24 @@ class ControllerTest {
 
     private final Player player = mock(Player.class);
     private final Computer computer = mock(Computer.class);
-    private final Controller controller = new Controller(player, computer);
+    private final Umpire umpire = mock(Umpire.class);
+    private final Controller controller = new Controller(player, computer, umpire);
+
+    private final List<Integer> allStrikeBalls = Arrays.asList(1, 2, 3);
+    private final List<Integer> nothingBalls = Arrays.asList(7, 8, 9);
+    private final Score allStrikeScore = new Score(3, 0);
+    private final Score nothingScore = new Score(0, 0);
+
 
     @DisplayName("플레이어에게 값을 입력받아 컴퓨터의 값과 비교한 결과를 사용자에게 출력한다")
     @Test
-    void play() {
+    void start() {
         //given
-        List<Integer> numbers = Arrays.asList(1, 2, 3);
-        given(computer.ballNumbers()).willReturn(numbers);
-        given(player.guessBalls()).willReturn(numbers);
-        InOrder inOrder = inOrder(computer, player);
+        given(computer.ballNumbers()).willReturn(allStrikeBalls);
+        given(player.guessBalls()).willReturn(allStrikeBalls);
+        given(player.guessStartNewGame()).willReturn(false);
+        given(umpire.call(any(), any())).willReturn(allStrikeScore);
+        InOrder inOrder = inOrder(computer, player, umpire);
 
         //when
         controller.start();
@@ -44,11 +52,10 @@ class ControllerTest {
     @Test
     void requestPlayerForNumberUntilCorrect() {
         //given
-        List<Integer> correct = Arrays.asList(1, 2, 3);
-        List<Integer> nothing = Arrays.asList(7, 8, 9);
 
-        given(computer.ballNumbers()).willReturn(correct);
-        given(player.guessBalls()).willReturn(nothing, correct);
+        given(computer.ballNumbers()).willReturn(allStrikeBalls);
+        given(player.guessBalls()).willReturn(nothingBalls, allStrikeBalls);
+        given(umpire.call(any(), any())).willReturn(nothingScore, allStrikeScore);
 
         //when
         controller.start();
@@ -65,10 +72,10 @@ class ControllerTest {
     @Test
     void startNewGame() {
         //given
-        List<Integer> numbers = Arrays.asList(1, 2, 3);
-        given(computer.ballNumbers()).willReturn(numbers);
-        given(player.guessBalls()).willReturn(numbers);
+        given(computer.ballNumbers()).willReturn(allStrikeBalls);
+        given(player.guessBalls()).willReturn(allStrikeBalls);
         given(player.guessStartNewGame()).willReturn(true, false);
+        given(umpire.call(any(), any())).willReturn(allStrikeScore);
 
         //when
         controller.start();
