@@ -1,12 +1,12 @@
 package baseball.view;
 
-import baseball.domain.Scores;
+import baseball.domain.Score;
 
 public interface OutputView {
 
     void selectNumberRequest();
 
-    void selectNumberResponse(Scores scores); // TODO: domain
+    void selectNumberResponse(Score score); // TODO: domain
 
     void perfectScore();
 

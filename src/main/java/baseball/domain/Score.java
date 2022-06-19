@@ -1,10 +1,10 @@
 package baseball.domain;
 
-public final class Scores {
+public final class Score {
     private final int strikeCount;
     private final int ballCount;
 
-    public Scores(int strikeCount, int ballCount) {
+    public Score(int strikeCount, int ballCount) {
         this.strikeCount = strikeCount;
         this.ballCount = ballCount;
     }

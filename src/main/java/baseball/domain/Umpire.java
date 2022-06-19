@@ -9,7 +9,7 @@ import java.util.List;
 
 public final class Umpire {
 
-    public Scores call(Balls balls, Balls otherBalls) {
+    public Score call(Balls balls, Balls otherBalls) {
         final ScoreRecord scoreRecord = new ScoreRecord();
         for (Ball otherBall : otherBalls.toList()) {
             final Pitch score = call(balls, otherBall);
@@ -56,8 +56,8 @@ public final class Umpire {
             return balls.size();
         }
 
-        private Scores toScore() {
-            return new Scores(countStrike(), countBall());
+        private Score toScore() {
+            return new Score(countStrike(), countBall());
         }
     }
 }

@@ -2,7 +2,7 @@ package baseball.controller;
 
 import baseball.Computer;
 import baseball.domain.Balls;
-import baseball.domain.Scores;
+import baseball.domain.Score;
 import baseball.domain.Umpire;
 import baseball.view.InputView;
 import baseball.view.OutputView;
@@ -37,15 +37,15 @@ public final class Controller {
         while (!perfectScore) {
             outputView.selectNumberRequest();
             final Balls playerBalls = playerBalls();
-            final Scores scores = umpire.call(computerBalls, playerBalls);
-            outputView.selectNumberResponse(scores);
-            perfectScore = isPerfect(scores);
+            final Score score = umpire.call(computerBalls, playerBalls);
+            outputView.selectNumberResponse(score);
+            perfectScore = isPerfect(score);
         }
         outputView.perfectScore();
     }
 
-    private boolean isPerfect(Scores scores) {
-        return scores.strikeCount() == 3; // TODO: 상수
+    private boolean isPerfect(Score score) {
+        return score.strikeCount() == 3; // TODO: 상수
     }
 
     private Balls playerBalls() {
