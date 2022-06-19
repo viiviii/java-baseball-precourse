@@ -1,10 +1,7 @@
-package baseball.controller;
+package baseball.gamePlay;
 
-import baseball.Computer;
-import baseball.domain.Balls;
-import baseball.domain.Score;
-import baseball.domain.Umpire;
-import baseball.view.Player;
+import baseball.gameStrategy.Balls;
+import baseball.gameStrategy.Umpire;
 import java.util.List;
 
 // TODO

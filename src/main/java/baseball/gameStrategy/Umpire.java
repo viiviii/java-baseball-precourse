@@ -1,9 +1,10 @@
-package baseball.domain;
+package baseball.gameStrategy;
 
-import static baseball.domain.Pitch.BALL;
-import static baseball.domain.Pitch.NOTHING;
-import static baseball.domain.Pitch.STRIKE;
+import static baseball.gameStrategy.Pitch.BALL;
+import static baseball.gameStrategy.Pitch.NOTHING;
+import static baseball.gameStrategy.Pitch.STRIKE;
 
+import baseball.gamePlay.Score;
 import java.util.ArrayList;
 import java.util.List;
 

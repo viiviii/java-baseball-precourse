@@ -1,4 +1,4 @@
-package baseball.domain;
+package baseball.gameStrategy;
 
 import java.util.Objects;
 

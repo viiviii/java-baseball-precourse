@@ -1,7 +1,8 @@
-package baseball.domain;
+package baseball.gameStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import baseball.gamePlay.Score;
 import org.junit.jupiter.api.Test;
 
 class UmpireTest {
