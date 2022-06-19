@@ -37,7 +37,7 @@ public final class Controller {
         while (!perfectScore) {
             outputView.selectNumberRequest();
             final Balls playerBalls = playerBalls();
-            final Scores scores = umpire.totalCalls(computerBalls, playerBalls);
+            final Scores scores = umpire.call(computerBalls, playerBalls);
             outputView.selectNumberResponse(scores);
             perfectScore = isPerfect(scores);
         }

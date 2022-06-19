@@ -15,7 +15,7 @@ class UmpireTest {
         Balls other = Balls.of(1, 2, 3);
 
         //when
-        Scores scores = umpire.totalCalls(balls, other);
+        Scores scores = umpire.call(balls, other);
 
         //then
         assertThat(scores.strikeCount()).isEqualTo(3);
@@ -29,7 +29,7 @@ class UmpireTest {
         Balls other = Balls.of(3, 1, 2);
 
         //when
-        Scores scores = umpire.totalCalls(balls, other);
+        Scores scores = umpire.call(balls, other);
 
         //then
         assertThat(scores.strikeCount()).isEqualTo(0);
@@ -43,7 +43,7 @@ class UmpireTest {
         Balls other = Balls.of(3, 2, 1);
 
         //when
-        Scores scores = umpire.totalCalls(balls, other);
+        Scores scores = umpire.call(balls, other);
 
         //then
         assertThat(scores.strikeCount()).isEqualTo(1);
