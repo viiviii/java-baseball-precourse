@@ -8,7 +8,6 @@ import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import baseball.view.Player;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

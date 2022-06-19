@@ -1,6 +1,5 @@
-package baseball.view;
+package baseball.controller;
 
-import baseball.controller.Score;
 import java.util.List;
 
 public interface Player {

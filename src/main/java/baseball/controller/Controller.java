@@ -2,7 +2,6 @@ package baseball.controller;
 
 import baseball.domain.Balls;
 import baseball.domain.Umpire;
-import baseball.view.Player;
 import java.util.List;
 
 // TODO
