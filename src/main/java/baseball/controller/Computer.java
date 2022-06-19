@@ -1,4 +1,4 @@
-package baseball;
+package baseball.controller;
 
 import baseball.util.MyRandoms;
 import java.util.ArrayList;
