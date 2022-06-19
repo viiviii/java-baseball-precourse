@@ -1,7 +1,7 @@
 package baseball.gamePlay;
 
-import baseball.domain.Balls;
-import baseball.domain.Umpire;
+import baseball.gameStrategy.Balls;
+import baseball.gameStrategy.Umpire;
 import java.util.List;
 
 // TODO

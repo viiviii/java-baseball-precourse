@@ -1,4 +1,4 @@
-package baseball.domain;
+package baseball.gameStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
