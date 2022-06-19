@@ -7,18 +7,18 @@ import static baseball.domain.Score.STRIKE;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Scorer {
+public final class Umpire {
 
-    public Scores totalScoreTo(Balls balls, Balls otherBalls) {
+    public Scores totalCalls(Balls balls, Balls otherBalls) {
         final List<Score> scores = new ArrayList<>();
         for (Ball otherBall : otherBalls.toList()) {
-            final Score score = scoreTo(balls, otherBall);
+            final Score score = call(balls, otherBall);
             scores.add(score);
         }
         return Scores.from(scores);
     }
 
-    public Score scoreTo(Balls balls, Ball other) {
+    public Score call(Balls balls, Ball other) {
         if (isStrike(balls, other)) {
             return STRIKE;
         }

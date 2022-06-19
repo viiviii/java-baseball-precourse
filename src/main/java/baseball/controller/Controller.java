@@ -2,8 +2,8 @@ package baseball.controller;
 
 import baseball.Computer;
 import baseball.domain.Balls;
-import baseball.domain.Scorer;
 import baseball.domain.Scores;
+import baseball.domain.Umpire;
 import baseball.view.InputView;
 import baseball.view.OutputView;
 import java.util.List;
@@ -31,13 +31,13 @@ public final class Controller {
 
     // TODO: 여기 정리해라
     private void play() {
-        final Scorer scorer = new Scorer(); // TODO
+        final Umpire umpire = new Umpire(); // TODO
         final Balls computerBalls = computerBalls();
         boolean perfectScore = false;
         while (!perfectScore) {
             outputView.selectNumberRequest();
             final Balls playerBalls = playerBalls();
-            final Scores scores = scorer.totalScoreTo(computerBalls, playerBalls);
+            final Scores scores = umpire.totalCalls(computerBalls, playerBalls);
             outputView.selectNumberResponse(scores.toList());
             perfectScore = scores.isPerfect(); // TODO
         }
