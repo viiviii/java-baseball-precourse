@@ -1,8 +1,8 @@
 package baseball.domain;
 
-import static baseball.domain.Score.BALL;
-import static baseball.domain.Score.NOTHING;
-import static baseball.domain.Score.STRIKE;
+import static baseball.domain.Pitch.BALL;
+import static baseball.domain.Pitch.NOTHING;
+import static baseball.domain.Pitch.STRIKE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,13 +12,13 @@ public final class Umpire {
     public Scores call(Balls balls, Balls otherBalls) {
         final ScoreRecord scoreRecord = new ScoreRecord();
         for (Ball otherBall : otherBalls.toList()) {
-            final Score score = call(balls, otherBall);
+            final Pitch score = call(balls, otherBall);
             scoreRecord.add(score);
         }
         return scoreRecord.toScore();
     }
 
-    private Score call(Balls balls, Ball oneBall) {
+    private Pitch call(Balls balls, Ball oneBall) {
         if (isStrike(balls, oneBall)) {
             return STRIKE;
         }
@@ -38,20 +38,20 @@ public final class Umpire {
 
     // TODO
     private static final class ScoreRecord {
-        private final List<Score> record = new ArrayList<>();
+        private final List<Pitch> record = new ArrayList<>();
 
-        private void add(Score score) {
+        private void add(Pitch score) {
             record.add(score);
         }
 
         private int countStrike() {
-            final List<Score> strikes = new ArrayList<>(record);
+            final List<Pitch> strikes = new ArrayList<>(record);
             strikes.removeIf(score -> !score.equals(STRIKE));
             return strikes.size();
         }
 
         private int countBall() {
-            final List<Score> balls = new ArrayList<>(record);
+            final List<Pitch> balls = new ArrayList<>(record);
             balls.removeIf(score -> !score.equals(BALL));
             return balls.size();
         }
