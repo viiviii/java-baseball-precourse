@@ -3,11 +3,12 @@ package baseball.gameStrategy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import baseball.gamePlay.Score;
+import baseball.gamePlay.Umpire;
 import org.junit.jupiter.api.Test;
 
 class UmpireTest {
 
-    private final Umpire umpire = new Umpire();
+    private final Umpire umpire = new UmpireImpl();
 
     @Test
     void allStrikes() {

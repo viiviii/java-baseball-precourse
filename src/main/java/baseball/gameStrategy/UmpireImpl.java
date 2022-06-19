@@ -5,19 +5,11 @@ import static baseball.gameStrategy.Pitch.NOTHING;
 import static baseball.gameStrategy.Pitch.STRIKE;
 
 import baseball.gamePlay.Score;
+import baseball.gamePlay.Umpire;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Umpire {
-
-    public Score call(Balls balls, Balls otherBalls) {
-        final ScoreRecord scoreRecord = new ScoreRecord();
-        for (Ball otherBall : otherBalls.toList()) {
-            final Pitch score = call(balls, otherBall);
-            scoreRecord.add(score);
-        }
-        return scoreRecord.toScore();
-    }
+public final class UmpireImpl implements Umpire {
 
     private Pitch call(Balls balls, Ball oneBall) {
         if (isStrike(balls, oneBall)) {
@@ -35,6 +27,16 @@ public final class Umpire {
 
     private boolean isBall(Balls balls, Ball oneBall) {
         return !balls.hasSameBall(oneBall) && balls.hasSameNumber(oneBall);
+    }
+
+    @Override
+    public Score call(Balls balls, Balls otherBalls) {
+        final ScoreRecord scoreRecord = new ScoreRecord();
+        for (Ball otherBall : otherBalls.toList()) {
+            final Pitch score = call(balls, otherBall);
+            scoreRecord.add(score);
+        }
+        return scoreRecord.toScore();
     }
 
     // TODO
