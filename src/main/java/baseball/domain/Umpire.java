@@ -4,6 +4,7 @@ import static baseball.domain.Pitch.BALL;
 import static baseball.domain.Pitch.NOTHING;
 import static baseball.domain.Pitch.STRIKE;
 
+import baseball.controller.Score;
 import java.util.ArrayList;
 import java.util.List;
 

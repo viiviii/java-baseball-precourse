@@ -1,6 +1,6 @@
 package baseball.view;
 
-import baseball.domain.Score;
+import baseball.controller.Score;
 import java.util.List;
 
 public interface Player {

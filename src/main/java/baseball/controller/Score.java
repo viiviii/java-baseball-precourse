@@ -1,4 +1,4 @@
-package baseball.domain;
+package baseball.controller;
 
 public final class Score {
     private final int strikeCount;

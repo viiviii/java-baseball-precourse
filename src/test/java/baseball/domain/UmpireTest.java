@@ -2,6 +2,7 @@ package baseball.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import baseball.controller.Score;
 import org.junit.jupiter.api.Test;
 
 class UmpireTest {
