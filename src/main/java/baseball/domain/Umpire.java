@@ -10,41 +10,54 @@ import java.util.List;
 public final class Umpire {
 
     public Scores call(Balls balls, Balls otherBalls) {
-        final List<Score> scores = new ArrayList<>();
+        final ScoreRecord scoreRecord = new ScoreRecord();
         for (Ball otherBall : otherBalls.toList()) {
             final Score score = call(balls, otherBall);
-            scores.add(score);
+            scoreRecord.add(score);
         }
-        return new Scores(countStrikeTo(scores), countBallTo(scores));
+        return scoreRecord.toScore();
     }
 
-    private Score call(Balls balls, Ball other) {
-        if (isStrike(balls, other)) {
+    private Score call(Balls balls, Ball oneBall) {
+        if (isStrike(balls, oneBall)) {
             return STRIKE;
         }
-        if (isBall(balls, other)) {
+        if (isBall(balls, oneBall)) {
             return BALL;
         }
         return NOTHING;
     }
 
-    private boolean isStrike(Balls balls, Ball other) {
-        return balls.hasSameBall(other);
+    private boolean isStrike(Balls balls, Ball oneBall) {
+        return balls.hasSameBall(oneBall);
     }
 
-    private boolean isBall(Balls balls, Ball other) {
-        return !balls.hasSameBall(other) && balls.hasSameNumber(other);
+    private boolean isBall(Balls balls, Ball oneBall) {
+        return !balls.hasSameBall(oneBall) && balls.hasSameNumber(oneBall);
     }
 
-    private int countStrikeTo(List<Score> scores) {
-        final List<Score> strikes = new ArrayList<>(scores); // TODO
-        strikes.removeIf(score -> !score.equals(STRIKE));
-        return strikes.size();
-    }
+    // TODO
+    private static final class ScoreRecord {
+        private final List<Score> record = new ArrayList<>();
 
-    private int countBallTo(List<Score> scores) {
-        final List<Score> balls = new ArrayList<>(scores); // TODO
-        balls.removeIf(score -> !score.equals(BALL));
-        return balls.size();
+        private void add(Score score) {
+            record.add(score);
+        }
+
+        private int countStrike() {
+            final List<Score> strikes = new ArrayList<>(record);
+            strikes.removeIf(score -> !score.equals(STRIKE));
+            return strikes.size();
+        }
+
+        private int countBall() {
+            final List<Score> balls = new ArrayList<>(record);
+            balls.removeIf(score -> !score.equals(BALL));
+            return balls.size();
+        }
+
+        private Scores toScore() {
+            return new Scores(countStrike(), countBall());
+        }
     }
 }
