@@ -41,34 +41,4 @@ class UmpireTest {
         //then
         assertThat(actual).isEqualTo(expected);
     }
-
-
-    @ParameterizedTest(name = "strike: balls=123, ball={1}")
-    @CsvSource(value = {"1, true", "2, false"})
-    void strike(int number, boolean expected) {
-        //given
-        Balls balls = Balls.of(1, 2, 3);
-        Ball other = new Ball(0, number);
-
-        //when
-        boolean actual = umpire.isStrike(balls, other);
-
-        //then
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    @ParameterizedTest(name = "ball: position={0}, number={1}")
-    @CsvSource(value = {"0, 1, false", "0, 2, true", "1, 1, true"})
-    void ball(int position, int number, boolean expected) {
-        //given
-        Balls balls = Balls.of(1, 2, 3);
-        Ball other = new Ball(position, number);
-
-        //when
-        boolean actual = umpire.isBall(balls, other);
-
-        //then
-        assertThat(actual).isEqualTo(expected);
-    }
-
 }

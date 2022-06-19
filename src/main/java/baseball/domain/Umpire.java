@@ -28,11 +28,11 @@ public final class Umpire {
         return NOTHING;
     }
 
-    public boolean isStrike(Balls balls, Ball other) {
+    private boolean isStrike(Balls balls, Ball other) {
         return balls.hasSameBall(other);
     }
 
-    public boolean isBall(Balls balls, Ball other) {
+    private boolean isBall(Balls balls, Ball other) {
         return !balls.hasSameBall(other) && balls.hasSameNumber(other);
     }
 }
