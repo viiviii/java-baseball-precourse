@@ -1,4 +1,4 @@
-package baseball.controller;
+package baseball.gamePlay;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;

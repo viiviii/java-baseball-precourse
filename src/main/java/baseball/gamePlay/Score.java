@@ -1,4 +1,4 @@
-package baseball.controller;
+package baseball.gamePlay;
 
 public final class Score {
     private final int strikeCount;

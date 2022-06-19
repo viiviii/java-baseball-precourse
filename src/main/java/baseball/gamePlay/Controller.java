@@ -1,4 +1,4 @@
-package baseball.controller;
+package baseball.gamePlay;
 
 import baseball.domain.Balls;
 import baseball.domain.Umpire;
