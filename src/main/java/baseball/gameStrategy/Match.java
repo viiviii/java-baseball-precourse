@@ -1,6 +1,6 @@
 package baseball.gameStrategy;
 
-public enum Match {
+enum Match {
     STRIKE, BALL, NOTHING;
 
     public boolean isStrike() {

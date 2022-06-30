@@ -2,7 +2,7 @@ package baseball.gameStrategy;
 
 import java.util.Objects;
 
-public final class BallNumber {
+final class BallNumber {
     private final int value;
 
     public BallNumber(int value) {
