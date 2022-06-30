@@ -1,8 +1,8 @@
 package baseball.gameStrategy;
 
-import static baseball.gameStrategy.Pitch.BALL;
-import static baseball.gameStrategy.Pitch.NOTHING;
-import static baseball.gameStrategy.Pitch.STRIKE;
+import static baseball.gameStrategy.Match.BALL;
+import static baseball.gameStrategy.Match.NOTHING;
+import static baseball.gameStrategy.Match.STRIKE;
 
 import baseball.gamePlay.Score;
 import baseball.gamePlay.Umpire;
@@ -10,18 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class UmpireImpl implements Umpire {
-    
+
     @Override
     public Score call(Balls balls, Balls otherBalls) {
         final ScoreRecord scoreRecord = new ScoreRecord();
         for (Ball otherBall : otherBalls.toList()) {
-            final Pitch score = call(balls, otherBall);
+            final Match score = call(balls, otherBall);
             scoreRecord.add(score);
         }
         return scoreRecord.toScore();
     }
 
-    private Pitch call(Balls balls, Ball oneBall) {
+    private Match call(Balls balls, Ball oneBall) {
         if (isStrike(balls, oneBall)) {
             return STRIKE;
         }
@@ -41,20 +41,20 @@ public final class UmpireImpl implements Umpire {
 
     // TODO
     private static final class ScoreRecord {
-        private final List<Pitch> record = new ArrayList<>();
+        private final List<Match> record = new ArrayList<>();
 
-        private void add(Pitch score) {
+        private void add(Match score) {
             record.add(score);
         }
 
         private int countStrike() {
-            final List<Pitch> strikes = new ArrayList<>(record);
+            final List<Match> strikes = new ArrayList<>(record);
             strikes.removeIf(score -> !score.equals(STRIKE));
             return strikes.size();
         }
 
         private int countBall() {
-            final List<Pitch> balls = new ArrayList<>(record);
+            final List<Match> balls = new ArrayList<>(record);
             balls.removeIf(score -> !score.equals(BALL));
             return balls.size();
         }

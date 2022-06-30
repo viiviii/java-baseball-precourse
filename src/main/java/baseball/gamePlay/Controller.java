@@ -7,12 +7,10 @@ import java.util.List;
 public final class Controller {
     private final Player player;
     private final Computer computer;
-    private final Umpire umpire;
 
-    public Controller(Player player, Computer computer, Umpire umpire) {
+    public Controller(Player player, Computer computer) {
         this.player = player;
         this.computer = computer;
-        this.umpire = umpire;
     }
 
     public void start() {
@@ -29,7 +27,7 @@ public final class Controller {
         boolean perfectScore = false;
         while (!perfectScore) {
             final Balls playerBalls = playerBalls();
-            final Score score = umpire.call(computerBalls, playerBalls);
+            final Score score = computerBalls.scoreOf(playerBalls);
             player.announceScore(score);
             perfectScore = isPerfect(score);
         }
