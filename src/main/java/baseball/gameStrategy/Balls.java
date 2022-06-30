@@ -14,6 +14,10 @@ public final class Balls {
         this.values = values;
     }
 
+    public static Balls of(Integer... numbers) {
+        return Balls.of(Arrays.asList(numbers));
+    }
+
     public static Balls of(List<Integer> numbers) {
         validateDuplicate(numbers); // TODO
         validateLength(numbers); // TODO
@@ -34,30 +38,6 @@ public final class Balls {
 
     private static void validateLength(List<Integer> inputNumbers) {
         if (inputNumbers.size() != BALL_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public static Balls of(Integer... numbers) {
-        validateDuplicate(numbers); // TODO
-        validateLength(numbers); // TODO
-        final List<Ball> balls = new ArrayList<>();
-        for (int position = 0; position < numbers.length; position++) {
-            final Ball ball = new Ball(position, numbers[position]);
-            balls.add(ball);
-        }
-        return new Balls(balls);
-    }
-
-    private static void validateDuplicate(Integer... numbers) {
-        final Set<Integer> uniqueNumbers = new HashSet<>(Arrays.asList(numbers));
-        if (uniqueNumbers.size() != BALL_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private static void validateLength(Integer... inputNumbers) {
-        if (inputNumbers.length != BALL_NUMBER_COUNT) {
             throw new IllegalArgumentException();
         }
     }

@@ -10,6 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class UmpireImpl implements Umpire {
+    
+    @Override
+    public Score call(Balls balls, Balls otherBalls) {
+        final ScoreRecord scoreRecord = new ScoreRecord();
+        for (Ball otherBall : otherBalls.toList()) {
+            final Pitch score = call(balls, otherBall);
+            scoreRecord.add(score);
+        }
+        return scoreRecord.toScore();
+    }
 
     private Pitch call(Balls balls, Ball oneBall) {
         if (isStrike(balls, oneBall)) {
@@ -27,16 +37,6 @@ public final class UmpireImpl implements Umpire {
 
     private boolean isBall(Balls balls, Ball oneBall) {
         return !balls.hasSameBall(oneBall) && balls.hasSameNumber(oneBall);
-    }
-
-    @Override
-    public Score call(Balls balls, Balls otherBalls) {
-        final ScoreRecord scoreRecord = new ScoreRecord();
-        for (Ball otherBall : otherBalls.toList()) {
-            final Pitch score = call(balls, otherBall);
-            scoreRecord.add(score);
-        }
-        return scoreRecord.toScore();
     }
 
     // TODO
