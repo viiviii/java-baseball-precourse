@@ -5,43 +5,9 @@ import static baseball.gameStrategy.Match.NOTHING;
 import static baseball.gameStrategy.Match.STRIKE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BallTest {
-
-    @DisplayName("숫자가 같으면 true")
-    @Test
-    void isSameNumberReturnTrue() {
-        //given
-        int number = 1;
-
-        Ball ball = new Ball(1, number);
-        Ball other = new Ball(2, number);
-
-        //when
-        boolean actual = ball.isSameNumber(other);
-
-        //then
-        assertThat(actual).isTrue();
-    }
-
-    @DisplayName("숫자가 다르면 false")
-    @Test
-    void isSameNumberReturnFalse() {
-        //given
-        int number = 1;
-        int otherNumber = 2;
-
-        Ball ball = new Ball(1, number);
-        Ball other = new Ball(1, otherNumber);
-
-        //when
-        boolean actual = ball.isSameNumber(other);
-
-        //then
-        assertThat(actual).isFalse();
-    }
 
     @Test
     void strike() {

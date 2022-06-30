@@ -46,24 +46,7 @@ public final class Balls {
             throw new IllegalArgumentException();
         }
     }
-
-    public boolean hasSameBall(Ball ball) {
-        return values.contains(ball);
-    }
-
-    public boolean hasSameNumber(Ball other) {
-        for (Ball ball : values) {
-            if (ball.isSameNumber(other)) { // TODO
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public List<Ball> toList() {
-        return new ArrayList<>(values);
-    }
-
+    
     public Score scoreOf(Balls other) {
         final MatchRecorder record = new MatchRecorder();
         for (Ball ball : values) {

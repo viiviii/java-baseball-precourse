@@ -11,10 +11,6 @@ public final class Ball {
         this.number = new BallNumber(number);
     }
 
-    public boolean isSameNumber(Ball other) {
-        return this.number.equals(other.number);
-    }
-
     public Match matchOf(Ball other) {
         if (isStrike(other)) {
             return Match.STRIKE;
@@ -30,7 +26,7 @@ public final class Ball {
     }
 
     private boolean isBall(Ball other) {
-        return !isStrike(other) && isSameNumber(other);
+        return !isStrike(other) && this.number.equals(other.number);
     }
 
     @Override
