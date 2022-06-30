@@ -1,5 +1,10 @@
 package baseball.gameStrategy;
 
+import static baseball.gameStrategy.Match.BALL;
+import static baseball.gameStrategy.Match.NOTHING;
+import static baseball.gameStrategy.Match.STRIKE;
+
+import baseball.gamePlay.Score;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -57,5 +62,38 @@ public final class Balls {
 
     public List<Ball> toList() {
         return new ArrayList<>(values);
+    }
+
+    public Score scoreOf(Balls other) {
+        final MatchRecorder record = new MatchRecorder();
+        for (Ball ball : values) {
+            final Match match = other.matchOf(ball);
+            record.increase(match);
+        }
+        return record.toScore();
+    }
+
+    private Match matchOf(Ball other) {
+        if (hasStrike(other)) {
+            return STRIKE;
+        }
+        if (hasBall(other)) {
+            return BALL;
+        }
+        return NOTHING;
+    }
+
+    private boolean hasStrike(Ball ball) {
+        return values.contains(ball);
+    }
+
+    // TODO
+    private boolean hasBall(Ball otherBall) {
+        final Set<Match> matches = new HashSet<>();
+        for (Ball ball : values) {
+            final Match match = ball.matchOf(otherBall);
+            matches.add(match);
+        }
+        return matches.contains(BALL);
     }
 }
