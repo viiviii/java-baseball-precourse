@@ -4,7 +4,6 @@ import static baseball.gameStrategy.Match.BALL;
 import static baseball.gameStrategy.Match.NOTHING;
 import static baseball.gameStrategy.Match.STRIKE;
 
-import baseball.gamePlay.Score;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -46,14 +45,14 @@ public final class Balls {
             throw new IllegalArgumentException();
         }
     }
-    
+
     public Score scoreOf(Balls other) {
-        final MatchRecorder record = new MatchRecorder();
+        final Score score = Score.init();
         for (Ball ball : values) {
             final Match match = other.matchOf(ball);
-            record.increase(match);
+            score.increase(match);
         }
-        return record.toScore();
+        return score;
     }
 
     private Match matchOf(Ball other) {

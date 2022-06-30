@@ -1,5 +1,6 @@
 package baseball.gamePlay;
 
+import baseball.gameStrategy.Score;
 import java.util.List;
 
 public interface Player {
