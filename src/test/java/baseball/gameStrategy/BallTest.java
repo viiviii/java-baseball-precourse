@@ -1,43 +1,51 @@
 package baseball.gameStrategy;
 
+import static baseball.gameStrategy.Match.BALL;
+import static baseball.gameStrategy.Match.NOTHING;
+import static baseball.gameStrategy.Match.STRIKE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BallTest {
 
-    @DisplayName("숫자가 같으면 true")
     @Test
-    void isSameNumberReturnTrue() {
+    void strike() {
         //given
-        int number = 1;
-
-        Ball ball = new Ball(1, number);
-        Ball other = new Ball(2, number);
+        Ball ball = new Ball(1, 1);
+        Ball other = new Ball(1, 1);
 
         //when
-        boolean actual = ball.isSameNumber(other);
+        Match match = ball.matchOf(other);
 
         //then
-        assertThat(actual).isTrue();
+        assertThat(match).isEqualTo(STRIKE);
     }
 
-    @DisplayName("숫자가 다르면 false")
     @Test
-    void isSameNumberReturnFalse() {
+    void ball() {
         //given
-        int number = 1;
-        int otherNumber = 2;
-
-        Ball ball = new Ball(1, number);
-        Ball other = new Ball(1, otherNumber);
+        Ball ball = new Ball(1, 1);
+        Ball other = new Ball(2, 1);
 
         //when
-        boolean actual = ball.isSameNumber(other);
+        Match match = ball.matchOf(other);
 
         //then
-        assertThat(actual).isFalse();
+        assertThat(match).isEqualTo(BALL);
+    }
+
+    @Test
+    void nothing() {
+        //given
+        Ball ball = new Ball(1, 1);
+        Ball other = new Ball(2, 2);
+
+        //when
+        Match match = ball.matchOf(other);
+
+        //then
+        assertThat(match).isEqualTo(NOTHING);
     }
 
     @Test

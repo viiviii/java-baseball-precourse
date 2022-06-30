@@ -1,5 +1,9 @@
 package baseball.gameStrategy;
 
+import static baseball.gameStrategy.Match.BALL;
+import static baseball.gameStrategy.Match.NOTHING;
+import static baseball.gameStrategy.Match.STRIKE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,6 +16,10 @@ public final class Balls {
 
     private Balls(List<Ball> values) {
         this.values = values;
+    }
+
+    public static Balls of(Integer... numbers) {
+        return Balls.of(Arrays.asList(numbers));
     }
 
     public static Balls of(List<Integer> numbers) {
@@ -38,44 +46,36 @@ public final class Balls {
         }
     }
 
-    public static Balls of(Integer... numbers) {
-        validateDuplicate(numbers); // TODO
-        validateLength(numbers); // TODO
-        final List<Ball> balls = new ArrayList<>();
-        for (int position = 0; position < numbers.length; position++) {
-            final Ball ball = new Ball(position, numbers[position]);
-            balls.add(ball);
+    public Score scoreOf(Balls other) {
+        final Score score = Score.init();
+        for (Ball ball : values) {
+            final Match match = other.matchOf(ball);
+            score.increase(match);
         }
-        return new Balls(balls);
+        return score;
     }
 
-    private static void validateDuplicate(Integer... numbers) {
-        final Set<Integer> uniqueNumbers = new HashSet<>(Arrays.asList(numbers));
-        if (uniqueNumbers.size() != BALL_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+    private Match matchOf(Ball other) {
+        if (hasStrike(other)) {
+            return STRIKE;
         }
+        if (hasBall(other)) {
+            return BALL;
+        }
+        return NOTHING;
     }
 
-    private static void validateLength(Integer... inputNumbers) {
-        if (inputNumbers.length != BALL_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public boolean hasSameBall(Ball ball) {
+    private boolean hasStrike(Ball ball) {
         return values.contains(ball);
     }
 
-    public boolean hasSameNumber(Ball other) {
+    // TODO
+    private boolean hasBall(Ball otherBall) {
+        final Set<Match> matches = new HashSet<>();
         for (Ball ball : values) {
-            if (ball.isSameNumber(other)) { // TODO
-                return true;
-            }
+            final Match match = ball.matchOf(otherBall);
+            matches.add(match);
         }
-        return false;
-    }
-
-    public List<Ball> toList() {
-        return new ArrayList<>(values);
+        return matches.contains(BALL);
     }
 }
